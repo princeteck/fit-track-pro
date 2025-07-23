@@ -1,0 +1,22 @@
+{
+  "@@locale": "mr",
+  "hello": "नमस्कार",
+  "greetUser": "स्वागत आहे, {username}!",
+  "appTitle": "FitTrack Pro",
+  "appDescription": "आपला वैयक्तिक फिटनेस ट्रॅकर",
+  "loginButton": "लॉगिन",
+  "signUpButton": "साइन अप",
+  "logoutButton": "लॉगआउट",
+  "settingsTitle": "सेटिंग्ज",
+  "profileTitle": "प्रोफाइल",
+  "notificationsTitle": "सूचनाएँ",
+  "privacyPolicy": "गोपनीयता धोरण",
+  "termsOfService": "सेवा अटी",
+  "errorNetwork": "नेटवर्क त्रुटी, कृपया नंतर पुन्हा प्रयत्न करा.",
+  "errorInvalidCredentials": "अवैध वापरकर्ता नाव किंवा पासवर्ड.",
+  "errorUserNotFound": "वापरकर्ता सापडला नाही.",
+  "errorGeneric": "एक त्रुटी झाली, कृपया पुन्हा प्रयत्न करा.",
+  "localeSettingsTitle": "भाषा सेटिंग्ज",
+  "localeSettingsDescription": "ऐपसाठी आपली आवडती भाषा निवडा.",
+  "selectLanguage": "भाषा निवडा"
+}

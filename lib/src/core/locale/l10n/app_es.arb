@@ -1,0 +1,22 @@
+{
+  "@@locale": "es",
+  "hello": "Hola",
+  "greetUser": "¡Bienvenido, {username}!",
+  "appTitle": "FitTrack Pro",
+  "appDescription": "Tu rastreador de fitness personal",
+  "loginButton": "Iniciar sesión",
+  "signUpButton": "Registrarse",
+  "logoutButton": "Cerrar sesión",
+  "settingsTitle": "Configuraciones",
+  "profileTitle": "Perfil",
+  "notificationsTitle": "Notificaciones",
+  "privacyPolicy": "Política de Privacidad",
+  "termsOfService": "Términos de Servicio",
+  "errorNetwork": "Error de red, por favor intente nuevamente más tarde.",
+  "errorInvalidCredentials": "Nombre de usuario o contraseña inválidos.",
+  "errorUserNotFound": "Usuario no encontrado.",
+  "errorGeneric": "Ocurrió un error, por favor intente nuevamente.",
+  "localeSettingsTitle": "Configuración de Idioma",
+  "localeSettingsDescription": "Seleccione su idioma preferido para la aplicación.",
+  "selectLanguage": "Seleccionar Idioma"
+}
