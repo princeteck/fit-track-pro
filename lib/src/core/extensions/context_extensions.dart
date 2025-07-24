@@ -6,4 +6,7 @@ import '../locale/generated/app_localizations.dart';
 extension ContextExtensions on BuildContext {
   /// Easy access to AppLocalizations
   AppLocalizations? get l10n => AppLocalizations.of(this);
+
+  /// return bool if l10n is RTL or not
+  bool get isRtl => Directionality.of(this) == TextDirection.rtl;
 }
