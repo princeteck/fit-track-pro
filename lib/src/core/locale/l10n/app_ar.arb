@@ -1,0 +1,22 @@
+{
+  "@@locale": "ar",
+  "hello": "مرحبا",
+  "greetUser": "أهلا بك، {username}!",
+  "appTitle": "FitTrack Pro",
+  "appDescription": "متعقب اللياقة البدنية الشخصي الخاص بك",
+  "loginButton": "تسجيل الدخول",
+  "signUpButton": "إنشاء حساب",
+  "logoutButton": "تسجيل الخروج",
+  "settingsTitle": "الإعدادات",
+  "profileTitle": "الملف الشخصي",
+  "notificationsTitle": "الإشعارات",
+  "privacyPolicy": "سياسة الخصوصية",
+  "termsOfService": "شروط الخدمة",
+  "errorNetwork": "خطأ في الشبكة، يرجى المحاولة مرة أخرى لاحقًا.",
+  "errorInvalidCredentials": "اسم المستخدم أو كلمة المرور غير صحيحة.",
+  "errorUserNotFound": "لم يتم العثور على المستخدم.",
+  "errorGeneric": "حدث خطأ، يرجى المحاولة مرة أخرى.",
+  "localeSettingsTitle": "إعدادات اللغة",
+  "localeSettingsDescription": "حدد لغتك المفضلة للتطبيق.",
+  "selectLanguage": "اختر اللغة"
+}
