@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -74,7 +76,6 @@ class _WalkthroughViewState extends State<_WalkthroughView>
         curve: Curves.easeInOut,
       );
     } else {
-      // Navigate to next screen (e.g., auth screen)
       context.go(LocaleSettingsScreen.path);
     }
   }
@@ -97,7 +98,6 @@ class _WalkthroughViewState extends State<_WalkthroughView>
         builder: (context, state) {
           return Stack(
             children: [
-              // Animated Background with Gradient
               AnimatedBuilder(
                 animation: _gradientAnimation,
                 builder: (context, child) {
@@ -126,7 +126,6 @@ class _WalkthroughViewState extends State<_WalkthroughView>
                 ),
               ),
 
-              // PageView Content
               PageView(
                 controller: _pageController,
                 onPageChanged: _onPageChanged,
@@ -164,7 +163,6 @@ class _WalkthroughViewState extends State<_WalkthroughView>
                 ],
               ),
 
-              // Bottom Navigation
               Positioned(
                 left: 0,
                 right: 0,
@@ -193,21 +191,17 @@ class _AnimatedBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Define subtle gradient colors for each slide
     final slideColors = [
-      const Color(0xFF6A1B9A), // Purple
-      const Color(0xFF1565C0), // Blue
-      const Color(0xFF2E7D32), // Green
+      const Color(0xFF6A1B9A),
+      const Color(0xFF1565C0),
+      const Color(0xFF2E7D32),
     ];
 
-    // Smoothly interpolate between slide colors
     Color primaryColor;
     if (gradientPosition <= 0.5) {
-      // Between slide 0 and 1
       final t = gradientPosition * 2;
       primaryColor = Color.lerp(slideColors[0], slideColors[1], t)!;
     } else {
-      // Between slide 1 and 2
       final t = (gradientPosition - 0.5) * 2;
       primaryColor = Color.lerp(slideColors[1], slideColors[2], t)!;
     }
@@ -262,7 +256,8 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
     with TickerProviderStateMixin {
   late AnimationController _iconController;
   late Animation<double> _iconRotateAnimation;
-  bool _isAnimationCancelled = false;
+  Timer? _animationTimer;
+  bool _isAnimationForward = true;
 
   @override
   void initState() {
@@ -277,7 +272,6 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
       CurvedAnimation(parent: _iconController, curve: Curves.easeInOut),
     );
 
-    // Start ping pong animation if active
     if (widget.isActive) {
       _startIconPingPongAnimation();
     }
@@ -289,44 +283,69 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
 
     if (widget.isActive != oldWidget.isActive) {
       if (widget.isActive) {
-        _isAnimationCancelled = false;
         _startIconPingPongAnimation();
       } else {
-        // Stop the ping pong animation when slide becomes inactive
-        _isAnimationCancelled = true;
-        _iconController.stop();
+        _stopIconPingPongAnimation();
       }
     }
   }
 
   @override
   void dispose() {
-    _isAnimationCancelled = true;
+    _stopIconPingPongAnimation();
     _iconController.dispose();
     super.dispose();
   }
 
-  void _startIconPingPongAnimation() async {
-    while (mounted && widget.isActive && !_isAnimationCancelled) {
-      try {
-        await _iconController.forward();
-        if (mounted && widget.isActive && !_isAnimationCancelled) {
-          await _iconController.reverse();
-        }
-      } catch (e) {
-        // Animation was disposed or interrupted, break the loop
-        break;
+  void _startIconPingPongAnimation() {
+    _stopIconPingPongAnimation();
+
+    _isAnimationForward = true;
+
+    _animationTimer = Timer.periodic(const Duration(milliseconds: 2000), (
+      timer,
+    ) {
+      if (!mounted || !widget.isActive) {
+        timer.cancel();
+        return;
       }
+
+      if (_isAnimationForward) {
+        _iconController.forward().then((_) {
+          if (mounted && widget.isActive) {
+            _isAnimationForward = false;
+          }
+        });
+      } else {
+        _iconController.reverse().then((_) {
+          if (mounted && widget.isActive) {
+            _isAnimationForward = true;
+          }
+        });
+      }
+    });
+
+    if (mounted && widget.isActive) {
+      _iconController.forward().then((_) {
+        if (mounted && widget.isActive) {
+          _isAnimationForward = false;
+        }
+      });
     }
+  }
+
+  void _stopIconPingPongAnimation() {
+    _animationTimer?.cancel();
+    _animationTimer = null;
+    _iconController.stop();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Define colors for each slide
     final colors = [
-      const Color(0xFF6A1B9A), // Purple
-      const Color(0xFF1565C0), // Blue
-      const Color(0xFF2E7D32), // Green
+      const Color(0xFF6A1B9A),
+      const Color(0xFF1565C0),
+      const Color(0xFF2E7D32),
     ];
 
     return SafeArea(
@@ -343,7 +362,6 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
               children: [
                 const Spacer(flex: 2),
 
-                // Animated Icon Container
                 _AnimatedIconContainer(
                   icon: widget.icon,
                   color: colors[widget.slideIndex],
@@ -352,7 +370,6 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
 
                 const Spacer(),
 
-                // Animated Title
                 _AnimatedSlideText(
                   text: widget.title,
                   style: GoogleFonts.manrope(
@@ -367,7 +384,6 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
 
                 const SizedBox(height: 16),
 
-                // Animated Description
                 _AnimatedSlideText(
                   text: widget.description,
                   style: GoogleFonts.manrope(
@@ -391,7 +407,6 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
   }
 }
 
-// Helper widget for animated icon container
 class _AnimatedIconContainer extends StatefulWidget {
   final IconData icon;
   final Color color;
@@ -424,7 +439,6 @@ class _AnimatedIconContainerState extends State<_AnimatedIconContainer>
       CurvedAnimation(parent: _scaleController, curve: Curves.elasticOut),
     );
 
-    // Start scale animation
     _scaleController.forward();
   }
 
@@ -442,7 +456,7 @@ class _AnimatedIconContainerState extends State<_AnimatedIconContainer>
         return Transform.scale(
           scale: _scaleAnimation.value,
           child: Transform.rotate(
-            angle: widget.rotationAnimation.value * 0.05,
+            angle: widget.rotationAnimation.value * 0.15,
             child: Container(
               width: 100,
               height: 100,
@@ -474,7 +488,6 @@ class _AnimatedIconContainerState extends State<_AnimatedIconContainer>
   }
 }
 
-// Helper widget for animated slide text
 class _AnimatedSlideText extends StatefulWidget {
   final String text;
   final TextStyle? style;
@@ -516,7 +529,6 @@ class _AnimatedSlideTextState extends State<_AnimatedSlideText>
       end: 1.0,
     ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
 
-    // Start animation with delay
     Future.delayed(widget.delay, () {
       if (mounted) {
         _controller.forward();
@@ -528,7 +540,6 @@ class _AnimatedSlideTextState extends State<_AnimatedSlideText>
   void didUpdateWidget(_AnimatedSlideText oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // Restart animation if text changes
     if (oldWidget.text != widget.text) {
       _controller.reset();
       Future.delayed(widget.delay, () {
@@ -613,7 +624,6 @@ class _BottomNavigationState extends State<_BottomNavigation>
       CurvedAnimation(parent: _buttonController, curve: Curves.easeOut),
     );
 
-    // Start animations
     _buttonController.forward();
     _indicatorController.forward();
   }
@@ -641,7 +651,6 @@ class _BottomNavigationState extends State<_BottomNavigation>
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Animated Page Indicator with animations package
               FadeTransition(
                 opacity: _buttonFadeAnimation,
                 child: SlideTransition(
@@ -668,11 +677,9 @@ class _BottomNavigationState extends State<_BottomNavigation>
 
               const SizedBox(height: 40),
 
-              // Navigation Buttons with PageTransitionSwitcher
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Skip Button with smooth transitions
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 300),
                     transitionBuilder: (child, animation) {
@@ -697,7 +704,6 @@ class _BottomNavigationState extends State<_BottomNavigation>
                         : const SizedBox(width: 80, key: ValueKey('empty')),
                   ),
 
-                  // Next/Finish Button
                   _AnimatedElevatedButton(
                     onPressed: () {
                       _animateButtonPress();
