@@ -2,7 +2,7 @@
   "@@locale": "en",
   "hello": "Hello",
   "greetUser": "Welcome, {username}!",
-  "appTitle": "FitTrack Pro",
+  "appTitle": "Fit Track Pro",
   "appDescription": "Your personal fitness tracker",
   "loginButton": "Login",
   "signUpButton": "Sign Up",
@@ -18,5 +18,15 @@
   "errorGeneric": "An error occurred, please try again.",
   "localeSettingsTitle": "Language Settings",
   "localeSettingsDescription": "Select your preferred language for the app.",
-  "selectLanguage": "Select Language"
+  "selectLanguage": "Select Language",
+  "walkthroughTitle1": "Track Your Fitness",
+  "walkthroughDescription1": "Monitor your daily activities, workouts, and health metrics all in one place.",
+  "walkthroughTitle2": "Set Goals & Achieve",
+  "walkthroughDescription2": "Create personalized fitness goals and track your progress towards a healthier you.",
+  "walkthroughTitle3": "Stay Motivated",
+  "walkthroughDescription3": "Get insights, reminders, and celebrate your achievements along the way.",
+  "skipButton": "Skip",
+  "nextButton": "Next",
+  "letsGetStartedButton": "Let's Get Started",
+  "finishButton": "Finish"
 }

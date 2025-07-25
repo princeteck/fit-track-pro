@@ -2,7 +2,7 @@
   "@@locale": "mr",
   "hello": "नमस्कार",
   "greetUser": "स्वागत आहे, {username}!",
-  "appTitle": "FitTrack Pro",
+  "appTitle": "Fit Track Pro",
   "appDescription": "आपला वैयक्तिक फिटनेस ट्रॅकर",
   "loginButton": "लॉगिन",
   "signUpButton": "साइन अप",
@@ -18,5 +18,15 @@
   "errorGeneric": "एक त्रुटी झाली, कृपया पुन्हा प्रयत्न करा.",
   "localeSettingsTitle": "भाषा सेटिंग्ज",
   "localeSettingsDescription": "ऐपसाठी आपली आवडती भाषा निवडा.",
-  "selectLanguage": "भाषा निवडा"
+  "selectLanguage": "भाषा निवडा",
+  "walkthroughTitle1": "तुमचे फिटनेस ट्रॅक करा",
+  "walkthroughDescription1": "तुमच्या दैनंदिन क्रियाकलाप, व्यायाम आणि आरोग्य मेट्रिक्स एकाच ठिकाणी मॉनिटर करा.",
+  "walkthroughTitle2": "ध्येय ठरवा आणि साध्य करा",
+  "walkthroughDescription2": "वैयक्तिक फिटनेस ध्येये तयार करा आणि निरोगी तुमच्या दिशेने प्रगती ट्रॅक करा.",
+  "walkthroughTitle3": "प्रेरित राहा",
+  "walkthroughDescription3": "अंतर्दृष्टी मिळवा, स्मरणपत्रे घ्या आणि तुमच्या यशाचा उत्सव साजरा करा.",
+  "skipButton": "वगळा",
+  "nextButton": "पुढे",
+  "letsGetStartedButton": "चला सुरुवात करूया",
+  "finishButton": "समाप्त"
 }

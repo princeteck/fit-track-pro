@@ -10,4 +10,10 @@ final List<RouteBase> commonRoutes = [
     builder: (context, state) => const SplashScreen(),
     transitionDuration: const Duration(milliseconds: 400),
   ),
+  CustomRouteBuilder.fadeRoute(
+    path: WalkthroughScreen.path,
+    name: WalkthroughScreen.name,
+    builder: (context, state) => const WalkthroughScreen(),
+    transitionDuration: const Duration(milliseconds: 400),
+  ),
 ];
