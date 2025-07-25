@@ -119,7 +119,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'FitTrack Pro'**
+  /// **'Fit Track Pro'**
   String get appTitle;
 
   /// No description provided for @appDescription.
@@ -217,6 +217,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select Language'**
   String get selectLanguage;
+
+  /// No description provided for @walkthroughTitle1.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Your Fitness'**
+  String get walkthroughTitle1;
+
+  /// No description provided for @walkthroughDescription1.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor your daily activities, workouts, and health metrics all in one place.'**
+  String get walkthroughDescription1;
+
+  /// No description provided for @walkthroughTitle2.
+  ///
+  /// In en, this message translates to:
+  /// **'Set Goals & Achieve'**
+  String get walkthroughTitle2;
+
+  /// No description provided for @walkthroughDescription2.
+  ///
+  /// In en, this message translates to:
+  /// **'Create personalized fitness goals and track your progress towards a healthier you.'**
+  String get walkthroughDescription2;
+
+  /// No description provided for @walkthroughTitle3.
+  ///
+  /// In en, this message translates to:
+  /// **'Stay Motivated'**
+  String get walkthroughTitle3;
+
+  /// No description provided for @walkthroughDescription3.
+  ///
+  /// In en, this message translates to:
+  /// **'Get insights, reminders, and celebrate your achievements along the way.'**
+  String get walkthroughDescription3;
+
+  /// No description provided for @skipButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skipButton;
+
+  /// No description provided for @nextButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get nextButton;
+
+  /// No description provided for @letsGetStartedButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s Get Started'**
+  String get letsGetStartedButton;
+
+  /// No description provided for @finishButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get finishButton;
 }
 
 class _AppLocalizationsDelegate

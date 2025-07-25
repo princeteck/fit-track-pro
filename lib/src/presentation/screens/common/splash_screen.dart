@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../core/di/di.dart';
 import '../../../core/constants/ui/assets_constants.dart';
 import '../../controllers/splash/splash_cubit.dart';
-import '../settings/locale_settings_screen.dart';
+import '../walkthrough/walkthrough_screen.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -31,7 +31,7 @@ class SplashScreen extends StatelessWidget {
               ),
             );
           } else if (state.isComplete && state.dependenciesReady) {
-            context.goNamed(LocaleSettingsScreen.name);
+            context.goNamed(WalkthroughScreen.name);
           }
         },
         child: const _SplashScreenView(),
@@ -366,7 +366,12 @@ class _AnimatedLogoState extends State<_AnimatedLogo>
       builder: (context, child) {
         return Transform.scale(scale: _scaleAnimation.value, child: child);
       },
-      child: SvgPicture.asset(KIcons.logoIcon, width: 150),
+      child: SvgPicture.asset(
+        KIcons.logoIcon,
+        width: 150,
+        placeholderBuilder: (BuildContext context) =>
+            Icon(Icons.error, size: 150, color: Colors.red),
+      ),
     );
   }
 }

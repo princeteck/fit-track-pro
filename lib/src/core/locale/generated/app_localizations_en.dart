@@ -17,7 +17,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get appTitle => 'FitTrack Pro';
+  String get appTitle => 'Fit Track Pro';
 
   @override
   String get appDescription => 'Your personal fitness tracker';
@@ -67,4 +67,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get selectLanguage => 'Select Language';
+
+  @override
+  String get walkthroughTitle1 => 'Track Your Fitness';
+
+  @override
+  String get walkthroughDescription1 =>
+      'Monitor your daily activities, workouts, and health metrics all in one place.';
+
+  @override
+  String get walkthroughTitle2 => 'Set Goals & Achieve';
+
+  @override
+  String get walkthroughDescription2 =>
+      'Create personalized fitness goals and track your progress towards a healthier you.';
+
+  @override
+  String get walkthroughTitle3 => 'Stay Motivated';
+
+  @override
+  String get walkthroughDescription3 =>
+      'Get insights, reminders, and celebrate your achievements along the way.';
+
+  @override
+  String get skipButton => 'Skip';
+
+  @override
+  String get nextButton => 'Next';
+
+  @override
+  String get letsGetStartedButton => 'Let\'s Get Started';
+
+  @override
+  String get finishButton => 'Finish';
 }
