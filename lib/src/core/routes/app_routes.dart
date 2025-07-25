@@ -21,8 +21,8 @@ class AppRoutes {
       );
   static final GoRouter _router = GoRouter(
     errorBuilder: errorWidget,
-    initialLocation: LocaleSettingsScreen.path,
-    routes: <RouteBase>[...systemRoutes],
+    initialLocation: SplashScreen.path,
+    routes: <RouteBase>[...commonRoutes, ...systemRoutes],
     redirect: (context, state) async {
       debugPrint('Redirecting ${state.uri.toString()}');
       return state.name;
