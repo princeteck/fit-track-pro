@@ -262,6 +262,7 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
     with TickerProviderStateMixin {
   late AnimationController _iconController;
   late Animation<double> _iconRotateAnimation;
+  bool _isAnimationCancelled = false;
 
   @override
   void initState() {
@@ -288,9 +289,11 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
 
     if (widget.isActive != oldWidget.isActive) {
       if (widget.isActive) {
+        _isAnimationCancelled = false;
         _startIconPingPongAnimation();
       } else {
         // Stop the ping pong animation when slide becomes inactive
+        _isAnimationCancelled = true;
         _iconController.stop();
       }
     }
@@ -298,15 +301,21 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
 
   @override
   void dispose() {
+    _isAnimationCancelled = true;
     _iconController.dispose();
     super.dispose();
   }
 
   void _startIconPingPongAnimation() async {
-    while (mounted && widget.isActive) {
-      await _iconController.forward();
-      if (mounted && widget.isActive) {
-        await _iconController.reverse();
+    while (mounted && widget.isActive && !_isAnimationCancelled) {
+      try {
+        await _iconController.forward();
+        if (mounted && widget.isActive && !_isAnimationCancelled) {
+          await _iconController.reverse();
+        }
+      } catch (e) {
+        // Animation was disposed or interrupted, break the loop
+        break;
       }
     }
   }
