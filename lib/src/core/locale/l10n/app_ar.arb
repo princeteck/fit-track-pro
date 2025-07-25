@@ -2,7 +2,7 @@
   "@@locale": "ar",
   "hello": "مرحبا",
   "greetUser": "أهلا بك، {username}!",
-  "appTitle": "FitTrack Pro",
+  "appTitle": "Fit Track Pro",
   "appDescription": "متعقب اللياقة البدنية الشخصي الخاص بك",
   "loginButton": "تسجيل الدخول",
   "signUpButton": "إنشاء حساب",
@@ -18,5 +18,15 @@
   "errorGeneric": "حدث خطأ، يرجى المحاولة مرة أخرى.",
   "localeSettingsTitle": "إعدادات اللغة",
   "localeSettingsDescription": "حدد لغتك المفضلة للتطبيق.",
-  "selectLanguage": "اختر اللغة"
+  "selectLanguage": "اختر اللغة",
+  "walkthroughTitle1": "تتبع لياقتك البدنية",
+  "walkthroughDescription1": "راقب أنشطتك اليومية وتمارينك ومقاييس صحتك في مكان واحد.",
+  "walkthroughTitle2": "حدد الأهداف وحققها",
+  "walkthroughDescription2": "اصنع أهداف لياقة شخصية وتتبع تقدمك نحو نسخة أكثر صحة منك.",
+  "walkthroughTitle3": "حافظ على تحفيزك",
+  "walkthroughDescription3": "احصل على رؤى وتذكيرات واحتفل بإنجازاتك على طول الطريق.",
+  "skipButton": "تخطي",
+  "nextButton": "التالي",
+  "letsGetStartedButton": "لنبدأ",
+  "finishButton": "إنهاء"
 }

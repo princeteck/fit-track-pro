@@ -1,5 +1,5 @@
 name: fittrack_pro
-description: "FitTrack Pro is a modern, offline-capable health and fitness tracker built using Flutter. It helps users monitor and log their daily fitness journey securely with features like onboarding walkthroughs, secure authentication, local data storage, and more."
+description: "Fit Track Pro is a modern, offline-capable health and fitness tracker built using Flutter. It helps users monitor and log their daily fitness journey securely with features like onboarding walkthroughs, secure authentication, local data storage, and more."
 publish_to: 'none'
 
 version: 0.0.1+1
@@ -42,10 +42,15 @@ dev_dependencies:
   json_serializable: ^6.9.5
 
 flutter_launcher_icons:
-  android: "launcher_icon"
+  android: true
   ios: true
   image_path: "assets/images/logos/logo.png"
   min_sdk_android: 21
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/logos/logo.png"
+  remove_alpha_ios: true
+  android_app_name: "Fit Track Pro"
+  ios_app_name: "Fit Track Pro"
 
 flutter:
   uses-material-design: true

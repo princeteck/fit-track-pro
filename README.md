@@ -1,6 +1,6 @@
-# FitTrack Pro
+# Fit Track Pro
 
-**FitTrack Pro** is a modern, offline-capable health and fitness tracker built using Flutter. It helps users monitor and log their daily fitness journey securely with features like onboarding walkthroughs, secure authentication, local data storage, and more.
+**Fit Track Pro** is a modern, offline-capable health and fitness tracker built using Flutter. It helps users monitor and log their daily fitness journey securely with features like onboarding walkthroughs, secure authentication, local data storage, and more.
 
 ---
 
