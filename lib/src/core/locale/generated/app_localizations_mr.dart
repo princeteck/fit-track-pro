@@ -17,7 +17,7 @@ class AppLocalizationsMr extends AppLocalizations {
   }
 
   @override
-  String get appTitle => 'FitTrack Pro';
+  String get appTitle => 'Fit Track Pro';
 
   @override
   String get appDescription => 'आपला वैयक्तिक फिटनेस ट्रॅकर';
@@ -66,4 +66,37 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get selectLanguage => 'भाषा निवडा';
+
+  @override
+  String get walkthroughTitle1 => 'तुमचे फिटनेस ट्रॅक करा';
+
+  @override
+  String get walkthroughDescription1 =>
+      'तुमच्या दैनंदिन क्रियाकलाप, व्यायाम आणि आरोग्य मेट्रिक्स एकाच ठिकाणी मॉनिटर करा.';
+
+  @override
+  String get walkthroughTitle2 => 'ध्येय ठरवा आणि साध्य करा';
+
+  @override
+  String get walkthroughDescription2 =>
+      'वैयक्तिक फिटनेस ध्येये तयार करा आणि निरोगी तुमच्या दिशेने प्रगती ट्रॅक करा.';
+
+  @override
+  String get walkthroughTitle3 => 'प्रेरित राहा';
+
+  @override
+  String get walkthroughDescription3 =>
+      'अंतर्दृष्टी मिळवा, स्मरणपत्रे घ्या आणि तुमच्या यशाचा उत्सव साजरा करा.';
+
+  @override
+  String get skipButton => 'वगळा';
+
+  @override
+  String get nextButton => 'पुढे';
+
+  @override
+  String get letsGetStartedButton => 'चला सुरुवात करूया';
+
+  @override
+  String get finishButton => 'समाप्त';
 }
