@@ -76,7 +76,7 @@ class _WalkthroughViewState extends State<_WalkthroughView>
         curve: Curves.easeInOut,
       );
     } else {
-      context.go(LocaleSettingsScreen.path);
+      context.go(DashboardScreen.path);
     }
   }
 
