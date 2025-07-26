@@ -367,7 +367,7 @@ class _AnimatedLogoState extends State<_AnimatedLogo>
         return Transform.scale(scale: _scaleAnimation.value, child: child);
       },
       child: SvgPicture.asset(
-        KIcons.logoIcon,
+        KIcons.logo,
         width: 150,
         placeholderBuilder: (BuildContext context) =>
             Icon(Icons.error, size: 150, color: Colors.red),
