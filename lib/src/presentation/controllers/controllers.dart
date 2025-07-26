@@ -3,3 +3,4 @@ export 'locale/locale_cubit.dart';
 export 'system/system_cubit.dart';
 export 'splash/splash_cubit.dart';
 export 'walkthrough/walkthrough_cubit.dart';
+export 'bottom_navbar/bottom_navbar_cubit.dart';
