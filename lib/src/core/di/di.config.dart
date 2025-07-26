@@ -14,6 +14,8 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import '../../data/repositories/locale_repository_impl.dart' as _i579;
 import '../../domain/repositories/locale_repository.dart' as _i369;
+import '../../presentation/controllers/bottom_navbar/bottom_navbar_cubit.dart'
+    as _i338;
 import '../../presentation/controllers/locale/locale_cubit.dart' as _i716;
 import '../../presentation/controllers/splash/splash_cubit.dart' as _i820;
 import '../../presentation/controllers/system/system_cubit.dart' as _i885;
@@ -34,8 +36,9 @@ _i174.GetIt init(
   gh.singleton<_i329.LocalStorage>(() => _i329.LocalStorage());
   gh.singleton<_i913.NavigationService>(() => services.navigationService);
   gh.singleton<_i820.SplashCubit>(() => _i820.SplashCubit());
-  gh.singleton<_i885.SystemCubit>(() => _i885.SystemCubit());
   gh.singleton<_i219.WalkthroughCubit>(() => _i219.WalkthroughCubit());
+  gh.singleton<_i885.SystemCubit>(() => _i885.SystemCubit());
+  gh.singleton<_i338.BottomNavbarCubit>(() => _i338.BottomNavbarCubit());
   gh.lazySingleton<_i716.LocaleCubit>(() => _i716.LocaleCubit());
   gh.factory<_i369.LocaleRepository>(() => _i579.LocaleRepositoryImpl());
   return getIt;
