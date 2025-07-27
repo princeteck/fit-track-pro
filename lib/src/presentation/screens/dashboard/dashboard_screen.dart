@@ -58,17 +58,11 @@ class _DashboardScreenState extends State<DashboardScreen>
           bloc: locator<BottomNavbarCubit>(),
           builder: (context, state) {
             return AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 200), // Reduced from 300
               transitionBuilder: (child, animation) {
                 return FadeTransition(
                   opacity: animation,
-                  child: SlideTransition(
-                    position: Tween<Offset>(
-                      begin: const Offset(0.1, 0),
-                      end: Offset.zero,
-                    ).animate(animation),
-                    child: child,
-                  ),
+                  child: child, // Removed complex SlideTransition
                 );
               },
               child: _buildCurrentSection(state.selectedIndex),

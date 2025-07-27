@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../core/di/di.dart';
+import '../../../core/locale/generated/app_localizations.dart';
 import '../../controllers/auth/auth_cubit.dart';
 import '../screens.dart';
 import 'prelude/prelude.dart';
@@ -63,83 +64,83 @@ class _SignInScreenState extends State<SignInScreen>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = MediaQuery.of(context).size;
+    final l10n = AppLocalizations.of(context);
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: SizedBox(
-            height: size.height - MediaQuery.of(context).padding.top,
-            child: Column(
-              children: [
-                const SizedBox(height: 60),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: SizedBox(
+          height: size.height - MediaQuery.of(context).padding.top,
+          child: Column(
+            children: [
+              const SizedBox(height: 60),
 
-                FadeTransition(
-                  opacity: _fadeAnimation,
-                  child: Column(
-                    children: [
-                      Semantics(
-                        label: 'App logo',
-                        child: Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.primary,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Icon(
-                            Icons.fitness_center,
-                            size: 40,
-                            color: theme.colorScheme.onPrimary,
-                          ),
+              FadeTransition(
+                opacity: _fadeAnimation,
+                child: Column(
+                  children: [
+                    Semantics(
+                      label: 'App logo',
+                      child: Container(
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          color: theme.colorScheme.primary,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Icon(
+                          Icons.fitness_center,
+                          size: 40,
+                          color: theme.colorScheme.onPrimary,
                         ),
                       ),
-
-                      const SizedBox(height: 24),
-
-                      Text(
-                        context.l10n?.welcomeBackTitle ?? 'Welcome Back!',
-                        style: GoogleFonts.inter(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: theme.colorScheme.onSurface,
-                        ),
-                      ),
-
-                      const SizedBox(height: 8),
-
-                      Text(
-                        context.l10n?.signInSubtitle ??
-                            'Sign in to continue your fitness journey',
-                        style: GoogleFonts.inter(
-                          fontSize: 16,
-                          color: theme.colorScheme.onSurface.withValues(
-                            alpha: 0.7,
-                          ),
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-
-                const SizedBox(height: 48),
-
-                Expanded(
-                  child: SlideTransition(
-                    position: _slideAnimation,
-                    child: BlocProvider<AuthCubit>(
-                      create: (context) => locator<AuthCubit>(),
-                      child: const SignInForm(),
                     ),
+
+                    const SizedBox(height: 16),
+
+                    Text(
+                      context.l10n?.welcomeBackTitle ?? 'Welcome Back!',
+                      style: GoogleFonts.inter(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
+
+                    const SizedBox(height: 8),
+
+                    Text(
+                      context.l10n?.signInSubtitle ??
+                          'Sign in to continue your fitness journey',
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.7,
+                        ),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 28),
+
+              Expanded(
+                child: SlideTransition(
+                  position: _slideAnimation,
+                  child: BlocProvider<AuthCubit>(
+                    create: (context) => locator<AuthCubit>(),
+                    child: const SignInForm(),
                   ),
                 ),
+              ),
 
-                FadeTransition(
-                  opacity: _fadeAnimation,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 24),
+              Column(
+                children: [
+                  FadeTransition(
+                    opacity: _fadeAnimation,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -173,9 +174,23 @@ class _SignInScreenState extends State<SignInScreen>
                       ],
                     ),
                   ),
-                ),
-              ],
-            ),
+                  // Forgot password link
+                  TextButton(
+                    onPressed: () {
+                      context.go(ForgotPasswordScreen.name);
+                    },
+                    child: Text(
+                      l10n?.forgotPasswordLink ?? 'Forgot Password?',
+                      style: GoogleFonts.inter(
+                        fontSize: 14,
+                        color: theme.colorScheme.primary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

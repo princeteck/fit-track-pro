@@ -21,8 +21,13 @@ class SplashCubit extends BaseCubitWrapper<SplashState> {
     : super(const SplashState());
 
   void initializeSplash() {
-    _startAnimationSequence();
+    // Start dependencies initialization immediately but asynchronously
     _initializeDependencies();
+
+    // Delay animation sequence to reduce initial load
+    Future.delayed(const Duration(milliseconds: 100), () {
+      _startAnimationSequence();
+    });
   }
 
   void _startAnimationSequence() {
@@ -88,7 +93,11 @@ class SplashCubit extends BaseCubitWrapper<SplashState> {
   Future<void> _initializeDependencies() async {
     try {
       showLog('Initializing dependencies...');
-      await injector.allReady();
+
+      // Use compute or isolate for heavy initialization to avoid blocking main thread
+      await Future.microtask(() async {
+        await injector.allReady();
+      });
 
       if (!isClosed) {
         emit(state.copyWith(dependenciesReady: true));

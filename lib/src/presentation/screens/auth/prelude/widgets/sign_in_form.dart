@@ -35,26 +35,32 @@ class _SignInFormState extends State<SignInForm> with TickerProviderStateMixin {
 
   void _setupAnimations() {
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 800),
+      duration: const Duration(milliseconds: 600), // Reduced from 800
       vsync: this,
     );
 
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: const Interval(0.0, 1.0, curve: Curves.easeOut),
+        curve: Curves.easeOut, // Simplified curve
       ),
     );
 
     _slideAnimation =
-        Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
+        Tween<Offset>(begin: const Offset(0, 0.2), end: Offset.zero).animate(
+          // Reduced offset
           CurvedAnimation(
             parent: _animationController,
-            curve: const Interval(0.2, 1.0, curve: Curves.easeOut),
+            curve: Curves.easeOut, // Simplified curve
           ),
         );
 
-    _animationController.forward();
+    // Start animation after a small delay to reduce initial load
+    Future.delayed(const Duration(milliseconds: 50), () {
+      if (mounted) {
+        _animationController.forward();
+      }
+    });
   }
 
   @override
@@ -180,23 +186,6 @@ class _SignInFormState extends State<SignInForm> with TickerProviderStateMixin {
                   validator: _validatePassword,
                   focusNode: _passwordFocusNode,
                   onFieldSubmitted: (_) => _signIn(),
-                ),
-
-                // Forgot password link
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {
-                      context.go(ForgotPasswordScreen.name);
-                    },
-                    child: Text(
-                      l10n?.forgotPasswordLink ?? 'Forgot Password?',
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
-                        color: theme.colorScheme.primary,
-                      ),
-                    ),
-                  ),
                 ),
 
                 const SizedBox(height: 24),

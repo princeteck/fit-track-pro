@@ -13,7 +13,7 @@ class WalkthroughCubit extends BaseCubitWrapper<WalkthroughState> {
 
   WalkthroughCubit(this._appStartupService) : super(const WalkthroughState());
 
-  static const int totalSlides = 3;
+  static const int totalSlides = 6;
 
   void nextSlide() {
     if (state.currentIndex < totalSlides - 1) {

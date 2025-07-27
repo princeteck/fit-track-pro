@@ -1,7 +1,35 @@
 class KImages {
-  static const String splashLogo = 'assets/images/splash_logo.png';
-  static const String splashBackground = 'assets/images/splash_background.png';
   static const String appIcon = 'assets/images/app_icon.png';
+
+  // Base path for onboarding images
+  static const String onboarding = 'assets/images/walkthrough';
+
+  static const String onboarding1 = 'assets/images/walkthrough/1.webp';
+  static const String onboarding2 = 'assets/images/walkthrough/2.webp';
+  static const String onboarding3 = 'assets/images/walkthrough/3.webp';
+  static const String onboarding4 = 'assets/images/walkthrough/4.webp';
+  static const String onboarding5 = 'assets/images/walkthrough/5.webp';
+  static const String onboarding6 = 'assets/images/walkthrough/6.webp';
+
+  // Helper method to get onboarding image by index (1-based)
+  static String getOnboardingImage(int index) {
+    switch (index) {
+      case 1:
+        return onboarding1;
+      case 2:
+        return onboarding2;
+      case 3:
+        return onboarding3;
+      case 4:
+        return onboarding4;
+      case 5:
+        return onboarding5;
+      case 6:
+        return onboarding6;
+      default:
+        return onboarding1; // Default to first image
+    }
+  }
 }
 
 class KIcons {
@@ -45,6 +73,7 @@ class KIcons {
   static const String spark = '$_basePath/spark.svg';
   static const String edit = '$_basePath/edit.svg';
   static const String documentText = '$_basePath/document-text.svg';
+  static const String slideHorizontal = '$_basePath/slide-horizontal.svg';
 
   // Export icons
   static const String export = '$_basePath/export.svg';
