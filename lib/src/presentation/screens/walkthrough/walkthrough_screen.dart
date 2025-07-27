@@ -62,26 +62,29 @@ class _WalkthroughViewState extends State<_WalkthroughView>
   }
 
   void _onPageChanged(int index) {
-    context.read<WalkthroughCubit>().goToSlide(index);
+    locator<WalkthroughCubit>().goToSlide(index);
     _gradientController.animateTo(index / (WalkthroughCubit.totalSlides - 1));
   }
 
   void _handleNext() {
-    final cubit = context.read<WalkthroughCubit>();
+    final cubit = locator<WalkthroughCubit>();
     final currentIndex = cubit.state.currentIndex;
 
     if (currentIndex < WalkthroughCubit.totalSlides - 1) {
+      cubit.nextSlide();
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } else {
-      context.go(DashboardScreen.path);
+      // Mark onboarding as completed before navigation
+      cubit.completeOnboarding();
+      context.go(SignInScreen.path);
     }
   }
 
   void _handleSkip() {
-    final cubit = context.read<WalkthroughCubit>();
+    final cubit = locator<WalkthroughCubit>();
     cubit.skipToEnd();
     _pageController.animateToPage(
       WalkthroughCubit.totalSlides - 1,
@@ -89,12 +92,15 @@ class _WalkthroughViewState extends State<_WalkthroughView>
       curve: Curves.easeInOut,
     );
     _gradientController.animateTo(1.0);
+    // Mark onboarding as completed when skipped
+    cubit.completeOnboarding();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<WalkthroughCubit, WalkthroughState>(
+        bloc: locator<WalkthroughCubit>(),
         builder: (context, state) {
           return Stack(
             children: [
@@ -824,17 +830,15 @@ class _AnimatedElevatedButton extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Flexible(
-                      child: Text(
-                        text,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 0.1,
-                        ),
-                        textAlign: TextAlign.center,
-                        overflow: TextOverflow.ellipsis,
+                    Text(
+                      text,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.1,
                       ),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
                     ),
                     if (!isLastSlide) ...[
                       const SizedBox(width: 8),

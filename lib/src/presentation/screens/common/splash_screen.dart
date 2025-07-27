@@ -8,8 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/di/di.dart';
 import '../../../core/constants/ui/assets_constants.dart';
+import '../../../core/services/app_startup_service.dart';
 import '../../controllers/splash/splash_cubit.dart';
-import '../walkthrough/walkthrough_screen.dart';
+import '../screens.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -31,12 +32,30 @@ class SplashScreen extends StatelessWidget {
               ),
             );
           } else if (state.isComplete && state.dependenciesReady) {
-            context.goNamed(WalkthroughScreen.name);
+            _navigateToInitialRoute(context, state.initialRoute);
           }
         },
         child: const _SplashScreenView(),
       ),
     );
+  }
+
+  void _navigateToInitialRoute(BuildContext context, AppStartupResult? result) {
+    switch (result) {
+      case AppStartupResult.onboarding:
+        context.goNamed(WalkthroughScreen.name);
+        break;
+      case AppStartupResult.signIn:
+        context.goNamed(SignInScreen.name);
+        break;
+      case AppStartupResult.dashboard:
+        context.goNamed(DashboardScreen.name);
+        break;
+      case null:
+        // Fallback to onboarding if result is null
+        context.goNamed(WalkthroughScreen.name);
+        break;
+    }
   }
 }
 

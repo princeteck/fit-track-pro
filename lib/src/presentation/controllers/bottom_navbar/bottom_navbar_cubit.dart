@@ -26,4 +26,9 @@ class BottomNavbarCubit extends BaseCubitWrapper<BottomNavbarState> {
       emit(state.copyWith(isScrollingDown: isScrollingDown));
     }
   }
+
+  /// Reset to initial state (useful for sign out)
+  void reset() {
+    emit(const BottomNavbarState());
+  }
 }

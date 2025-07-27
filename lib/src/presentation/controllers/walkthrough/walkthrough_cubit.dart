@@ -2,12 +2,16 @@ import 'package:fittrack_pro/src/presentation/controllers/base/base_cubit_wrappe
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../core/services/app_startup_service.dart';
+
 part 'walkthrough_state.dart';
 part 'walkthrough_cubit.freezed.dart';
 
 @singleton
 class WalkthroughCubit extends BaseCubitWrapper<WalkthroughState> {
-  WalkthroughCubit() : super(const WalkthroughState());
+  final AppStartupService _appStartupService;
+
+  WalkthroughCubit(this._appStartupService) : super(const WalkthroughState());
 
   static const int totalSlides = 3;
 
@@ -62,5 +66,14 @@ class WalkthroughCubit extends BaseCubitWrapper<WalkthroughState> {
 
   void updateGradientPosition(double position) {
     emit(state.copyWith(backgroundGradientPosition: position.clamp(0.0, 1.0)));
+  }
+
+  /// Mark onboarding as completed
+  Future<void> completeOnboarding() async {
+    try {
+      await _appStartupService.markOnboardingCompleted();
+    } catch (e) {
+      // Handle error silently for now
+    }
   }
 }

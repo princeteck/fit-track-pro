@@ -142,7 +142,9 @@ class _ProfileSectionImplState extends State<ProfileSectionImpl>
                   ),
                 ),
 
-                const SizedBox(height: 100), // Space for bottom navbar
+                const SizedBox(
+                  height: 120,
+                ), // Space for bottom navbar and content
               ],
             ),
           ),

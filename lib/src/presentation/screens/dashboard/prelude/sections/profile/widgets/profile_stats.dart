@@ -1,39 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProfileStats extends StatelessWidget {
   const ProfileStats({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: _StatCard(
-            label: 'Start weight',
-            value: '53.3',
-            unit: 'kg',
-            color: const Color(0xFF66BB6A), // Green
+    return Semantics(
+      label: 'Profile statistics overview',
+      child: Row(
+        children: [
+          Expanded(
+            child: _StatCard(
+              label: 'Start weight',
+              value: '53.3',
+              unit: 'kg',
+              color: const Color(0xFF66BB6A), // Green
+            ),
           ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _StatCard(
-            label: 'Good',
-            value: '50.0',
-            unit: 'kg',
-            color: const Color(0xFF42A5F5), // Blue
+          const SizedBox(width: 12),
+          Expanded(
+            child: _StatCard(
+              label: 'Good',
+              value: '50.0',
+              unit: 'kg',
+              color: const Color(0xFF42A5F5), // Blue
+            ),
           ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _StatCard(
-            label: 'Daily calories',
-            value: '740',
-            unit: 'kcal',
-            color: const Color(0xFFFFA726), // Orange
+          const SizedBox(width: 12),
+          Expanded(
+            child: _StatCard(
+              label: 'Daily calories',
+              value: '740',
+              unit: 'kcal',
+              color: const Color(0xFFFFA726), // Orange
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -87,65 +91,76 @@ class _StatCardState extends State<_StatCard>
       onTap: () {
         // Handle stat card tap
       },
-      child: AnimatedBuilder(
-        animation: _scaleAnimation,
-        builder: (context, child) {
-          return Transform.scale(
-            scale: _scaleAnimation.value,
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: widget.color,
-                borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: widget.color.withValues(alpha: 0.3),
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    widget.label,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+      child: Semantics(
+        label: '${widget.label}: ${widget.value} ${widget.unit}',
+        hint: 'Tap to view more details about ${widget.label}',
+        button: true,
+        child: AnimatedBuilder(
+          animation: _scaleAnimation,
+          builder: (context, child) {
+            return Transform.scale(
+              scale: _scaleAnimation.value,
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: widget.color,
+                  borderRadius: BorderRadius.circular(16),
+                  boxShadow: [
+                    BoxShadow(
+                      color: widget.color.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 8),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: widget.value,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                          ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.label,
+                      style: GoogleFonts.inter(
+                        textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
                         ),
-                        TextSpan(
-                          text: widget.unit,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 8),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: widget.value,
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                          TextSpan(
+                            text: widget.unit,
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
