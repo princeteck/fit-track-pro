@@ -247,13 +247,46 @@ class AppLocalizationsEs extends AppLocalizations {
   String get profileLanguageValue => 'Español (ES)';
 
   @override
-  String get profileDarkMode => 'Modo Oscuro';
+  String get profileDarkMode => 'Tema';
 
   @override
   String get profileLinkedDevices => 'Dispositivos Vinculados';
 
   @override
   String get profileLinkedDevicesValue => 'Apple Watch';
+
+  @override
+  String get themeTitle => 'Tema';
+
+  @override
+  String get themeDescription => 'Elige tu modo de tema preferido';
+
+  @override
+  String get themeLightTitle => 'Claro';
+
+  @override
+  String get themeLightSubtitle => 'Usar tema claro';
+
+  @override
+  String get themeDarkTitle => 'Oscuro';
+
+  @override
+  String get themeDarkSubtitle => 'Usar tema oscuro';
+
+  @override
+  String get themeSystemTitle => 'Sistema';
+
+  @override
+  String get themeSystemSubtitle => 'Seguir configuración del sistema';
+
+  @override
+  String get themeLight => 'Claro';
+
+  @override
+  String get themeDark => 'Oscuro';
+
+  @override
+  String get themeSystem => 'Sistema';
 
   @override
   String get profileSecurityPrivacy => 'Seguridad y Privacidad';

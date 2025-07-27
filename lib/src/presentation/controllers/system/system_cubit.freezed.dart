@@ -21,6 +21,8 @@ mixin _$SystemState {
   String get appVersion => throw _privateConstructorUsedError;
   String get buildNumber => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
+  AppThemeMode get themeMode => throw _privateConstructorUsedError;
+  AppThemeMode get currentEffectiveTheme => throw _privateConstructorUsedError;
 
   /// Create a copy of SystemState
   /// with the given fields replaced by the non-null parameter values.
@@ -41,6 +43,8 @@ abstract class $SystemStateCopyWith<$Res> {
     String appVersion,
     String buildNumber,
     bool isLoading,
+    AppThemeMode themeMode,
+    AppThemeMode currentEffectiveTheme,
   });
 }
 
@@ -63,6 +67,8 @@ class _$SystemStateCopyWithImpl<$Res, $Val extends SystemState>
     Object? appVersion = null,
     Object? buildNumber = null,
     Object? isLoading = null,
+    Object? themeMode = null,
+    Object? currentEffectiveTheme = null,
   }) {
     return _then(
       _value.copyWith(
@@ -82,6 +88,14 @@ class _$SystemStateCopyWithImpl<$Res, $Val extends SystemState>
                 ? _value.isLoading
                 : isLoading // ignore: cast_nullable_to_non_nullable
                       as bool,
+            themeMode: null == themeMode
+                ? _value.themeMode
+                : themeMode // ignore: cast_nullable_to_non_nullable
+                      as AppThemeMode,
+            currentEffectiveTheme: null == currentEffectiveTheme
+                ? _value.currentEffectiveTheme
+                : currentEffectiveTheme // ignore: cast_nullable_to_non_nullable
+                      as AppThemeMode,
           )
           as $Val,
     );
@@ -102,6 +116,8 @@ abstract class _$$SystemStateImplCopyWith<$Res>
     String appVersion,
     String buildNumber,
     bool isLoading,
+    AppThemeMode themeMode,
+    AppThemeMode currentEffectiveTheme,
   });
 }
 
@@ -123,6 +139,8 @@ class __$$SystemStateImplCopyWithImpl<$Res>
     Object? appVersion = null,
     Object? buildNumber = null,
     Object? isLoading = null,
+    Object? themeMode = null,
+    Object? currentEffectiveTheme = null,
   }) {
     return _then(
       _$SystemStateImpl(
@@ -142,6 +160,14 @@ class __$$SystemStateImplCopyWithImpl<$Res>
             ? _value.isLoading
             : isLoading // ignore: cast_nullable_to_non_nullable
                   as bool,
+        themeMode: null == themeMode
+            ? _value.themeMode
+            : themeMode // ignore: cast_nullable_to_non_nullable
+                  as AppThemeMode,
+        currentEffectiveTheme: null == currentEffectiveTheme
+            ? _value.currentEffectiveTheme
+            : currentEffectiveTheme // ignore: cast_nullable_to_non_nullable
+                  as AppThemeMode,
       ),
     );
   }
@@ -155,6 +181,8 @@ class _$SystemStateImpl implements _SystemState {
     this.appVersion = '',
     this.buildNumber = '',
     this.isLoading = false,
+    this.themeMode = AppThemeMode.system,
+    this.currentEffectiveTheme = AppThemeMode.system,
   });
 
   @override
@@ -169,10 +197,16 @@ class _$SystemStateImpl implements _SystemState {
   @override
   @JsonKey()
   final bool isLoading;
+  @override
+  @JsonKey()
+  final AppThemeMode themeMode;
+  @override
+  @JsonKey()
+  final AppThemeMode currentEffectiveTheme;
 
   @override
   String toString() {
-    return 'SystemState(appName: $appName, appVersion: $appVersion, buildNumber: $buildNumber, isLoading: $isLoading)';
+    return 'SystemState(appName: $appName, appVersion: $appVersion, buildNumber: $buildNumber, isLoading: $isLoading, themeMode: $themeMode, currentEffectiveTheme: $currentEffectiveTheme)';
   }
 
   @override
@@ -186,12 +220,23 @@ class _$SystemStateImpl implements _SystemState {
             (identical(other.buildNumber, buildNumber) ||
                 other.buildNumber == buildNumber) &&
             (identical(other.isLoading, isLoading) ||
-                other.isLoading == isLoading));
+                other.isLoading == isLoading) &&
+            (identical(other.themeMode, themeMode) ||
+                other.themeMode == themeMode) &&
+            (identical(other.currentEffectiveTheme, currentEffectiveTheme) ||
+                other.currentEffectiveTheme == currentEffectiveTheme));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, appName, appVersion, buildNumber, isLoading);
+  int get hashCode => Object.hash(
+    runtimeType,
+    appName,
+    appVersion,
+    buildNumber,
+    isLoading,
+    themeMode,
+    currentEffectiveTheme,
+  );
 
   /// Create a copy of SystemState
   /// with the given fields replaced by the non-null parameter values.
@@ -208,6 +253,8 @@ abstract class _SystemState implements SystemState {
     final String appVersion,
     final String buildNumber,
     final bool isLoading,
+    final AppThemeMode themeMode,
+    final AppThemeMode currentEffectiveTheme,
   }) = _$SystemStateImpl;
 
   @override
@@ -218,6 +265,10 @@ abstract class _SystemState implements SystemState {
   String get buildNumber;
   @override
   bool get isLoading;
+  @override
+  AppThemeMode get themeMode;
+  @override
+  AppThemeMode get currentEffectiveTheme;
 
   /// Create a copy of SystemState
   /// with the given fields replaced by the non-null parameter values.

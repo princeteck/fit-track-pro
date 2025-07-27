@@ -151,6 +151,10 @@ class _SplashAnimatedBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isDarkMode = theme.brightness == Brightness.dark;
+
     return AnimatedBuilder(
       animation: Listenable.merge([
         animationController,
@@ -158,21 +162,30 @@ class _SplashAnimatedBackground extends StatelessWidget {
         blobController,
       ]),
       builder: (context, child) {
+        // Theme-responsive colors
         final primaryColor = Color.lerp(
-          const Color(0xFFFAFAFA),
-          const Color(0xFFF5F5F5),
+          isDarkMode ? colorScheme.surface : const Color(0xFFFAFAFA),
+          isDarkMode
+              ? colorScheme.surfaceContainerLow
+              : const Color(0xFFF5F5F5),
           animationController.value,
         )!;
 
         final secondaryColor = Color.lerp(
-          const Color(0xFFF5F5F5),
-          const Color(0xFFE5E5E5),
+          isDarkMode ? colorScheme.surfaceContainer : const Color(0xFFF5F5F5),
+          isDarkMode
+              ? colorScheme.surfaceContainerHigh
+              : const Color(0xFFE5E5E5),
           gradientController.value,
         )!;
 
         final tertiaryColor = Color.lerp(
-          const Color(0xFFE5E5E5),
-          const Color(0xFFD4D4D4),
+          isDarkMode
+              ? colorScheme.surfaceContainerHigh
+              : const Color(0xFFE5E5E5),
+          isDarkMode
+              ? colorScheme.surfaceContainerHighest
+              : const Color(0xFFD4D4D4),
           (animationController.value + gradientController.value) / 2,
         )!;
 
@@ -200,8 +213,14 @@ class _SplashAnimatedBackground extends StatelessWidget {
                 borderRadius: 150 + (50 * animationController.value),
                 colors: [
                   Colors.transparent,
-                  const Color(0xFFF5F5F5).withValues(alpha: 0.15),
-                  const Color(0xFFE5E5E5).withValues(alpha: 0.08),
+                  (isDarkMode
+                          ? colorScheme.surfaceContainer
+                          : const Color(0xFFF5F5F5))
+                      .withValues(alpha: 0.15),
+                  (isDarkMode
+                          ? colorScheme.surfaceContainerHigh
+                          : const Color(0xFFE5E5E5))
+                      .withValues(alpha: 0.08),
                 ],
                 radiusMultipliers: [0.4, 1.6, 1.8, 0.6],
               ),
@@ -213,8 +232,14 @@ class _SplashAnimatedBackground extends StatelessWidget {
                 borderRadius: 180 + (60 * blobController.value),
                 colors: [
                   Colors.transparent,
-                  const Color(0xFFE5E5E5).withValues(alpha: 0.12),
-                  const Color(0xFFD4D4D4).withValues(alpha: 0.06),
+                  (isDarkMode
+                          ? colorScheme.surfaceContainerHigh
+                          : const Color(0xFFE5E5E5))
+                      .withValues(alpha: 0.12),
+                  (isDarkMode
+                          ? colorScheme.surfaceContainerHighest
+                          : const Color(0xFFD4D4D4))
+                      .withValues(alpha: 0.06),
                 ],
                 radiusMultipliers: [1.3, 0.5, 0.7, 1.5],
               ),
@@ -226,8 +251,12 @@ class _SplashAnimatedBackground extends StatelessWidget {
                 borderRadius: 120 + (30 * gradientController.value),
                 colors: [
                   Colors.transparent,
-                  const Color(0xFFD4D4D4).withValues(alpha: 0.10),
-                  const Color(0xFFFAFAFA).withValues(alpha: 0.05),
+                  (isDarkMode
+                          ? colorScheme.surfaceContainerHighest
+                          : const Color(0xFFD4D4D4))
+                      .withValues(alpha: 0.10),
+                  (isDarkMode ? colorScheme.surface : const Color(0xFFFAFAFA))
+                      .withValues(alpha: 0.05),
                 ],
                 radiusMultipliers: [0.8, 1.4, 1.2, 0.3],
               ),
@@ -380,6 +409,8 @@ class _AnimatedLogoState extends State<_AnimatedLogo>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return AnimatedBuilder(
       animation: _scaleAnimation,
       builder: (context, child) {
@@ -388,8 +419,12 @@ class _AnimatedLogoState extends State<_AnimatedLogo>
       child: SvgPicture.asset(
         KIcons.logo,
         width: 150,
+        colorFilter: ColorFilter.mode(
+          theme.colorScheme.primary,
+          BlendMode.srcIn,
+        ),
         placeholderBuilder: (BuildContext context) =>
-            Icon(Icons.error, size: 150, color: Colors.red),
+            Icon(Icons.error, size: 150, color: theme.colorScheme.error),
       ),
     );
   }
@@ -400,9 +435,16 @@ class _AppNameText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Text(
       context.l10n?.appTitle ?? '',
-      style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.bold),
+      style: GoogleFonts.poppins(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: theme.colorScheme.onSurface,
+      ),
+      textAlign: TextAlign.center,
     );
   }
 }

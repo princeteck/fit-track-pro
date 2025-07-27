@@ -241,13 +241,46 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileLanguageValue => 'العربية (AR)';
 
   @override
-  String get profileDarkMode => 'الوضع المظلم';
+  String get profileDarkMode => 'المظهر';
 
   @override
   String get profileLinkedDevices => 'الأجهزة المرتبطة';
 
   @override
   String get profileLinkedDevicesValue => 'Apple Watch';
+
+  @override
+  String get themeTitle => 'المظهر';
+
+  @override
+  String get themeDescription => 'اختر وضع المظهر المفضل لديك';
+
+  @override
+  String get themeLightTitle => 'فاتح';
+
+  @override
+  String get themeLightSubtitle => 'استخدام المظهر الفاتح';
+
+  @override
+  String get themeDarkTitle => 'مظلم';
+
+  @override
+  String get themeDarkSubtitle => 'استخدام المظهر المظلم';
+
+  @override
+  String get themeSystemTitle => 'النظام';
+
+  @override
+  String get themeSystemSubtitle => 'اتبع إعداد النظام';
+
+  @override
+  String get themeLight => 'فاتح';
+
+  @override
+  String get themeDark => 'مظلم';
+
+  @override
+  String get themeSystem => 'النظام';
 
   @override
   String get profileSecurityPrivacy => 'الأمان والخصوصية';

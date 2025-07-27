@@ -7,5 +7,7 @@ abstract class SystemState with _$SystemState {
     @Default('') String appVersion,
     @Default('') String buildNumber,
     @Default(false) bool isLoading,
+    @Default(AppThemeMode.system) AppThemeMode themeMode,
+    @Default(AppThemeMode.system) AppThemeMode currentEffectiveTheme,
   }) = _SystemState;
 }

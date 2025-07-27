@@ -1,3 +1,4 @@
+import 'package:fittrack_pro/src/presentation/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -183,7 +184,7 @@ class _SignInFormState extends State<SignInForm> with TickerProviderStateMixin {
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/forgot-password');
+                      context.go(ForgotPasswordScreen.name);
                     },
                     child: Text(
                       l10n?.forgotPasswordLink ?? 'Forgot Password?',

@@ -20,14 +20,25 @@ class SocialButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isDarkMode = theme.brightness == Brightness.dark;
 
     return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: backgroundColor ?? Colors.white,
+        color:
+            backgroundColor ??
+            (isDarkMode ? Colors.white : colorScheme.surface),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: borderColor ?? theme.dividerColor, width: 1),
+        border: Border.all(
+          color:
+              borderColor ??
+              (isDarkMode
+                  ? Colors.grey.shade300
+                  : colorScheme.outline.withValues(alpha: 0.2)),
+          width: 1,
+        ),
       ),
       child: Material(
         color: Colors.transparent,

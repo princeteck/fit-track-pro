@@ -98,6 +98,9 @@ class _WalkthroughViewState extends State<_WalkthroughView>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
       body: BlocBuilder<WalkthroughCubit, WalkthroughState>(
         bloc: locator<WalkthroughCubit>(),
@@ -120,10 +123,10 @@ class _WalkthroughViewState extends State<_WalkthroughView>
                       colors: [
                         Colors.transparent,
                         Colors.transparent,
-                        Colors.white.withValues(alpha: 0.2),
-                        Colors.white.withValues(alpha: 0.6),
-                        Colors.white.withValues(alpha: 0.8),
-                        Colors.white,
+                        colorScheme.surface.withValues(alpha: 0.2),
+                        colorScheme.surface.withValues(alpha: 0.6),
+                        colorScheme.surface.withValues(alpha: 0.8),
+                        colorScheme.surface,
                       ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -787,6 +790,9 @@ class _AnimatedElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return AnimatedBuilder(
       animation: scaleAnimation,
       builder: (context, child) {
@@ -799,8 +805,8 @@ class _AnimatedElevatedButton extends StatelessWidget {
             child: ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF1A1A1A),
-                foregroundColor: Colors.white,
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
                 elevation: 0,
                 shadowColor: Colors.transparent,
                 padding: const EdgeInsets.symmetric(

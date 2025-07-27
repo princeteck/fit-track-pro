@@ -1,5 +1,6 @@
 import 'package:fittrack_pro/src/presentation/screens/auth/sign_in_screen.dart';
 import 'package:fittrack_pro/src/presentation/screens/settings/locale_settings_screen.dart';
+import 'package:fittrack_pro/src/presentation/screens/settings/theme_settings_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -59,14 +60,21 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
             context.push(LocaleSettingsScreen.path);
           },
         ),
-        _MenuTile(
-          icon: KIcons.setting,
-          title: context.l10n?.profileDarkMode ?? 'Dark Mode',
-          subtitle: null,
-          hasNotification: false,
-          hasSwitch: true,
-          switchValue: true,
-          onTap: () {},
+        BlocBuilder<SystemCubit, SystemState>(
+          bloc: locator<SystemCubit>(),
+          builder: (context, systemState) {
+            return _MenuTile(
+              icon: KIcons.setting,
+              title: context.l10n?.profileDarkMode ?? 'Dark Mode',
+              subtitle: locator<SystemCubit>().currentThemeDisplayName,
+              hasNotification: false,
+              hasSwitch: false,
+              switchValue: false,
+              onTap: () {
+                _showThemeSettings(context);
+              },
+            );
+          },
         ),
         _MenuTile(
           icon: KIcons.chart,
@@ -175,6 +183,23 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
                 ? context.l10n?.profileLoading('...') ?? 'Loading...'
                 : systemCubit.appDisplayVersion;
 
+            final theme = Theme.of(context);
+            final colorScheme = theme.colorScheme;
+            final isDarkMode = theme.brightness == Brightness.dark;
+
+            // Theme-responsive colors
+            final logoColor = isDarkMode
+                ? colorScheme.onSurfaceVariant
+                : Colors.grey[600]!;
+
+            final versionTextColor = isDarkMode
+                ? colorScheme.onSurfaceVariant
+                : Colors.grey[600];
+
+            final copyrightTextColor = isDarkMode
+                ? colorScheme.onSurfaceVariant.withValues(alpha: 0.7)
+                : Colors.grey[500];
+
             return Column(
               children: [
                 Row(
@@ -184,20 +209,16 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
                       KIcons.logo,
                       width: 20,
                       height: 20,
-                      colorFilter: ColorFilter.mode(
-                        Colors.grey[600]!,
-                        BlendMode.srcIn,
-                      ),
+                      colorFilter: ColorFilter.mode(logoColor, BlendMode.srcIn),
                     ),
                     const SizedBox(width: 8),
                     Text(
                       displayVersion,
                       style: GoogleFonts.inter(
-                        textStyle: Theme.of(context).textTheme.bodyMedium
-                            ?.copyWith(
-                              color: Colors.grey[600],
-                              fontWeight: FontWeight.w500,
-                            ),
+                        textStyle: theme.textTheme.bodyMedium?.copyWith(
+                          color: versionTextColor,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
@@ -207,8 +228,8 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
                   context.l10n?.profileRightsReserved(currentYear) ??
                       '© $currentYear Rights Reserved',
                   style: GoogleFonts.inter(
-                    textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Colors.grey[500],
+                    textStyle: theme.textTheme.bodySmall?.copyWith(
+                      color: copyrightTextColor,
                       fontSize: 11,
                     ),
                   ),
@@ -277,6 +298,15 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
       }
     }
   }
+
+  void _showThemeSettings(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => const ThemeSettingsBottomSheet(),
+    );
+  }
 }
 
 class _SectionHeader extends StatelessWidget {
@@ -292,6 +322,27 @@ class _SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isDarkMode = theme.brightness == Brightness.dark;
+
+    // Theme-responsive colors
+    final titleColor = isWarning
+        ? (isDarkMode ? Colors.red.shade400 : Colors.red[600])
+        : (isDarkMode ? colorScheme.onSurface : Colors.grey[800]);
+
+    final betaBackgroundColor = isDarkMode
+        ? colorScheme.primary.withValues(alpha: 0.2)
+        : Colors.blue[100];
+
+    final betaTextColor = isDarkMode ? colorScheme.primary : Colors.blue[700];
+
+    final warningBackgroundColor = isDarkMode
+        ? Colors.red.shade900.withValues(alpha: 0.3)
+        : Colors.red[100];
+
+    final warningTextColor = isDarkMode ? Colors.red.shade400 : Colors.red[700];
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
@@ -299,9 +350,9 @@ class _SectionHeader extends StatelessWidget {
           Text(
             title,
             style: GoogleFonts.inter(
-              textStyle: Theme.of(context).textTheme.titleMedium?.copyWith(
+              textStyle: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.w600,
-                color: isWarning ? Colors.red[600] : Colors.grey[800],
+                color: titleColor,
               ),
             ),
           ),
@@ -310,14 +361,14 @@ class _SectionHeader extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.blue[100],
+                color: betaBackgroundColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 context.l10n?.profileBeta ?? 'Beta',
                 style: GoogleFonts.inter(
-                  textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.blue[700],
+                  textStyle: theme.textTheme.bodySmall?.copyWith(
+                    color: betaTextColor,
                     fontWeight: FontWeight.w500,
                     fontSize: 10,
                   ),
@@ -330,14 +381,14 @@ class _SectionHeader extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
               decoration: BoxDecoration(
-                color: Colors.red[100],
+                color: warningBackgroundColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
                 context.l10n?.profileWarning ?? 'Warning',
                 style: GoogleFonts.inter(
-                  textStyle: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: Colors.red[700],
+                  textStyle: theme.textTheme.bodySmall?.copyWith(
+                    color: warningTextColor,
                     fontWeight: FontWeight.w500,
                     fontSize: 10,
                   ),
@@ -403,6 +454,45 @@ class _MenuTileState extends State<_MenuTile>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isDarkMode = theme.brightness == Brightness.dark;
+
+    // Theme-responsive colors
+    final backgroundColor = widget.isDanger
+        ? (isDarkMode
+              ? Colors.red.shade900.withValues(alpha: 0.2)
+              : Colors.red[50])
+        : Colors.transparent;
+
+    final borderColor = widget.isDanger
+        ? (isDarkMode ? Colors.red.shade700 : Colors.red[200]!)
+        : null;
+
+    final iconBackgroundColor = widget.isDanger
+        ? (isDarkMode
+              ? Colors.red.shade800.withValues(alpha: 0.3)
+              : Colors.red[100])
+        : (isDarkMode ? colorScheme.surfaceContainerHighest : Colors.grey[100]);
+
+    final iconColor = widget.isDanger
+        ? (isDarkMode ? Colors.red.shade400 : Colors.red[600]!)
+        : (isDarkMode ? colorScheme.onSurfaceVariant : Colors.grey[700]!);
+
+    final titleColor = widget.isDanger
+        ? (isDarkMode ? Colors.red.shade400 : Colors.red[600])
+        : colorScheme.onSurface;
+
+    final subtitleColor = isDarkMode
+        ? colorScheme.onSurfaceVariant
+        : Colors.grey[600];
+
+    final arrowColor = isDarkMode
+        ? colorScheme.onSurfaceVariant.withValues(alpha: 0.6)
+        : Colors.grey[400]!;
+
+    final primaryColor = colorScheme.primary;
+
     return GestureDetector(
       onTapDown: (_) => _animationController.forward(),
       onTapUp: (_) => _animationController.reverse(),
@@ -428,10 +518,10 @@ class _MenuTileState extends State<_MenuTile>
                   horizontal: 4,
                 ),
                 decoration: BoxDecoration(
-                  color: widget.isDanger ? Colors.red[50] : Colors.transparent,
+                  color: backgroundColor,
                   borderRadius: BorderRadius.circular(12),
-                  border: widget.isDanger
-                      ? Border.all(color: Colors.red[200]!, width: 1)
+                  border: borderColor != null
+                      ? Border.all(color: borderColor, width: 1)
                       : null,
                 ),
                 child: Row(
@@ -441,9 +531,7 @@ class _MenuTileState extends State<_MenuTile>
                       height: 40,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: widget.isDanger
-                            ? Colors.red[100]
-                            : Colors.grey[100],
+                        color: iconBackgroundColor,
                       ),
                       child: Center(
                         child: SvgPicture.asset(
@@ -451,9 +539,7 @@ class _MenuTileState extends State<_MenuTile>
                           width: 20,
                           height: 20,
                           colorFilter: ColorFilter.mode(
-                            widget.isDanger
-                                ? Colors.red[600]!
-                                : Colors.grey[700]!,
+                            iconColor,
                             BlendMode.srcIn,
                           ),
                         ),
@@ -469,13 +555,10 @@ class _MenuTileState extends State<_MenuTile>
                           Text(
                             widget.title,
                             style: GoogleFonts.inter(
-                              textStyle: Theme.of(context).textTheme.bodyLarge
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    color: widget.isDanger
-                                        ? Colors.red[600]
-                                        : Colors.black,
-                                  ),
+                              textStyle: theme.textTheme.bodyLarge?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: titleColor,
+                              ),
                             ),
                           ),
                           if (widget.subtitle != null) ...[
@@ -483,13 +566,10 @@ class _MenuTileState extends State<_MenuTile>
                             Text(
                               widget.subtitle!,
                               style: GoogleFonts.inter(
-                                textStyle: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(
-                                      color: Colors.grey[600],
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                textStyle: theme.textTheme.bodyMedium?.copyWith(
+                                  color: subtitleColor,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                             ),
                           ],
@@ -498,13 +578,13 @@ class _MenuTileState extends State<_MenuTile>
                     ),
 
                     if (widget.isLoading) ...[
-                      const SizedBox(
+                      SizedBox(
                         width: 20,
                         height: 20,
                         child: CircularProgressIndicator(
                           strokeWidth: 2,
                           valueColor: AlwaysStoppedAnimation<Color>(
-                            Colors.orange,
+                            primaryColor,
                           ),
                         ),
                       ),
@@ -515,18 +595,17 @@ class _MenuTileState extends State<_MenuTile>
                           vertical: 2,
                         ),
                         decoration: BoxDecoration(
-                          color: Colors.orange,
+                          color: primaryColor,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: Text(
                           widget.subtitle ?? '',
                           style: GoogleFonts.inter(
-                            textStyle: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 10,
-                                ),
+                            textStyle: theme.textTheme.bodySmall?.copyWith(
+                              color: colorScheme.onPrimary,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10,
+                            ),
                           ),
                         ),
                       ),
@@ -540,9 +619,13 @@ class _MenuTileState extends State<_MenuTile>
                         child: Switch(
                           value: widget.switchValue,
                           onChanged: (bool? value) {},
-                          activeColor: Colors.orange,
-                          inactiveThumbColor: Colors.grey[400],
-                          inactiveTrackColor: Colors.grey[300],
+                          activeColor: primaryColor,
+                          inactiveThumbColor: isDarkMode
+                              ? colorScheme.outline
+                              : Colors.grey[400],
+                          inactiveTrackColor: isDarkMode
+                              ? colorScheme.surfaceContainerHighest
+                              : Colors.grey[300],
                         ),
                       )
                     else if (!widget.hasNotification && !widget.isLoading)
@@ -551,7 +634,7 @@ class _MenuTileState extends State<_MenuTile>
                         width: 20,
                         height: 20,
                         colorFilter: ColorFilter.mode(
-                          Colors.grey[400]!,
+                          arrowColor,
                           BlendMode.srcIn,
                         ),
                       ),
