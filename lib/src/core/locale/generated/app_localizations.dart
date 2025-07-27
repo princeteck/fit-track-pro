@@ -551,7 +551,7 @@ abstract class AppLocalizations {
   /// No description provided for @profileDarkMode.
   ///
   /// In en, this message translates to:
-  /// **'Dark Mode'**
+  /// **'Theme'**
   String get profileDarkMode;
 
   /// No description provided for @profileLinkedDevices.
@@ -565,6 +565,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Apple Watch'**
   String get profileLinkedDevicesValue;
+
+  /// No description provided for @themeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get themeTitle;
+
+  /// No description provided for @themeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your preferred theme mode'**
+  String get themeDescription;
+
+  /// No description provided for @themeLightTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLightTitle;
+
+  /// No description provided for @themeLightSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use light theme'**
+  String get themeLightSubtitle;
+
+  /// No description provided for @themeDarkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDarkTitle;
+
+  /// No description provided for @themeDarkSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use dark theme'**
+  String get themeDarkSubtitle;
+
+  /// No description provided for @themeSystemTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystemTitle;
+
+  /// No description provided for @themeSystemSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow system setting'**
+  String get themeSystemSubtitle;
+
+  /// No description provided for @themeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// No description provided for @themeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
+
+  /// No description provided for @themeSystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
 
   /// No description provided for @profileSecurityPrivacy.
   ///

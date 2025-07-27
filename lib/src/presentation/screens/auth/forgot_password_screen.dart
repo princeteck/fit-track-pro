@@ -1,5 +1,7 @@
+import 'package:fittrack_pro/src/presentation/screens/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/extensions/context_extensions.dart';
 import '../../../core/di/di.dart';
@@ -94,7 +96,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
           button: true,
           label: 'Go back',
           child: IconButton(
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              if (context.canPop()) context.pop();
+              context.go(SignInScreen.name);
+            },
             icon: Icon(
               Icons.arrow_back_ios,
               color: theme.colorScheme.onSurface,
@@ -253,7 +258,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
 
                             // Back to sign in
                             TextButton(
-                              onPressed: () => Navigator.pop(context),
+                              onPressed: () {
+                                if (context.canPop()) context.pop();
+                                context.go(SignInScreen.name);
+                              },
                               child: Text(
                                 context.l10n?.backToSignInButton ??
                                     'Back to Sign In',

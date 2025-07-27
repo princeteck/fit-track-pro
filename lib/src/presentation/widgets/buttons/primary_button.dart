@@ -28,6 +28,7 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return SizedBox(
       width: width,
@@ -35,13 +36,13 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? theme.primaryColor,
-          foregroundColor: textColor ?? Colors.white,
+          backgroundColor: backgroundColor ?? colorScheme.primary,
+          foregroundColor: textColor ?? colorScheme.onPrimary,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(12),
           ),
-          disabledBackgroundColor: (backgroundColor ?? theme.primaryColor)
+          disabledBackgroundColor: (backgroundColor ?? colorScheme.primary)
               .withValues(alpha: 0.6),
         ),
         child: isLoading
@@ -51,7 +52,7 @@ class PrimaryButton extends StatelessWidget {
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
                   valueColor: AlwaysStoppedAnimation<Color>(
-                    textColor ?? Colors.white,
+                    textColor ?? colorScheme.onPrimary,
                   ),
                 ),
               )
@@ -65,7 +66,7 @@ class PrimaryButton extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: textColor ?? Colors.white,
+                      color: textColor ?? colorScheme.onPrimary,
                     ),
                   ),
                 ],

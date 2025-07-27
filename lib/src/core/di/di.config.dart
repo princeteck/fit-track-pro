@@ -19,8 +19,10 @@ import '../../data/datasources/auth_remote_data_source_impl.dart' as _i209;
 import '../../data/datasources/database_helper.dart' as _i778;
 import '../../data/repositories/auth_repository_impl.dart' as _i895;
 import '../../data/repositories/locale_repository_impl.dart' as _i579;
+import '../../data/repositories/theme_repository_impl.dart' as _i858;
 import '../../domain/repositories/auth_repository.dart' as _i1073;
 import '../../domain/repositories/locale_repository.dart' as _i369;
+import '../../domain/repositories/theme_repository.dart' as _i964;
 import '../../domain/usecase/enable_two_factor_auth_usecase.dart' as _i544;
 import '../../domain/usecase/get_current_user_usecase.dart' as _i190;
 import '../../domain/usecase/resend_verification_email_usecase.dart' as _i317;
@@ -68,6 +70,7 @@ _i174.GetIt init(
     () => _i209.AuthRemoteDataSourceImpl(),
   );
   gh.factory<_i369.LocaleRepository>(() => _i579.LocaleRepositoryImpl());
+  gh.factory<_i964.ThemeRepository>(() => _i858.ThemeRepositoryImpl());
   gh.factory<_i565.AuthLocalDataSource>(
     () => _i515.AuthLocalDataSourceImpl(
       gh<_i778.DatabaseHelper>(),

@@ -242,13 +242,46 @@ class AppLocalizationsHi extends AppLocalizations {
   String get profileLanguageValue => 'हिंदी (HI)';
 
   @override
-  String get profileDarkMode => 'डार्क मोड';
+  String get profileDarkMode => 'थीम';
 
   @override
-  String get profileLinkedDevices => 'लिंक्ड डिवाइसेस';
+  String get profileLinkedDevices => 'जुड़े हुए उपकरण';
 
   @override
   String get profileLinkedDevicesValue => 'Apple Watch';
+
+  @override
+  String get themeTitle => 'थीम';
+
+  @override
+  String get themeDescription => 'अपनी पसंदीदा थीम मोड चुनें';
+
+  @override
+  String get themeLightTitle => 'हल्का';
+
+  @override
+  String get themeLightSubtitle => 'हल्का थीम उपयोग करें';
+
+  @override
+  String get themeDarkTitle => 'गहरा';
+
+  @override
+  String get themeDarkSubtitle => 'गहरा थीम उपयोग करें';
+
+  @override
+  String get themeSystemTitle => 'सिस्टम';
+
+  @override
+  String get themeSystemSubtitle => 'सिस्टम सेटिंग का पालन करें';
+
+  @override
+  String get themeLight => 'हल्का';
+
+  @override
+  String get themeDark => 'गहरा';
+
+  @override
+  String get themeSystem => 'सिस्टम';
 
   @override
   String get profileSecurityPrivacy => 'सुरक्षा और गोपनीयता';
