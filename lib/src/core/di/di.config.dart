@@ -29,6 +29,7 @@ import '../../domain/usecase/resend_verification_email_usecase.dart' as _i317;
 import '../../domain/usecase/send_password_reset_email_usecase.dart' as _i1072;
 import '../../domain/usecase/sign_in_with_email_password_usecase.dart' as _i518;
 import '../../domain/usecase/sign_in_with_google_usecase.dart' as _i409;
+import '../../domain/usecase/sign_in_with_instagram_usecase.dart' as _i873;
 import '../../domain/usecase/sign_out_usecase.dart' as _i720;
 import '../../domain/usecase/sign_up_with_email_password_usecase.dart' as _i33;
 import '../../domain/usecase/verify_two_factor_code_usecase.dart' as _i549;
@@ -125,6 +126,9 @@ _i174.GetIt init(
   );
   gh.factory<_i720.SignOutUseCase>(
     () => _i720.SignOutUseCase(gh<_i1073.AuthRepository>()),
+  );
+  gh.factory<_i873.SignInWithInstagramUseCase>(
+    () => _i873.SignInWithInstagramUseCase(gh<_i1073.AuthRepository>()),
   );
   return getIt;
 }

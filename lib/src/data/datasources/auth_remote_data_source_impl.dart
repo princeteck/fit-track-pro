@@ -217,4 +217,20 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       expiresIn: 3600, // 1 hour in seconds
     );
   }
+
+  @override
+  Future<AuthResponseModel> signInWithInstagram() async {
+    // Mock API call delay
+    await Future.delayed(const Duration(seconds: 3));
+
+    final user = _mockUser.copyWith(
+      email: 'instagram.user@example.com',
+      name: 'Instagram User',
+      photoUrl: 'https://instagram.com/mock',
+      isEmailVerified: true,
+      lastLoginAt: DateTime.now(),
+    );
+
+    return _generateAuthResponse(user);
+  }
 }

@@ -20,6 +20,9 @@ abstract class AuthRemoteDataSource {
   /// Sign in with Google
   Future<AuthResponseModel> signInWithGoogle();
 
+  /// Sign in with Instagram
+  Future<AuthResponseModel> signInWithInstagram();
+
   /// Send password reset email
   Future<Unit> sendPasswordResetEmail({required String email});
 

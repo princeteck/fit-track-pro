@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/constants/ui/colors_constants.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;
@@ -28,7 +29,12 @@ class PrimaryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final isLightMode = theme.brightness == Brightness.light;
+
+    // Use black background in light mode if no custom color is provided
+    final buttonBackground =
+        backgroundColor ?? (isLightMode ? KColors.black : KColors.orange50);
+    final buttonText = textColor ?? Colors.white;
 
     return SizedBox(
       width: width,
@@ -36,14 +42,13 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? colorScheme.primary,
-          foregroundColor: textColor ?? colorScheme.onPrimary,
+          backgroundColor: buttonBackground,
+          foregroundColor: buttonText,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: borderRadius ?? BorderRadius.circular(12),
           ),
-          disabledBackgroundColor: (backgroundColor ?? colorScheme.primary)
-              .withValues(alpha: 0.6),
+          disabledBackgroundColor: buttonBackground.withValues(alpha: 0.6),
         ),
         child: isLoading
             ? SizedBox(
@@ -51,9 +56,7 @@ class PrimaryButton extends StatelessWidget {
                 height: 20,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    textColor ?? colorScheme.onPrimary,
-                  ),
+                  valueColor: AlwaysStoppedAnimation<Color>(buttonText),
                 ),
               )
             : Row(
@@ -66,7 +69,7 @@ class PrimaryButton extends StatelessWidget {
                     style: GoogleFonts.inter(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: textColor ?? colorScheme.onPrimary,
+                      color: buttonText,
                     ),
                   ),
                 ],

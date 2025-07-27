@@ -232,4 +232,18 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(AuthFailure.unknownError(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<AuthFailure, AuthResponse>> signInWithInstagram() async {
+    try {
+      final result = await _remoteDataSource.signInWithInstagram();
+
+      // Store auth response locally
+      await _localDataSource.saveAuthResponse(result);
+
+      return Right(_toAuthResponse(result));
+    } catch (e) {
+      return Left(AuthFailure.unknownError(message: e.toString()));
+    }
+  }
 }

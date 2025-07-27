@@ -7,6 +7,7 @@ import '../../../domain/usecase/resend_verification_email_usecase.dart';
 import '../../../domain/usecase/send_password_reset_email_usecase.dart';
 import '../../../domain/usecase/sign_in_with_email_password_usecase.dart';
 import '../../../domain/usecase/sign_in_with_google_usecase.dart';
+import '../../../domain/usecase/sign_in_with_instagram_usecase.dart';
 import '../../../domain/usecase/sign_out_usecase.dart';
 import '../../../domain/usecase/sign_up_with_email_password_usecase.dart';
 import '../../../domain/entities/auth_failure.dart';
@@ -24,6 +25,7 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
   late SignInWithEmailAndPasswordUseCase _signInWithEmailPasswordUseCase;
   late SignUpWithEmailAndPasswordUseCase _signUpWithEmailPasswordUseCase;
   late SignInWithGoogleUseCase _signInWithGoogleUseCase;
+  late SignInWithInstagramUseCase _signInWithInstagramUseCase;
   late SignOutUseCase _signOutUseCase;
   late SendPasswordResetEmailUseCase _sendPasswordResetEmailUseCase;
   late ResendVerificationEmailUseCase _resendVerificationEmailUseCase;
@@ -146,6 +148,34 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
     );
 
     final result = await _signInWithGoogleUseCase(NoParams());
+
+    result.fold(
+      (failure) => emit(
+        state.copyWith(
+          status: CubitState.error(
+            message: _getErrorMessage(failure),
+            canRetry: true,
+          ),
+          errorMessage: _getErrorMessage(failure),
+        ),
+      ),
+      (authResponse) => emit(
+        state.copyWith(
+          status: const CubitState.submitted(),
+          user: authResponse.user,
+          isAuthenticated: true,
+          errorMessage: null,
+        ),
+      ),
+    );
+  }
+
+  Future<void> signInWithInstagram() async {
+    emit(
+      state.copyWith(status: const CubitState.submitting(), errorMessage: null),
+    );
+
+    final result = await _signInWithInstagramUseCase(NoParams());
 
     result.fold(
       (failure) => emit(

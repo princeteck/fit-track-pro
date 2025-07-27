@@ -8,7 +8,6 @@ import '../../../../../core/locale/generated/app_localizations.dart';
 import '../../../../controllers/auth/auth_cubit.dart';
 import '../../../../controllers/base/cubit_state.dart';
 import '../../../../widgets/widgets.dart';
-import '../../../dashboard/dashboard_screen.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -102,6 +101,10 @@ class _SignInFormState extends State<SignInForm> with TickerProviderStateMixin {
 
   void _signInWithGoogle() {
     context.read<AuthCubit>().signInWithGoogle();
+  }
+
+  void _signInWithInstagram() {
+    context.read<AuthCubit>().signInWithInstagram();
   }
 
   void _signInWithApple() {
@@ -238,6 +241,10 @@ class _SignInFormState extends State<SignInForm> with TickerProviderStateMixin {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    SocialButton(
+                      iconPath: KIcons.instagram,
+                      onPressed: _signInWithInstagram,
+                    ),
                     SocialButton(
                       iconPath: KIcons.google,
                       onPressed: _signInWithGoogle,
