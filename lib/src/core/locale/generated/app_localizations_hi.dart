@@ -99,4 +99,218 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get finishButton => 'समाप्त';
+
+  @override
+  String get forgotPasswordTitle => 'पासवर्ड भूल गए?';
+
+  @override
+  String get forgotPasswordSubtitle =>
+      'अपना ईमेल पता दर्ज करें और हम आपको अपना पासवर्ड रीसेट करने के लिए एक लिंक भेजेंगे';
+
+  @override
+  String get emailLabel => 'ईमेल';
+
+  @override
+  String get emailHint => 'अपना ईमेल पता दर्ज करें';
+
+  @override
+  String get emailRequired => 'ईमेल आवश्यक है';
+
+  @override
+  String get emailInvalid => 'कृपया एक वैध ईमेल दर्ज करें';
+
+  @override
+  String get sendResetLinkButton => 'रीसेट लिंक भेजें';
+
+  @override
+  String get backToSignInButton => 'साइन इन पर वापस जाएं';
+
+  @override
+  String get passwordResetEmailSent =>
+      'पासवर्ड रीसेट ईमेल भेजा गया! अपना इनबॉक्स चेक करें।';
+
+  @override
+  String get passwordResetEmailFailed => 'रीसेट ईमेल भेजने में विफल';
+
+  @override
+  String get welcomeBackTitle => 'वापसी पर स्वागत है!';
+
+  @override
+  String get signInSubtitle =>
+      'अपनी फिटनेस यात्रा जारी रखने के लिए साइन इन करें';
+
+  @override
+  String get dontHaveAccountText => 'कोई खाता नहीं है? ';
+
+  @override
+  String get signInButtonText => 'साइन इन';
+
+  @override
+  String get createAccountTitle => 'खाता बनाएं';
+
+  @override
+  String get signUpSubtitle =>
+      'हमसे जुड़ें और आज ही अपनी फिटनेस यात्रा शुरू करें';
+
+  @override
+  String get alreadyHaveAccountText => 'पहले से खाता है? ';
+
+  @override
+  String get signUpButtonText => 'साइन अप';
+
+  @override
+  String get passwordLabel => 'पासवर्ड';
+
+  @override
+  String get passwordHint => 'अपना पासवर्ड दर्ज करें';
+
+  @override
+  String get passwordRequired => 'पासवर्ड आवश्यक है';
+
+  @override
+  String get passwordMinLength => 'पासवर्ड कम से कम 6 अक्षर का होना चाहिए';
+
+  @override
+  String get passwordStrong => 'पासवर्ड कम से कम 8 अक्षर का होना चाहिए';
+
+  @override
+  String get passwordComplexity =>
+      'पासवर्ड में बड़े, छोटे अक्षर और संख्या होनी चाहिए';
+
+  @override
+  String get confirmPasswordLabel => 'पासवर्ड की पुष्टि करें';
+
+  @override
+  String get confirmPasswordHint => 'अपने पासवर्ड की पुष्टि करें';
+
+  @override
+  String get confirmPasswordRequired => 'कृपया अपने पासवर्ड की पुष्टि करें';
+
+  @override
+  String get passwordsDoNotMatch => 'पासवर्ड मेल नहीं खाते';
+
+  @override
+  String get forgotPasswordLink => 'पासवर्ड भूल गए?';
+
+  @override
+  String get orText => 'या';
+
+  @override
+  String get appleSignInSoon => 'Apple साइन इन जल्द आ रहा है';
+
+  @override
+  String get loginFailed => 'लॉगिन विफल';
+
+  @override
+  String get signUpFailed => 'साइन अप विफल';
+
+  @override
+  String get accountCreatedSuccess => 'खाता सफलतापूर्वक बनाया गया!';
+
+  @override
+  String get createAccountButton => 'खाता बनाएं';
+
+  @override
+  String get enterYourEmail => 'अपना ईमेल दर्ज करें';
+
+  @override
+  String get enterYourPassword => 'अपना पासवर्ड दर्ज करें';
+
+  @override
+  String get createStrongPassword => 'एक मजबूत पासवर्ड बनाएं';
+
+  @override
+  String get termsAndConditions =>
+      'खाता बनाकर, आप हमारी सेवा की शर्तों और गोपनीयता नीति से सहमत हैं';
+
+  @override
+  String get profileGeneral => 'सामान्य';
+
+  @override
+  String get profileNotifications => 'सूचनाएं';
+
+  @override
+  String get profilePersonalInfo => 'व्यक्तिगत जानकारी';
+
+  @override
+  String get profileCoachContact => 'कोच संपर्क';
+
+  @override
+  String get profileLanguage => 'भाषा';
+
+  @override
+  String get profileLanguageValue => 'हिंदी (HI)';
+
+  @override
+  String get profileDarkMode => 'डार्क मोड';
+
+  @override
+  String get profileLinkedDevices => 'लिंक्ड डिवाइसेस';
+
+  @override
+  String get profileLinkedDevicesValue => 'Apple Watch';
+
+  @override
+  String get profileSecurityPrivacy => 'सुरक्षा और गोपनीयता';
+
+  @override
+  String get profileMainSecurity => 'मुख्य सुरक्षा';
+
+  @override
+  String get profileEnableBiometric => 'बायोमेट्रिक सक्षम करें';
+
+  @override
+  String get profilePrivacyPolicy => 'गोपनीयता नीति';
+
+  @override
+  String get profileHelpSupport => 'सहायता और समर्थन';
+
+  @override
+  String get profileAboutUs => 'हमारे बारे में';
+
+  @override
+  String get profileHelpCenter => 'सहायता केंद्र';
+
+  @override
+  String get profileSubmitFeedback => 'फीडबैक भेजें';
+
+  @override
+  String get profileDangerZone => 'खतरा क्षेत्र';
+
+  @override
+  String get profileCloseAccount => 'खाता बंद करें';
+
+  @override
+  String get profileLogOut => 'लॉग आउट';
+
+  @override
+  String get profileSignOut => 'साइन आउट';
+
+  @override
+  String get profileSignOutTitle => 'साइन आउट';
+
+  @override
+  String get profileSignOutMessage => 'क्या आप वाकई साइन आउट करना चाहते हैं?';
+
+  @override
+  String get profileCancel => 'रद्द करें';
+
+  @override
+  String get profileSignOutFailed => 'साइन आउट विफल';
+
+  @override
+  String get profileBeta => 'बीटा';
+
+  @override
+  String get profileWarning => 'चेतावनी';
+
+  @override
+  String profileRightsReserved(Object year) {
+    return '© $year सभी अधिकार सुरक्षित';
+  }
+
+  @override
+  String profileLoading(Object loadingIndication) {
+    return 'लोड हो रहा है$loadingIndication';
+  }
 }

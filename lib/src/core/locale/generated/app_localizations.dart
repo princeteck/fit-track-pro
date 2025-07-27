@@ -277,6 +277,414 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Finish'**
   String get finishButton;
+
+  /// No description provided for @forgotPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password?'**
+  String get forgotPasswordTitle;
+
+  /// No description provided for @forgotPasswordSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email address and we\'ll send you a link to reset your password'**
+  String get forgotPasswordSubtitle;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get emailLabel;
+
+  /// No description provided for @emailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email address'**
+  String get emailHint;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get emailRequired;
+
+  /// No description provided for @emailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get emailInvalid;
+
+  /// No description provided for @sendResetLinkButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Reset Link'**
+  String get sendResetLinkButton;
+
+  /// No description provided for @backToSignInButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to Sign In'**
+  String get backToSignInButton;
+
+  /// No description provided for @passwordResetEmailSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset email sent! Check your inbox.'**
+  String get passwordResetEmailSent;
+
+  /// No description provided for @passwordResetEmailFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to send reset email'**
+  String get passwordResetEmailFailed;
+
+  /// No description provided for @welcomeBackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back!'**
+  String get welcomeBackTitle;
+
+  /// No description provided for @signInSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to continue your fitness journey'**
+  String get signInSubtitle;
+
+  /// No description provided for @dontHaveAccountText.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account? '**
+  String get dontHaveAccountText;
+
+  /// No description provided for @signInButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
+  String get signInButtonText;
+
+  /// No description provided for @createAccountTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccountTitle;
+
+  /// No description provided for @signUpSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join us and start your fitness journey today'**
+  String get signUpSubtitle;
+
+  /// No description provided for @alreadyHaveAccountText.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account? '**
+  String get alreadyHaveAccountText;
+
+  /// No description provided for @signUpButtonText.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
+  String get signUpButtonText;
+
+  /// No description provided for @passwordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get passwordLabel;
+
+  /// No description provided for @passwordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get passwordHint;
+
+  /// No description provided for @passwordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get passwordRequired;
+
+  /// No description provided for @passwordMinLength.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 6 characters'**
+  String get passwordMinLength;
+
+  /// No description provided for @passwordStrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get passwordStrong;
+
+  /// No description provided for @passwordComplexity.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain uppercase, lowercase and number'**
+  String get passwordComplexity;
+
+  /// No description provided for @confirmPasswordLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Password'**
+  String get confirmPasswordLabel;
+
+  /// No description provided for @confirmPasswordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm your password'**
+  String get confirmPasswordHint;
+
+  /// No description provided for @confirmPasswordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please confirm your password'**
+  String get confirmPasswordRequired;
+
+  /// No description provided for @passwordsDoNotMatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Passwords do not match'**
+  String get passwordsDoNotMatch;
+
+  /// No description provided for @forgotPasswordLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password?'**
+  String get forgotPasswordLink;
+
+  /// No description provided for @orText.
+  ///
+  /// In en, this message translates to:
+  /// **'or'**
+  String get orText;
+
+  /// No description provided for @appleSignInSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple Sign In coming soon'**
+  String get appleSignInSoon;
+
+  /// No description provided for @loginFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Login failed'**
+  String get loginFailed;
+
+  /// No description provided for @signUpFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign up failed'**
+  String get signUpFailed;
+
+  /// No description provided for @accountCreatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Account created successfully!'**
+  String get accountCreatedSuccess;
+
+  /// No description provided for @createAccountButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Create Account'**
+  String get createAccountButton;
+
+  /// No description provided for @enterYourEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your email'**
+  String get enterYourEmail;
+
+  /// No description provided for @enterYourPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get enterYourPassword;
+
+  /// No description provided for @createStrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a strong password'**
+  String get createStrongPassword;
+
+  /// No description provided for @termsAndConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'By creating an account, you agree to our Terms of Service and Privacy Policy'**
+  String get termsAndConditions;
+
+  /// No description provided for @profileGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get profileGeneral;
+
+  /// No description provided for @profileNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get profileNotifications;
+
+  /// No description provided for @profilePersonalInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal Information'**
+  String get profilePersonalInfo;
+
+  /// No description provided for @profileCoachContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Coach Contact'**
+  String get profileCoachContact;
+
+  /// No description provided for @profileLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get profileLanguage;
+
+  /// No description provided for @profileLanguageValue.
+  ///
+  /// In en, this message translates to:
+  /// **'English (EN)'**
+  String get profileLanguageValue;
+
+  /// No description provided for @profileDarkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get profileDarkMode;
+
+  /// No description provided for @profileLinkedDevices.
+  ///
+  /// In en, this message translates to:
+  /// **'Linked Devices'**
+  String get profileLinkedDevices;
+
+  /// No description provided for @profileLinkedDevicesValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Apple Watch'**
+  String get profileLinkedDevicesValue;
+
+  /// No description provided for @profileSecurityPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Security & Privacy'**
+  String get profileSecurityPrivacy;
+
+  /// No description provided for @profileMainSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Main Security'**
+  String get profileMainSecurity;
+
+  /// No description provided for @profileEnableBiometric.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Biometric'**
+  String get profileEnableBiometric;
+
+  /// No description provided for @profilePrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get profilePrivacyPolicy;
+
+  /// No description provided for @profileHelpSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Help & Support'**
+  String get profileHelpSupport;
+
+  /// No description provided for @profileAboutUs.
+  ///
+  /// In en, this message translates to:
+  /// **'About Us'**
+  String get profileAboutUs;
+
+  /// No description provided for @profileHelpCenter.
+  ///
+  /// In en, this message translates to:
+  /// **'Help Center'**
+  String get profileHelpCenter;
+
+  /// No description provided for @profileSubmitFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Feedback'**
+  String get profileSubmitFeedback;
+
+  /// No description provided for @profileDangerZone.
+  ///
+  /// In en, this message translates to:
+  /// **'Danger Zone'**
+  String get profileDangerZone;
+
+  /// No description provided for @profileCloseAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Close Account'**
+  String get profileCloseAccount;
+
+  /// No description provided for @profileLogOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Log Out'**
+  String get profileLogOut;
+
+  /// No description provided for @profileSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Out'**
+  String get profileSignOut;
+
+  /// No description provided for @profileSignOutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Out'**
+  String get profileSignOutTitle;
+
+  /// No description provided for @profileSignOutMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to sign out?'**
+  String get profileSignOutMessage;
+
+  /// No description provided for @profileCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get profileCancel;
+
+  /// No description provided for @profileSignOutFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out failed'**
+  String get profileSignOutFailed;
+
+  /// No description provided for @profileBeta.
+  ///
+  /// In en, this message translates to:
+  /// **'Beta'**
+  String get profileBeta;
+
+  /// No description provided for @profileWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get profileWarning;
+
+  /// No description provided for @profileRightsReserved.
+  ///
+  /// In en, this message translates to:
+  /// **'© {year} Rights Reserved'**
+  String profileRightsReserved(Object year);
+
+  /// No description provided for @profileLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading{loadingIndication}'**
+  String profileLoading(Object loadingIndication);
 }
 
 class _AppLocalizationsDelegate

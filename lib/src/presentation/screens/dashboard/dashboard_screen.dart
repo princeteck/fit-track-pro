@@ -24,6 +24,8 @@ class _DashboardScreenState extends State<DashboardScreen>
   void initState() {
     super.initState();
     _setupControllers();
+
+    locator<BottomNavbarCubit>().reset();
   }
 
   void _setupControllers() {

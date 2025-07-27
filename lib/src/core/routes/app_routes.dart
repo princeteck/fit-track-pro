@@ -22,7 +22,7 @@ class AppRoutes {
   static final GoRouter _router = GoRouter(
     errorBuilder: errorWidget,
     initialLocation: SplashScreen.path,
-    routes: <RouteBase>[...commonRoutes, ...systemRoutes],
+    routes: <RouteBase>[...authRoutes, ...commonRoutes, ...systemRoutes],
     redirect: (context, state) async {
       debugPrint('Redirecting ${state.uri.toString()}');
       return state.name;
