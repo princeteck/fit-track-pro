@@ -52,6 +52,7 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   late FocusNode _focusNode;
   bool _isFocused = false;
+  bool _hasError = false;
 
   @override
   void initState() {
@@ -74,6 +75,15 @@ class _CustomTextFieldState extends State<CustomTextField> {
     });
   }
 
+  void _validateField(String? value) {
+    if (widget.validator != null) {
+      final errorMessage = widget.validator!(value);
+      setState(() {
+        _hasError = errorMessage != null;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -92,74 +102,110 @@ class _CustomTextFieldState extends State<CustomTextField> {
           ),
           const SizedBox(height: 8),
         ],
-        TextFormField(
-          controller: widget.controller,
-          validator: widget.validator,
-          keyboardType: widget.keyboardType,
-          textInputAction: widget.textInputAction,
-          enabled: widget.enabled,
-          readOnly: widget.readOnly,
-          maxLines: widget.maxLines,
-          minLines: widget.minLines,
-          onTap: widget.onTap,
-          onChanged: widget.onChanged,
-          onFieldSubmitted: widget.onFieldSubmitted,
-          focusNode: _focusNode,
-          autofocus: widget.autofocus,
-          initialValue: widget.initialValue,
-          style: GoogleFonts.inter(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: theme.colorScheme.onSurface,
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(
+              color: (_isFocused && !_hasError)
+                  ? theme.colorScheme.primary.withValues(alpha: 0.3)
+                  : Colors.transparent,
+              width: 3,
+            ),
           ),
-          decoration: InputDecoration(
-            hintText: widget.hint,
-            hintStyle: GoogleFonts.inter(
+          child: TextFormField(
+            controller: widget.controller,
+            validator: (value) {
+              final result = widget.validator?.call(value);
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _validateField(value);
+              });
+              return result;
+            },
+            keyboardType: widget.keyboardType,
+            textInputAction: widget.textInputAction,
+            enabled: widget.enabled,
+            readOnly: widget.readOnly,
+            maxLines: widget.maxLines,
+            minLines: widget.minLines,
+            onTap: widget.onTap,
+            onChanged: (value) {
+              _validateField(value);
+              widget.onChanged?.call(value);
+            },
+            onFieldSubmitted: widget.onFieldSubmitted,
+            focusNode: _focusNode,
+            autofocus: widget.autofocus,
+            initialValue: widget.initialValue,
+            style: GoogleFonts.inter(
               fontSize: 16,
               fontWeight: FontWeight.w400,
-              color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+              color: theme.colorScheme.onSurface,
             ),
-            prefixIcon: widget.prefixIcon,
-            suffixIcon: widget.suffixIcon,
-            contentPadding:
-                widget.contentPadding ??
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: theme.dividerColor, width: 1),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: theme.dividerColor, width: 1),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: theme.colorScheme.primary,
-                width: 2,
+            decoration: InputDecoration(
+              hintText: widget.hint,
+              hintStyle: GoogleFonts.inter(
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
               ),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: theme.colorScheme.error, width: 1),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(color: theme.colorScheme.error, width: 2),
-            ),
-            disabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: theme.dividerColor.withValues(alpha: 0.5),
-                width: 1,
+              prefixIcon: widget.prefixIcon,
+              suffixIcon: widget.suffixIcon,
+              contentPadding:
+                  widget.contentPadding ??
+                  const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: theme.colorScheme.outline.withValues(alpha: 0.3),
+                  width: 1,
+                ),
               ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: theme.colorScheme.outline.withValues(alpha: 0.3),
+                  width: 1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: theme.colorScheme.primary,
+                  width: 1,
+                ),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: theme.colorScheme.error,
+                  width: 1,
+                ),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: theme.colorScheme.error,
+                  width: 2,
+                ),
+              ),
+              disabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: theme.colorScheme.outline.withValues(alpha: 0.2),
+                  width: 1,
+                ),
+              ),
+              filled: true,
+              fillColor: widget.enabled
+                  ? (_isFocused
+                        ? theme.colorScheme.surface
+                        : theme.colorScheme.surfaceContainerHighest.withValues(
+                            alpha: 0.3,
+                          ))
+                  : theme.colorScheme.surfaceContainerHighest.withValues(
+                      alpha: 0.1,
+                    ),
             ),
-            filled: true,
-            fillColor: widget.enabled
-                ? (_isFocused
-                      ? theme.colorScheme.surface
-                      : theme.colorScheme.surface.withValues(alpha: 0.5))
-                : theme.colorScheme.surface.withValues(alpha: 0.3),
           ),
         ),
       ],

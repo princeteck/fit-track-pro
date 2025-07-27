@@ -37,6 +37,9 @@ abstract class AuthRepository {
   /// Sign in with Google
   Future<Either<AuthFailure, AuthResponse>> signInWithGoogle();
 
+  /// Sign in with Instagram
+  Future<Either<AuthFailure, AuthResponse>> signInWithInstagram();
+
   /// Send password reset email
   Future<Either<AuthFailure, Unit>> sendPasswordResetEmail({
     required String email,
