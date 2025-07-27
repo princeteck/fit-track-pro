@@ -1,6 +1,7 @@
 import 'package:fittrack_pro/src/presentation/screens/auth/sign_in_screen.dart';
 import 'package:fittrack_pro/src/presentation/screens/settings/locale_settings_screen.dart';
 import 'package:fittrack_pro/src/presentation/screens/settings/theme_settings_bottom_sheet.dart';
+import 'package:fittrack_pro/src/presentation/screens/walkthrough/walkthrough_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -74,6 +75,15 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
                 _showThemeSettings(context);
               },
             );
+          },
+        ),
+        _MenuTile(
+          icon: KIcons.slideHorizontal,
+          title: 'Onboarding Slides',
+          subtitle: '',
+          hasNotification: false,
+          onTap: () {
+            context.push(WalkthroughScreen.path);
           },
         ),
         _MenuTile(

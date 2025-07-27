@@ -19,9 +19,13 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    // Initialize theme after the widget tree is built
+    // Initialize theme after the widget tree is built with a small delay
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      locator<SystemCubit>().initializeTheme();
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (mounted) {
+          locator<SystemCubit>().initializeTheme();
+        }
+      });
     });
   }
 

@@ -79,34 +79,50 @@ class _SplashScreenViewState extends State<_SplashScreenView>
   }
 
   void _initializeAnimations() {
+    // Reduce animation duration and complexity
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 4000),
+      duration: const Duration(milliseconds: 2000), // Reduced from 4000
       vsync: this,
     );
 
     _gradientController = AnimationController(
-      duration: const Duration(milliseconds: 5000),
+      duration: const Duration(milliseconds: 3000), // Reduced from 5000
       vsync: this,
     );
 
     _blobController = AnimationController(
-      duration: const Duration(milliseconds: 6000),
+      duration: const Duration(milliseconds: 4000), // Reduced from 6000
       vsync: this,
     );
 
-    _animationController.forward().then((_) {
+    // Start animations with staggered delays to reduce initial load
+    Future.delayed(const Duration(milliseconds: 200), () {
       if (mounted) {
-        _animationController.repeat(reverse: true);
+        _animationController.forward().then((_) {
+          if (mounted) {
+            _animationController.repeat(reverse: true);
+          }
+        });
       }
     });
-    _gradientController.forward().then((_) {
+
+    Future.delayed(const Duration(milliseconds: 400), () {
       if (mounted) {
-        _gradientController.repeat(reverse: true);
+        _gradientController.forward().then((_) {
+          if (mounted) {
+            _gradientController.repeat(reverse: true);
+          }
+        });
       }
     });
-    _blobController.forward().then((_) {
+
+    Future.delayed(const Duration(milliseconds: 600), () {
       if (mounted) {
-        _blobController.repeat(reverse: true);
+        _blobController.forward().then((_) {
+          if (mounted) {
+            _blobController.repeat(reverse: true);
+          }
+        });
       }
     });
   }

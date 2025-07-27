@@ -38,6 +38,7 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
     _signUpWithEmailPasswordUseCase =
         injector<SignUpWithEmailAndPasswordUseCase>();
     _signInWithGoogleUseCase = injector<SignInWithGoogleUseCase>();
+    _signInWithInstagramUseCase = injector<SignInWithInstagramUseCase>();
     _signOutUseCase = injector<SignOutUseCase>();
     _sendPasswordResetEmailUseCase = injector<SendPasswordResetEmailUseCase>();
     _resendVerificationEmailUseCase =
@@ -144,7 +145,10 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
 
   Future<void> signInWithGoogle() async {
     emit(
-      state.copyWith(status: const CubitState.submitting(), errorMessage: null),
+      state.copyWith(
+        signInStatus: const CubitState.submitting(),
+        errorMessage: null,
+      ),
     );
 
     final result = await _signInWithGoogleUseCase(NoParams());
@@ -152,27 +156,54 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
     result.fold(
       (failure) => emit(
         state.copyWith(
-          status: CubitState.error(
+          signInStatus: CubitState.error(
             message: _getErrorMessage(failure),
             canRetry: true,
           ),
           errorMessage: _getErrorMessage(failure),
         ),
       ),
-      (authResponse) => emit(
-        state.copyWith(
-          status: const CubitState.submitted(),
-          user: authResponse.user,
-          isAuthenticated: true,
-          errorMessage: null,
-        ),
-      ),
+      (authResponse) async {
+        try {
+          final expiresAt = DateTime.now().add(
+            Duration(seconds: authResponse.expiresIn),
+          );
+
+          await _appStartupService.saveAuthTokens(
+            accessToken: authResponse.accessToken,
+            refreshToken: authResponse.refreshToken,
+            expiresAt: expiresAt,
+          );
+
+          emit(
+            state.copyWith(
+              signInStatus: const CubitState.submitted(),
+              user: authResponse.user,
+              isAuthenticated: true,
+              errorMessage: null,
+            ),
+          );
+        } catch (e) {
+          emit(
+            state.copyWith(
+              signInStatus: CubitState.error(
+                message: 'Failed to save authentication data',
+                canRetry: true,
+              ),
+              errorMessage: 'Failed to save authentication data',
+            ),
+          );
+        }
+      },
     );
   }
 
   Future<void> signInWithInstagram() async {
     emit(
-      state.copyWith(status: const CubitState.submitting(), errorMessage: null),
+      state.copyWith(
+        signInStatus: const CubitState.submitting(),
+        errorMessage: null,
+      ),
     );
 
     final result = await _signInWithInstagramUseCase(NoParams());
@@ -180,21 +211,45 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
     result.fold(
       (failure) => emit(
         state.copyWith(
-          status: CubitState.error(
+          signInStatus: CubitState.error(
             message: _getErrorMessage(failure),
             canRetry: true,
           ),
           errorMessage: _getErrorMessage(failure),
         ),
       ),
-      (authResponse) => emit(
-        state.copyWith(
-          status: const CubitState.submitted(),
-          user: authResponse.user,
-          isAuthenticated: true,
-          errorMessage: null,
-        ),
-      ),
+      (authResponse) async {
+        try {
+          final expiresAt = DateTime.now().add(
+            Duration(seconds: authResponse.expiresIn),
+          );
+
+          await _appStartupService.saveAuthTokens(
+            accessToken: authResponse.accessToken,
+            refreshToken: authResponse.refreshToken,
+            expiresAt: expiresAt,
+          );
+
+          emit(
+            state.copyWith(
+              signInStatus: const CubitState.submitted(),
+              user: authResponse.user,
+              isAuthenticated: true,
+              errorMessage: null,
+            ),
+          );
+        } catch (e) {
+          emit(
+            state.copyWith(
+              signInStatus: CubitState.error(
+                message: 'Failed to save authentication data',
+                canRetry: true,
+              ),
+              errorMessage: 'Failed to save authentication data',
+            ),
+          );
+        }
+      },
     );
   }
 

@@ -44,9 +44,18 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<UserModel?> getCurrentUser() async {
     try {
+      // First check if we have a cached user ID
       if (_currentUserId != null) {
         return await _databaseHelper.getUserById(_currentUserId!);
       }
+
+      // If no cached user ID, get the most recent authentication from database
+      final recentAuth = await _getMostRecentAuthentication();
+      if (recentAuth != null) {
+        _currentUserId = recentAuth.user.id; // Cache for future use
+        return recentAuth.user;
+      }
+
       return null;
     } catch (e) {
       throw Exception('Failed to get current user: $e');
@@ -56,9 +65,18 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<String?> getAccessToken() async {
     try {
+      // First check if we have a cached user ID
       if (_currentUserId != null) {
         return await _databaseHelper.getAccessToken(_currentUserId!);
       }
+
+      // If no cached user ID, get the most recent authentication from database
+      final recentAuth = await _getMostRecentAuthentication();
+      if (recentAuth != null) {
+        _currentUserId = recentAuth.user.id; // Cache for future use
+        return recentAuth.accessToken;
+      }
+
       return null;
     } catch (e) {
       throw Exception('Failed to get access token: $e');
@@ -68,12 +86,21 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<String?> getRefreshToken() async {
     try {
+      // First check if we have a cached user ID
       if (_currentUserId != null) {
         final authResponse = await _databaseHelper.getAuthResponse(
           _currentUserId!,
         );
         return authResponse?.refreshToken;
       }
+
+      // If no cached user ID, get the most recent authentication from database
+      final recentAuth = await _getMostRecentAuthentication();
+      if (recentAuth != null) {
+        _currentUserId = recentAuth.user.id; // Cache for future use
+        return recentAuth.refreshToken;
+      }
+
       return null;
     } catch (e) {
       throw Exception('Failed to get refresh token: $e');
@@ -235,4 +262,37 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   /// Get current user ID
   String? get currentUserId => _currentUserId;
+
+  /// Get the most recent authentication from database
+  /// This is used when _currentUserId is null (e.g., after hot reload)
+  Future<AuthResponseModel?> _getMostRecentAuthentication() async {
+    try {
+      final db = await _databaseHelper.database;
+      final maps = await db.rawQuery('''
+        SELECT * FROM auth_tokens 
+        ORDER BY created_at DESC 
+        LIMIT 1
+      ''');
+
+      if (maps.isNotEmpty) {
+        final tokenMap = maps.first;
+        final userId = tokenMap['user_id'] as String;
+        final user = await _databaseHelper.getUserById(userId);
+
+        if (user != null) {
+          return AuthResponseModel(
+            user: user,
+            accessToken: tokenMap['access_token'] as String,
+            refreshToken: tokenMap['refresh_token'] as String,
+            tokenType: tokenMap['token_type'] as String,
+            expiresIn: tokenMap['expires_in'] as int,
+          );
+        }
+      }
+
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
 }

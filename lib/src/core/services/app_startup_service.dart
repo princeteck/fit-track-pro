@@ -45,10 +45,11 @@ class AppStartupService {
         return false;
       }
 
-      // Check if token is expired
-      if (await _isTokenExpired(accessToken)) {
-        // Try to refresh token
-        return await _attemptTokenRefresh();
+      // Check if token is expired using stored expiry time
+      if (await _isStoredTokenExpired()) {
+        // Token is expired, clear auth data and return false
+        await clearAuthData();
+        return false;
       }
 
       return true;
@@ -58,48 +59,19 @@ class AppStartupService {
     }
   }
 
-  /// Check if JWT token is expired
-  Future<bool> _isTokenExpired(String token) async {
+  /// Check if the stored token expiry time is expired
+  Future<bool> _isStoredTokenExpired() async {
     try {
-      // Check expiry from secure storage first
       final expiryString = await _localStorage.read(_tokenExpiryKey);
       if (expiryString != null) {
         final expiry = DateTime.parse(expiryString);
-        if (DateTime.now().isAfter(expiry)) {
-          return true;
-        }
+        return DateTime.now().isAfter(expiry);
       }
-
-      // Token is valid if we reach here
-      return false;
-    } catch (e) {
-      debugPrint('Error checking token expiry: $e');
-      // If we can't determine expiry, consider it expired for safety
+      // If no expiry stored, consider it expired
       return true;
-    }
-  }
-
-  /// Attempt to refresh the access token
-  Future<bool> _attemptTokenRefresh() async {
-    try {
-      final refreshToken = await _authLocalDataSource.getRefreshToken();
-      if (refreshToken == null || refreshToken.isEmpty) {
-        return false;
-      }
-
-      // Check if refresh token is expired
-      if (await _isTokenExpired(refreshToken)) {
-        // Refresh token is expired, user needs to sign in again
-        await clearAuthData();
-        return false;
-      }
-
-      // TODO: Implement refresh token API call
-      // For now, return false to require re-authentication
-      return false;
     } catch (e) {
-      debugPrint('Error refreshing token: $e');
-      return false;
+      debugPrint('Error checking stored token expiry: $e');
+      return true;
     }
   }
 
