@@ -98,4 +98,22 @@ class CustomRouteBuilder {
       routes: routes,
     );
   }
+
+  /// Creates a GoRoute with fade forwards transition (Material Design style)
+  static GoRoute fadeForwardsRoute({
+    required String path,
+    required String name,
+    required Widget Function(BuildContext context, GoRouterState state) builder,
+    Duration transitionDuration = const Duration(milliseconds: 300),
+    List<RouteBase>? routes,
+  }) {
+    return route(
+      path: path,
+      name: name,
+      builder: builder,
+      transitionType: TransitionType.fadeForwards,
+      transitionDuration: transitionDuration,
+      routes: routes,
+    );
+  }
 }

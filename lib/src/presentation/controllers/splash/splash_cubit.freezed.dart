@@ -23,6 +23,7 @@ mixin _$SplashState {
   bool get dependenciesReady => throw _privateConstructorUsedError;
   bool get hasError => throw _privateConstructorUsedError;
   String get errorMessage => throw _privateConstructorUsedError;
+  AppStartupResult? get initialRoute => throw _privateConstructorUsedError;
 
   /// Create a copy of SplashState
   /// with the given fields replaced by the non-null parameter values.
@@ -45,6 +46,7 @@ abstract class $SplashStateCopyWith<$Res> {
     bool dependenciesReady,
     bool hasError,
     String errorMessage,
+    AppStartupResult? initialRoute,
   });
 }
 
@@ -69,6 +71,7 @@ class _$SplashStateCopyWithImpl<$Res, $Val extends SplashState>
     Object? dependenciesReady = null,
     Object? hasError = null,
     Object? errorMessage = null,
+    Object? initialRoute = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -96,6 +99,10 @@ class _$SplashStateCopyWithImpl<$Res, $Val extends SplashState>
                 ? _value.errorMessage
                 : errorMessage // ignore: cast_nullable_to_non_nullable
                       as String,
+            initialRoute: freezed == initialRoute
+                ? _value.initialRoute
+                : initialRoute // ignore: cast_nullable_to_non_nullable
+                      as AppStartupResult?,
           )
           as $Val,
     );
@@ -118,6 +125,7 @@ abstract class _$$SplashStateImplCopyWith<$Res>
     bool dependenciesReady,
     bool hasError,
     String errorMessage,
+    AppStartupResult? initialRoute,
   });
 }
 
@@ -141,6 +149,7 @@ class __$$SplashStateImplCopyWithImpl<$Res>
     Object? dependenciesReady = null,
     Object? hasError = null,
     Object? errorMessage = null,
+    Object? initialRoute = freezed,
   }) {
     return _then(
       _$SplashStateImpl(
@@ -168,6 +177,10 @@ class __$$SplashStateImplCopyWithImpl<$Res>
             ? _value.errorMessage
             : errorMessage // ignore: cast_nullable_to_non_nullable
                   as String,
+        initialRoute: freezed == initialRoute
+            ? _value.initialRoute
+            : initialRoute // ignore: cast_nullable_to_non_nullable
+                  as AppStartupResult?,
       ),
     );
   }
@@ -183,6 +196,7 @@ class _$SplashStateImpl implements _SplashState {
     this.dependenciesReady = false,
     this.hasError = false,
     this.errorMessage = '',
+    this.initialRoute,
   });
 
   @override
@@ -203,10 +217,12 @@ class _$SplashStateImpl implements _SplashState {
   @override
   @JsonKey()
   final String errorMessage;
+  @override
+  final AppStartupResult? initialRoute;
 
   @override
   String toString() {
-    return 'SplashState(showLogo: $showLogo, showAppName: $showAppName, isComplete: $isComplete, dependenciesReady: $dependenciesReady, hasError: $hasError, errorMessage: $errorMessage)';
+    return 'SplashState(showLogo: $showLogo, showAppName: $showAppName, isComplete: $isComplete, dependenciesReady: $dependenciesReady, hasError: $hasError, errorMessage: $errorMessage, initialRoute: $initialRoute)';
   }
 
   @override
@@ -225,7 +241,9 @@ class _$SplashStateImpl implements _SplashState {
             (identical(other.hasError, hasError) ||
                 other.hasError == hasError) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(other.initialRoute, initialRoute) ||
+                other.initialRoute == initialRoute));
   }
 
   @override
@@ -237,6 +255,7 @@ class _$SplashStateImpl implements _SplashState {
     dependenciesReady,
     hasError,
     errorMessage,
+    initialRoute,
   );
 
   /// Create a copy of SplashState
@@ -256,6 +275,7 @@ abstract class _SplashState implements SplashState {
     final bool dependenciesReady,
     final bool hasError,
     final String errorMessage,
+    final AppStartupResult? initialRoute,
   }) = _$SplashStateImpl;
 
   @override
@@ -270,6 +290,8 @@ abstract class _SplashState implements SplashState {
   bool get hasError;
   @override
   String get errorMessage;
+  @override
+  AppStartupResult? get initialRoute;
 
   /// Create a copy of SplashState
   /// with the given fields replaced by the non-null parameter values.

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:fittrack_pro/src/core/constants/ui/assets_constants.dart';
+import 'package:fittrack_pro/src/core/constants/ui/colors_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,26 +64,28 @@ class _WalkthroughViewState extends State<_WalkthroughView>
   }
 
   void _onPageChanged(int index) {
-    context.read<WalkthroughCubit>().goToSlide(index);
+    locator<WalkthroughCubit>().goToSlide(index);
     _gradientController.animateTo(index / (WalkthroughCubit.totalSlides - 1));
   }
 
   void _handleNext() {
-    final cubit = context.read<WalkthroughCubit>();
+    final cubit = locator<WalkthroughCubit>();
     final currentIndex = cubit.state.currentIndex;
 
     if (currentIndex < WalkthroughCubit.totalSlides - 1) {
+      cubit.nextSlide();
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } else {
-      context.go(LocaleSettingsScreen.path);
+      cubit.completeOnboarding();
+      context.go(SignInScreen.path);
     }
   }
 
   void _handleSkip() {
-    final cubit = context.read<WalkthroughCubit>();
+    final cubit = locator<WalkthroughCubit>();
     cubit.skipToEnd();
     _pageController.animateToPage(
       WalkthroughCubit.totalSlides - 1,
@@ -89,20 +93,43 @@ class _WalkthroughViewState extends State<_WalkthroughView>
       curve: Curves.easeInOut,
     );
     _gradientController.animateTo(1.0);
+
+    cubit.completeOnboarding();
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Scaffold(
       body: BlocBuilder<WalkthroughCubit, WalkthroughState>(
+        bloc: locator<WalkthroughCubit>(),
         builder: (context, state) {
           return Stack(
             children: [
               AnimatedBuilder(
                 animation: _gradientAnimation,
                 builder: (context, child) {
-                  return _AnimatedBackground(
-                    gradientPosition: _gradientAnimation.value,
+                  final currentPage = state.currentIndex;
+                  return AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 800),
+                    switchInCurve: Curves.easeInOut,
+                    switchOutCurve: Curves.easeInOut,
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                          return FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          );
+                        },
+                    child: Image.asset(
+                      KImages.getOnboardingImage(currentPage + 1),
+                      key: ValueKey('image_$currentPage'),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
                   );
                 },
               ),
@@ -113,11 +140,9 @@ class _WalkthroughViewState extends State<_WalkthroughView>
                     gradient: LinearGradient(
                       colors: [
                         Colors.transparent,
-                        Colors.transparent,
-                        Colors.white.withValues(alpha: 0.2),
-                        Colors.white.withValues(alpha: 0.6),
-                        Colors.white.withValues(alpha: 0.8),
-                        Colors.white,
+                        colorScheme.scrim.withValues(alpha: 0.2),
+                        colorScheme.scrim.withValues(alpha: 0.8),
+                        colorScheme.scrim,
                       ],
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
@@ -131,34 +156,43 @@ class _WalkthroughViewState extends State<_WalkthroughView>
                 onPageChanged: _onPageChanged,
                 children: [
                   _WalkthroughSlide(
-                    title:
-                        context.l10n?.walkthroughTitle1 ?? 'Track Your Fitness',
+                    title: 'Welcome to \nFit Track Pro',
                     description:
-                        context.l10n?.walkthroughDescription1 ??
-                        'Monitor your daily activities, workouts, and health metrics all in one place.',
-                    icon: Icons.fitness_center,
+                        'Personalize your fitness journey with our comprehensive tracking app.',
                     slideIndex: 0,
                     isActive: state.currentIndex == 0,
                   ),
                   _WalkthroughSlide(
-                    title:
-                        context.l10n?.walkthroughTitle2 ??
-                        'Set Goals & Achieve',
+                    title: 'Personalized Fitness Goals',
                     description:
-                        context.l10n?.walkthroughDescription2 ??
                         'Create personalized fitness goals and track your progress towards a healthier you.',
-                    icon: Icons.track_changes,
                     slideIndex: 1,
                     isActive: state.currentIndex == 1,
                   ),
                   _WalkthroughSlide(
-                    title: context.l10n?.walkthroughTitle3 ?? 'Stay Motivated',
+                    title: 'Track Your Workouts',
                     description:
-                        context.l10n?.walkthroughDescription3 ??
                         'Get insights, reminders, and celebrate your achievements along the way.',
-                    icon: Icons.emoji_events,
                     slideIndex: 2,
                     isActive: state.currentIndex == 2,
+                  ),
+                  _WalkthroughSlide(
+                    title: 'Health Metrics & Fitness Analytics',
+                    description: 'Monitor your health profile with ease.',
+                    slideIndex: 3,
+                    isActive: state.currentIndex == 3,
+                  ),
+                  _WalkthroughSlide(
+                    title: 'Nutrition & Diet\nGuidance',
+                    description: 'Lose weight and get fit with Fit Track Pro.',
+                    slideIndex: 4,
+                    isActive: state.currentIndex == 4,
+                  ),
+                  _WalkthroughSlide(
+                    title: 'Virtual AI Coach \nMentoring',
+                    description: 'Say goodbye to manual coaching.',
+                    slideIndex: 5,
+                    isActive: state.currentIndex == 5,
                   ),
                 ],
               ),
@@ -184,66 +218,15 @@ class _WalkthroughViewState extends State<_WalkthroughView>
   }
 }
 
-class _AnimatedBackground extends StatelessWidget {
-  final double gradientPosition;
-
-  const _AnimatedBackground({required this.gradientPosition});
-
-  @override
-  Widget build(BuildContext context) {
-    final slideColors = [
-      const Color(0xFF6A1B9A),
-      const Color(0xFF1565C0),
-      const Color(0xFF2E7D32),
-    ];
-
-    Color primaryColor;
-    if (gradientPosition <= 0.5) {
-      final t = gradientPosition * 2;
-      primaryColor = Color.lerp(slideColors[0], slideColors[1], t)!;
-    } else {
-      final t = (gradientPosition - 0.5) * 2;
-      primaryColor = Color.lerp(slideColors[1], slideColors[2], t)!;
-    }
-
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            primaryColor.withValues(alpha: 0.1),
-            primaryColor.withValues(alpha: 0.6),
-            primaryColor.withValues(alpha: 0.1),
-          ],
-          stops: const [0.0, 0.5, 1.0],
-        ),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: RadialGradient(
-            center: const Alignment(-0.3, -0.8),
-            radius: 1.2,
-            colors: [primaryColor.withValues(alpha: 0.03), Colors.transparent],
-            stops: const [0.0, 1.0],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class _WalkthroughSlide extends StatefulWidget {
   final String title;
   final String description;
-  final IconData icon;
   final int slideIndex;
   final bool isActive;
 
   const _WalkthroughSlide({
     required this.title,
     required this.description,
-    required this.icon,
     required this.slideIndex,
     required this.isActive,
   });
@@ -254,100 +237,8 @@ class _WalkthroughSlide extends StatefulWidget {
 
 class _WalkthroughSlideState extends State<_WalkthroughSlide>
     with TickerProviderStateMixin {
-  late AnimationController _iconController;
-  late Animation<double> _iconRotateAnimation;
-  Timer? _animationTimer;
-  bool _isAnimationForward = true;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _iconController = AnimationController(
-      duration: const Duration(milliseconds: 2000),
-      vsync: this,
-    );
-
-    _iconRotateAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _iconController, curve: Curves.easeInOut),
-    );
-
-    if (widget.isActive) {
-      _startIconPingPongAnimation();
-    }
-  }
-
-  @override
-  void didUpdateWidget(_WalkthroughSlide oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (widget.isActive != oldWidget.isActive) {
-      if (widget.isActive) {
-        _startIconPingPongAnimation();
-      } else {
-        _stopIconPingPongAnimation();
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    _stopIconPingPongAnimation();
-    _iconController.dispose();
-    super.dispose();
-  }
-
-  void _startIconPingPongAnimation() {
-    _stopIconPingPongAnimation();
-
-    _isAnimationForward = true;
-
-    _animationTimer = Timer.periodic(const Duration(milliseconds: 2000), (
-      timer,
-    ) {
-      if (!mounted || !widget.isActive) {
-        timer.cancel();
-        return;
-      }
-
-      if (_isAnimationForward) {
-        _iconController.forward().then((_) {
-          if (mounted && widget.isActive) {
-            _isAnimationForward = false;
-          }
-        });
-      } else {
-        _iconController.reverse().then((_) {
-          if (mounted && widget.isActive) {
-            _isAnimationForward = true;
-          }
-        });
-      }
-    });
-
-    if (mounted && widget.isActive) {
-      _iconController.forward().then((_) {
-        if (mounted && widget.isActive) {
-          _isAnimationForward = false;
-        }
-      });
-    }
-  }
-
-  void _stopIconPingPongAnimation() {
-    _animationTimer?.cancel();
-    _animationTimer = null;
-    _iconController.stop();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final colors = [
-      const Color(0xFF6A1B9A),
-      const Color(0xFF1565C0),
-      const Color(0xFF2E7D32),
-    ];
-
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -359,23 +250,14 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
             offset: widget.isActive ? Offset.zero : const Offset(0, 0.1),
             curve: Curves.easeOutCubic,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const Spacer(flex: 2),
-
-                _AnimatedIconContainer(
-                  icon: widget.icon,
-                  color: colors[widget.slideIndex],
-                  rotationAnimation: _iconRotateAnimation,
-                ),
-
-                const Spacer(),
-
                 _AnimatedSlideText(
                   text: widget.title,
-                  style: GoogleFonts.manrope(
+                  style: GoogleFonts.inter(
                     fontWeight: FontWeight.w800,
-                    color: const Color(0xFF1A1A1A),
-                    fontSize: 28,
+                    color: Colors.white,
+                    fontSize: 36,
                     letterSpacing: -0.5,
                     height: 1.2,
                   ),
@@ -387,7 +269,7 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
                 _AnimatedSlideText(
                   text: widget.description,
                   style: GoogleFonts.manrope(
-                    color: const Color(0xFF6B7280),
+                    color: Colors.white70,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
                     height: 1.6,
@@ -397,93 +279,12 @@ class _WalkthroughSlideState extends State<_WalkthroughSlide>
                   delay: const Duration(milliseconds: 400),
                 ),
 
-                const Spacer(flex: 3),
+                const SizedBox(height: 160),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class _AnimatedIconContainer extends StatefulWidget {
-  final IconData icon;
-  final Color color;
-  final Animation<double> rotationAnimation;
-
-  const _AnimatedIconContainer({
-    required this.icon,
-    required this.color,
-    required this.rotationAnimation,
-  });
-
-  @override
-  State<_AnimatedIconContainer> createState() => _AnimatedIconContainerState();
-}
-
-class _AnimatedIconContainerState extends State<_AnimatedIconContainer>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _scaleController;
-  late Animation<double> _scaleAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _scaleController = AnimationController(
-      duration: const Duration(milliseconds: 600),
-      vsync: this,
-    );
-
-    _scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _scaleController, curve: Curves.elasticOut),
-    );
-
-    _scaleController.forward();
-  }
-
-  @override
-  void dispose() {
-    _scaleController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: Listenable.merge([widget.rotationAnimation, _scaleAnimation]),
-      builder: (context, child) {
-        return Transform.scale(
-          scale: _scaleAnimation.value,
-          child: Transform.rotate(
-            angle: widget.rotationAnimation.value * 0.15,
-            child: Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                color: const Color(0xFFF8FAFC),
-                shape: BoxShape.circle,
-                border: Border.all(color: const Color(0xFFE2E8F0), width: 1),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0xFF64748B).withValues(alpha: 0.08),
-                    blurRadius: 24,
-                    offset: const Offset(0, 8),
-                    spreadRadius: 0,
-                  ),
-                  BoxShadow(
-                    color: const Color(0xFF64748B).withValues(alpha: 0.04),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                    spreadRadius: 0,
-                  ),
-                ],
-              ),
-              child: Icon(widget.icon, size: 40, color: widget.color),
-            ),
-          ),
-        );
-      },
     );
   }
 }
@@ -667,8 +468,8 @@ class _BottomNavigationState extends State<_BottomNavigation>
                       expansionFactor: 4,
                       spacing: 8,
                       radius: 16,
-                      activeDotColor: const Color(0xFF1A1A1A),
-                      dotColor: const Color(0xFF8f8f8f),
+                      activeDotColor: KColors.gray20,
+                      dotColor: KColors.gray70,
                       paintStyle: PaintingStyle.fill,
                     ),
                   ),
@@ -781,6 +582,9 @@ class _AnimatedElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return AnimatedBuilder(
       animation: scaleAnimation,
       builder: (context, child) {
@@ -789,16 +593,16 @@ class _AnimatedElevatedButton extends StatelessWidget {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 400),
             curve: Curves.easeInOut,
-            width: isLastSlide ? 200.0 : 140.0,
+            width: isLastSlide ? 220.0 : 140.0,
             child: ElevatedButton(
               onPressed: onPressed,
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF1A1A1A),
-                foregroundColor: Colors.white,
+                backgroundColor: colorScheme.primary,
+                foregroundColor: colorScheme.onPrimary,
                 elevation: 0,
                 shadowColor: Colors.transparent,
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
+                  horizontal: 24,
                   vertical: 16,
                 ),
                 shape: RoundedRectangleBorder(
@@ -834,6 +638,7 @@ class _AnimatedElevatedButton extends StatelessWidget {
                         ),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
                     ),
                     if (!isLastSlide) ...[

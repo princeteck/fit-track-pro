@@ -16,4 +16,16 @@ final List<RouteBase> commonRoutes = [
     builder: (context, state) => const WalkthroughScreen(),
     transitionDuration: const Duration(milliseconds: 400),
   ),
+  CustomRouteBuilder.fadeRoute(
+    path: DashboardScreen.path,
+    name: DashboardScreen.name,
+    builder: (context, state) => const DashboardScreen(),
+    transitionDuration: const Duration(milliseconds: 400),
+  ),
+  CustomRouteBuilder.fadeForwardsRoute(
+    path: HeartStatsDashboard.path,
+    name: HeartStatsDashboard.name,
+    builder: (context, state) => const HeartStatsDashboard(),
+    transitionDuration: const Duration(milliseconds: 400),
+  ),
 ];
