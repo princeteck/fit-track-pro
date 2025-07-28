@@ -40,9 +40,51 @@ class AuthRepositoryImpl implements AuthRepository {
       // Store auth response locally
       await _localDataSource.saveAuthResponse(result);
 
-      return Right(_toAuthResponse(result));
+      final authResponse = _toAuthResponse(result);
+
+      return Right(authResponse);
     } catch (e) {
-      return Left(AuthFailure.unknownError(message: e.toString()));
+      // Map specific error messages to appropriate AuthFailure types
+      final errorMessage = e.toString();
+
+      if (errorMessage.contains('Invalid credentials')) {
+        return Left(
+          AuthFailure.invalidCredentials(
+            message: 'Invalid email or password. Please try again.',
+          ),
+        );
+      } else if (errorMessage.contains('User account is disabled')) {
+        return Left(
+          AuthFailure.userDisabled(
+            message: 'Your account has been disabled. Please contact support.',
+          ),
+        );
+      } else if (errorMessage.contains('User not found')) {
+        return Left(
+          AuthFailure.userNotFound(
+            message: 'No account found with this email address.',
+          ),
+        );
+      } else if (errorMessage.contains('Invalid email')) {
+        return Left(
+          AuthFailure.invalidEmail(
+            message: 'Please enter a valid email address.',
+          ),
+        );
+      } else if (errorMessage.contains('network') ||
+          errorMessage.contains('connection')) {
+        return Left(
+          AuthFailure.networkError(
+            message: 'Network error. Please check your internet connection.',
+          ),
+        );
+      } else {
+        return Left(
+          AuthFailure.unknownError(
+            message: 'Sign in failed. Please try again.',
+          ),
+        );
+      }
     }
   }
 
@@ -64,7 +106,42 @@ class AuthRepositoryImpl implements AuthRepository {
 
       return Right(_toAuthResponse(result));
     } catch (e) {
-      return Left(AuthFailure.unknownError(message: e.toString()));
+      // Map specific error messages to appropriate AuthFailure types
+      final errorMessage = e.toString();
+
+      if (errorMessage.contains('Email already in use')) {
+        return Left(
+          AuthFailure.emailAlreadyInUse(
+            message:
+                'This email address is already registered. Please use a different email or try signing in.',
+          ),
+        );
+      } else if (errorMessage.contains('Password is too weak')) {
+        return Left(
+          AuthFailure.weakPassword(
+            message: 'Password must be at least 6 characters long.',
+          ),
+        );
+      } else if (errorMessage.contains('Invalid email')) {
+        return Left(
+          AuthFailure.invalidEmail(
+            message: 'Please enter a valid email address.',
+          ),
+        );
+      } else if (errorMessage.contains('network') ||
+          errorMessage.contains('connection')) {
+        return Left(
+          AuthFailure.networkError(
+            message: 'Network error. Please check your internet connection.',
+          ),
+        );
+      } else {
+        return Left(
+          AuthFailure.unknownError(
+            message: 'Sign up failed. Please try again.',
+          ),
+        );
+      }
     }
   }
 

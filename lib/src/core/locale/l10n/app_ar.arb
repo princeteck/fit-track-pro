@@ -120,6 +120,136 @@
   "bpmLabel": "معدل ضربات القلب",
   "calorieLabel": "سعر حراري",
   "stats": "الإحصائيات",
-  "heartRateLabel": "معدل ضربات القلب",
-  "workoutStatsTitle": "إحصائيات التمرين"
+    "heartRateLabel": "معدل ضربات القلب",
+  "workoutStatsTitle": "إحصائيات التمرين",
+  "duration": "المدة",
+  "exercises": "التمارين",
+  "difficulty": "الصعوبة",
+  "description": "الوصف",
+  "startWorkout": "بدء التمرين",
+  "clearData": "مسح البيانات",
+  "checkDatabase": "فحص قاعدة البيانات",
+  "close": "إغلاق",
+  "failedToLoadWorkoutPlans": "فشل في تحميل خطط التمرين",
+  "initializeMockData": "تهيئة البيانات التجريبية",
+  "notes": "ملاحظات",
+  "failedToChangeTheme": "فشل في تغيير السمة",
+  "resetToSystemDefault": "إعادة تعيين إلى افتراضيات النظام",
+  "clearSavedPreferences": "مسح التفضيلات المحفوظة",
+  "signOutFailed": "فشل تسجيل الخروج",
+  "home": "الرئيسية",
+  "categories": "الفئات",
+  "profile": "الملف الشخصي",
+  "currentHeartRate": "معدل ضربات القلب الحالي",
+  "preWorkoutStretch": "إطالة ما قبل التمرين",
+  "lowerBodyTraining": "تدريب الجزء السفلي من الجسم",
+  "hiitCardioInterval": "فترة كارديو عالية الكثافة",
+  "recoverySession": "جلسة الاستشفاء",
+  "progress": "التقدم",
+  "startWeight": "الوزن الأولي",
+  "good": "جيد",
+  "dailyCalories": "السعرات الحرارية اليومية",
+  "goBack": "العودة",
+  "passwordResetIcon": "أيقونة إعادة تعيين كلمة المرور",
+  "navigateToSignUp": "الانتقال إلى التسجيل",
+  "profileStatisticsOverview": "نظرة عامة على إحصائيات الملف الشخصي",
+  "profilePageHeader": "رأس صفحة الملف الشخصي",
+  "profileSettings": "إعدادات الملف الشخصي",
+  "tapToAccessProfileSettings": "اضغط للوصول إلى إعدادات الملف الشخصي",
+  "profilePictureForSandraGram": "صورة الملف الشخصي لـ Sandra Gram",
+  "userName": "اسم المستخدم",
+  "userLocationDenmarkCopenhagen": "موقع المستخدم: الدنمارك، كوبنهاغن",
+  "userStatisticsAndActions": "إحصائيات وإجراءات المستخدم",
+  "exportProfileData": "تصدير بيانات الملف الشخصي",
+  "tapToExportYourProfileInformation": "اضغط لتصدير معلومات ملفك الشخصي",
+  "editProfile": "تحرير الملف الشخصي",
+  "tapToEditYourProfileInformation": "اضغط لتحرير معلومات ملفك الشخصي",
+  "navigateToSignIn": "الانتقال إلى تسجيل الدخول",
+  "onboardingSlides": "شرائح التعريف",
+  "sandraGram": "Sandra Gram",
+  "denmarkCopenhagen": "الدنمارك، كوبنهاغن",
+  "welcomeToFitTrackPro": "مرحباً بك في\\nFit Track Pro",
+  "welcomeDescription": "خصص رحلة اللياقة البدنية الخاصة بك مع تطبيق التتبع الشامل لدينا.",
+  "personalizedFitnessGoals": "أهداف اللياقة البدنية الشخصية",
+  "personalizedFitnessGoalsDescription": "أنشئ أهداف لياقة بدنية شخصية وتتبع تقدمك نحو حياة أكثر صحة.",
+  "trackYourWorkouts": "تتبع تماريك",
+  "trackYourWorkoutsDescription": "احصل على رؤى وتذكيرات واحتفل بإنجازاتك في الطريق.",
+  "healthMetricsAndFitnessAnalytics": "مقاييس الصحة وتحليلات اللياقة",
+  "healthMetricsDescription": "راقب ملفك الصحي بسهولة.",
+  "nutritionAndDietGuidance": "إرشادات التغذية\\nوالنظام الغذائي",
+  "nutritionDescription": "اخسر الوزن وتمتع باللياقة مع Fit Track Pro.",
+  "virtualAiCoachMentoring": "إرشاد مدرب الذكاء\\nالاصطناعي الافتراضي",
+  "virtualAiCoachDescription": "قل وداعاً للتدريب اليدوي.",
+  "upperStrength2": "القوة العلوية 2",
+  "eightSeriesWorkout": "تمرين 8 سلاسل",
+  "corePower": "قوة الجذع",
+  "sixSeriesWorkout": "تمرين 6 سلاسل",
+  "cardioBlast": "انفجار كارديو",
+  "tenSeriesWorkout": "تمرين 10 سلاسل",
+  "workouts": "التمارين",
+  "durationWithMinutes": "المدة: {minutes} دقيقة",
+  "@durationWithMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "exercisesWithCount": "التمارين ({count})",
+  "@exercisesWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "totalWorkouts": "إجمالي التمارين",
+  "sessions": "جلسات",
+  "caloriesBurned": "السعرات المحروقة",
+  "kcal": "kcal",
+  "activeMinutes": "الدقائق النشطة",
+  "min": "دقيقة",
+  "thisWeek": "هذا الأسبوع",
+  "workoutsUnit": "تمارين",
+  "oneDay": "يوم واحد",
+  "oneWeek": "أسبوع واحد",
+  "oneMonth": "شهر واحد",
+  "threeMonths": "3 أشهر",
+  "sixMonths": "6 أشهر",
+  "twelveMonths": "12 شهر",
+  "percentageUnit": " %",
+  "rateUnit": " معدل",
+  "mlUnit": " مل",
+  "kcalUnit": " kcal",
+  "kmUnit": " كم",
+  "recentWorkouts": "التمارين الأخيرة",
+  "workoutPlans": "خطط التمرين",
+  "viewAll": "عرض الكل",
+  "workoutsWithCount": "التمارين ({count})",
+  "@workoutsWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "durationMinutes": "المدة: {minutes} دقيقة",
+  "@durationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "follow": "متابعة",
+  "followers": "المتابعون",
+  "following": "يتابع",
+  "signOutFailedWithError": "فشل تسجيل الخروج: {error}",
+  "@signOutFailedWithError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

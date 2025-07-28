@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -13,6 +14,7 @@ import '../../../domain/usecase/sign_up_with_email_password_usecase.dart';
 import '../../../domain/entities/auth_failure.dart';
 import '../../../domain/usecase/base_usecase.dart';
 import '../../../core/services/app_startup_service.dart';
+import '../../../core/di/di.dart';
 import '../base/base_cubit_wrapper.dart';
 import '../base/cubit_state.dart';
 import '../bottom_navbar/bottom_navbar_cubit.dart';
@@ -20,37 +22,57 @@ import '../bottom_navbar/bottom_navbar_cubit.dart';
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';
 
-@injectable
+@singleton
 class AuthCubit extends BaseCubitWrapper<AuthState> {
-  late SignInWithEmailAndPasswordUseCase _signInWithEmailPasswordUseCase;
-  late SignUpWithEmailAndPasswordUseCase _signUpWithEmailPasswordUseCase;
-  late SignInWithGoogleUseCase _signInWithGoogleUseCase;
-  late SignInWithInstagramUseCase _signInWithInstagramUseCase;
-  late SignOutUseCase _signOutUseCase;
-  late SendPasswordResetEmailUseCase _sendPasswordResetEmailUseCase;
-  late ResendVerificationEmailUseCase _resendVerificationEmailUseCase;
-  late GetCurrentUserUseCase _getCurrentUserUseCase;
-  late AppStartupService _appStartupService;
+  final SignInWithEmailAndPasswordUseCase _signInWithEmailPasswordUseCase;
+  final SignUpWithEmailAndPasswordUseCase _signUpWithEmailPasswordUseCase;
+  final SignInWithGoogleUseCase _signInWithGoogleUseCase;
+  final SignInWithInstagramUseCase _signInWithInstagramUseCase;
+  final SignOutUseCase _signOutUseCase;
+  final SendPasswordResetEmailUseCase _sendPasswordResetEmailUseCase;
+  final ResendVerificationEmailUseCase _resendVerificationEmailUseCase;
+  final GetCurrentUserUseCase _getCurrentUserUseCase;
+  final AppStartupService _appStartupService;
 
-  AuthCubit() : super(const AuthState()) {
-    _signInWithEmailPasswordUseCase =
-        injector<SignInWithEmailAndPasswordUseCase>();
-    _signUpWithEmailPasswordUseCase =
-        injector<SignUpWithEmailAndPasswordUseCase>();
-    _signInWithGoogleUseCase = injector<SignInWithGoogleUseCase>();
-    _signInWithInstagramUseCase = injector<SignInWithInstagramUseCase>();
-    _signOutUseCase = injector<SignOutUseCase>();
-    _sendPasswordResetEmailUseCase = injector<SendPasswordResetEmailUseCase>();
-    _resendVerificationEmailUseCase =
-        injector<ResendVerificationEmailUseCase>();
-    _getCurrentUserUseCase = injector<GetCurrentUserUseCase>();
-    _appStartupService = injector<AppStartupService>();
+  AuthCubit(
+    this._signInWithEmailPasswordUseCase,
+    this._signUpWithEmailPasswordUseCase,
+    this._signInWithGoogleUseCase,
+    this._signInWithInstagramUseCase,
+    this._signOutUseCase,
+    this._sendPasswordResetEmailUseCase,
+    this._resendVerificationEmailUseCase,
+    this._getCurrentUserUseCase,
+    this._appStartupService,
+    // ignore: empty_constructor_bodies
+  ) : super(const AuthState()) {}
+
+  @override
+  Future<void> close() {
+    // Check if we should actually close the cubit
+
+    // Since this is a singleton that manages global auth state,
+    // we should be more careful about when it gets closed
+    return super.close();
+  }
+
+  @override
+  void emit(AuthState state) {
+    if (isClosed) {
+      return;
+    }
+    super.emit(state);
   }
 
   Future<void> signInWithEmailPassword({
     required String email,
     required String password,
   }) async {
+    // Check if sign in is already in progress
+    if (state.signInStatus.isSubmitting) {
+      return;
+    }
+
     emit(
       state.copyWith(
         signInStatus: const CubitState.submitting(),
@@ -62,16 +84,26 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
       SignInParams(email: email, password: password),
     );
 
+    // Check if the cubit is still in submitting state before processing result
+    if (!state.signInStatus.isSubmitting) {
+      return;
+    }
+
     result.fold(
-      (failure) => emit(
-        state.copyWith(
-          signInStatus: CubitState.error(
-            message: _getErrorMessage(failure),
-            canRetry: true,
-          ),
-          errorMessage: _getErrorMessage(failure),
-        ),
-      ),
+      (failure) {
+        // Double-check that we're still in submitting state
+        if (state.signInStatus.isSubmitting) {
+          emit(
+            state.copyWith(
+              signInStatus: CubitState.error(
+                message: _getErrorMessage(failure),
+                canRetry: true,
+              ),
+              errorMessage: _getErrorMessage(failure),
+            ),
+          );
+        }
+      },
       (authResponse) async {
         try {
           final expiresAt = DateTime.now().add(
@@ -84,24 +116,30 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
             expiresAt: expiresAt,
           );
 
-          emit(
-            state.copyWith(
-              signInStatus: const CubitState.submitted(),
-              user: authResponse.user,
-              isAuthenticated: true,
-              errorMessage: null,
-            ),
-          );
-        } catch (e) {
-          emit(
-            state.copyWith(
-              signInStatus: CubitState.error(
-                message: 'Failed to save authentication data',
-                canRetry: true,
+          // Check if the cubit is still in submitting state
+          if (state.signInStatus.isSubmitting) {
+            emit(
+              state.copyWith(
+                signInStatus: const CubitState.submitted(),
+                user: authResponse.user,
+                isAuthenticated: true,
+                errorMessage: null,
               ),
-              errorMessage: 'Failed to save authentication data',
-            ),
-          );
+            );
+          }
+        } catch (e) {
+          // Check if the cubit is still in submitting state
+          if (state.signInStatus.isSubmitting) {
+            emit(
+              state.copyWith(
+                signInStatus: CubitState.error(
+                  message: 'Failed to save authentication data',
+                  canRetry: true,
+                ),
+                errorMessage: 'Failed to save authentication data',
+              ),
+            );
+          }
         }
       },
     );
@@ -111,6 +149,11 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
     required String email,
     required String password,
   }) async {
+    // Check if sign up is already in progress
+    if (state.signUpStatus.isSubmitting) {
+      return;
+    }
+
     emit(
       state.copyWith(
         signUpStatus: const CubitState.submitting(),
@@ -122,24 +165,64 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
       SignUpParams(email: email, password: password),
     );
 
+    // Check if the cubit is still in submitting state before processing result
+    if (!state.signUpStatus.isSubmitting) {
+      return;
+    }
+
     result.fold(
-      (failure) => emit(
-        state.copyWith(
-          signUpStatus: CubitState.error(
-            message: _getErrorMessage(failure),
-            canRetry: true,
-          ),
-          errorMessage: _getErrorMessage(failure),
-        ),
-      ),
-      (authResponse) => emit(
-        state.copyWith(
-          signUpStatus: const CubitState.submitted(),
-          user: authResponse.user,
-          isAuthenticated: true,
-          errorMessage: null,
-        ),
-      ),
+      (failure) {
+        // Double-check that we're still in submitting state
+        if (state.signUpStatus.isSubmitting) {
+          emit(
+            state.copyWith(
+              signUpStatus: CubitState.error(
+                message: _getErrorMessage(failure),
+                canRetry: true,
+              ),
+              errorMessage: _getErrorMessage(failure),
+            ),
+          );
+        }
+      },
+      (authResponse) async {
+        try {
+          final expiresAt = DateTime.now().add(
+            Duration(seconds: authResponse.expiresIn),
+          );
+
+          await _appStartupService.saveAuthTokens(
+            accessToken: authResponse.accessToken,
+            refreshToken: authResponse.refreshToken,
+            expiresAt: expiresAt,
+          );
+
+          // Check if the cubit is still in submitting state
+          if (state.signUpStatus.isSubmitting) {
+            emit(
+              state.copyWith(
+                signUpStatus: const CubitState.submitted(),
+                user: authResponse.user,
+                isAuthenticated: true,
+                errorMessage: null,
+              ),
+            );
+          }
+        } catch (e) {
+          // Check if the cubit is still in submitting state
+          if (state.signUpStatus.isSubmitting) {
+            emit(
+              state.copyWith(
+                signUpStatus: CubitState.error(
+                  message: 'Failed to save authentication data',
+                  canRetry: true,
+                ),
+                errorMessage: 'Failed to save authentication data',
+              ),
+            );
+          }
+        }
+      },
     );
   }
 
@@ -254,46 +337,84 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
   }
 
   Future<void> signOut() async {
+    // Check if sign out is already in progress
+    if (state.signOutStatus.isSubmitting) {
+      return;
+    }
+
+    if (isClosed) {
+      return;
+    }
+
     emit(
-      state.copyWith(status: const CubitState.submitting(), errorMessage: null),
+      state.copyWith(
+        signOutStatus: const CubitState.submitting(),
+        errorMessage: null,
+      ),
     );
 
     try {
       final signOutResult = await _signOutUseCase(NoParams());
 
-      await _appStartupService.clearAuthData();
+      if (isClosed) {
+        return;
+      }
 
-      injector<BottomNavbarCubit>().reset();
+      await signOutResult.fold(
+        (failure) async {
+          // Check if the cubit is still in submitting state and not closed before updating
+          if (state.signOutStatus.isSubmitting && !isClosed) {
+            emit(
+              state.copyWith(
+                signOutStatus: CubitState.error(
+                  message: _getErrorMessage(failure),
+                  canRetry: true,
+                ),
+                errorMessage: _getErrorMessage(failure),
+              ),
+            );
+          }
+        },
+        (_) async {
+          try {
+            // Clear additional auth data and reset navigation
+            await _appStartupService.clearAuthData();
+          } catch (e) {
+            debugPrint('Error clearing auth data: $e');
+          }
 
-      signOutResult.fold(
-        (failure) => emit(
-          state.copyWith(
-            status: CubitState.error(
-              message: _getErrorMessage(failure),
-              canRetry: true,
-            ),
-            errorMessage: _getErrorMessage(failure),
-          ),
-        ),
-        (_) => emit(
-          state.copyWith(
-            status: const CubitState.submitted(),
-            user: null,
-            isAuthenticated: false,
-            errorMessage: null,
-          ),
-        ),
+          try {
+            locator<BottomNavbarCubit>().reset();
+          } catch (e) {
+            debugPrint('Error resetting BottomNavbarCubit: $e');
+          }
+
+          // Check if the cubit is still in submitting state and not closed before updating
+          if (state.signOutStatus.isSubmitting && !isClosed) {
+            emit(
+              state.copyWith(
+                signOutStatus: const CubitState.submitted(),
+                user: null,
+                isAuthenticated: false,
+                errorMessage: null,
+              ),
+            );
+          } else {}
+        },
       );
     } catch (e) {
-      emit(
-        state.copyWith(
-          status: CubitState.error(
-            message: 'Sign out failed: ${e.toString()}',
-            canRetry: true,
+      // Check if the cubit is still in submitting state and not closed before updating
+      if (state.signOutStatus.isSubmitting && !isClosed) {
+        emit(
+          state.copyWith(
+            signOutStatus: CubitState.error(
+              message: 'Sign out failed: ${e.toString()}',
+              canRetry: true,
+            ),
+            errorMessage: 'Sign out failed: ${e.toString()}',
           ),
-          errorMessage: 'Sign out failed: ${e.toString()}',
-        ),
-      );
+        );
+      }
     }
   }
 
@@ -396,6 +517,10 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
 
   void resetSignUpStatus() {
     emit(state.copyWith(signUpStatus: const CubitState.initial()));
+  }
+
+  void resetSignOutStatus() {
+    emit(state.copyWith(signOutStatus: const CubitState.initial()));
   }
 
   void resetPasswordResetStatus() {

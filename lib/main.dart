@@ -12,11 +12,16 @@ void main() async {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
 
+      // Configure dependencies first
       await configureDependencies();
 
-      await L10n.initialize();
-
-      locator<MemoryManagerService>().startMemoryMonitoring();
+      // Initialize L10n and start memory monitoring in parallel
+      await Future.wait([
+        L10n.initialize(),
+        Future.microtask(
+          () => locator<MemoryManagerService>().startMemoryMonitoring(),
+        ),
+      ]);
 
       runApp(const App());
     },

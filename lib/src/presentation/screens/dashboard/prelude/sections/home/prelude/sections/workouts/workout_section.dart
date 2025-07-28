@@ -1,3 +1,4 @@
+import 'package:fittrack_pro/src/core/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -99,7 +100,8 @@ class _WorkoutSectionState extends State<WorkoutSection>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Workouts (${_workouts.length})',
+                        context.l10n?.workoutsWithCount(_workouts.length) ??
+                            'Workouts (${_workouts.length})',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).colorScheme.onSurface,

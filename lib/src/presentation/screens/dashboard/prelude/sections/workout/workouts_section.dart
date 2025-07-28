@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../../../core/extensions/context_extensions.dart';
+
 class WorkoutSectionImpl extends StatefulWidget {
   const WorkoutSectionImpl({super.key});
 
@@ -90,7 +92,7 @@ class _WorkoutSectionImplState extends State<WorkoutSectionImpl>
           child: Column(
             children: [
               const SizedBox(height: 20),
-              Text('Workouts', style: _titleStyle),
+              Text(context.l10n?.workouts ?? 'Workouts', style: _titleStyle),
               const SizedBox(height: 24),
 
               // Use ListView.builder for better performance

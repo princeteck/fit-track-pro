@@ -7,6 +7,7 @@ class AuthState with _$AuthState {
     @Default(CubitState.initial()) CubitState status,
     @Default(CubitState.initial()) CubitState signInStatus,
     @Default(CubitState.initial()) CubitState signUpStatus,
+    @Default(CubitState.initial()) CubitState signOutStatus,
     @Default(CubitState.initial()) CubitState passwordResetStatus,
     @Default(CubitState.initial()) CubitState verificationEmailStatus,
     @Default(CubitState.initial()) CubitState twoFactorStatus,

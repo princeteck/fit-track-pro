@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/extensions/context_extensions.dart';
-import '../../../core/di/di.dart';
 import '../../controllers/auth/auth_cubit.dart';
 import '../../controllers/base/cubit_state.dart';
 import '../../widgets/widgets.dart';
@@ -76,7 +75,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
 
   void _resetPassword() {
     if (_formKey.currentState?.validate() ?? false) {
-      locator<AuthCubit>().sendPasswordResetEmail(
+      context.read<AuthCubit>().sendPasswordResetEmail(
         email: _emailController.text.trim(),
       );
     }
@@ -108,7 +107,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
         ),
       ),
       body: BlocListener<AuthCubit, AuthState>(
-        bloc: locator<AuthCubit>(),
+        bloc: context.read<AuthCubit>(),
         listener: (context, state) {
           if (state.passwordResetStatus.isError) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -240,7 +239,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
 
                             // Reset password button
                             BlocBuilder<AuthCubit, AuthState>(
-                              bloc: locator<AuthCubit>(),
+                              bloc: context.read<AuthCubit>(),
                               builder: (context, state) {
                                 final isLoading =
                                     state.passwordResetStatus.isSubmitting;

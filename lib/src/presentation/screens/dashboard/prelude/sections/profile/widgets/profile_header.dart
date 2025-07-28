@@ -88,7 +88,7 @@ class ProfileHeader extends StatelessWidget {
             Semantics(
               label: 'User name',
               child: Text(
-                'Sandra Gram',
+                context.l10n?.sandraGram ?? 'Sandra Gram',
                 style: GoogleFonts.inter(
                   textStyle: Theme.of(context).textTheme.headlineSmall
                       ?.copyWith(
@@ -105,7 +105,7 @@ class ProfileHeader extends StatelessWidget {
             Semantics(
               label: 'User location: Denmark, Copenhagen',
               child: Text(
-                'Denmark, Copenhagen',
+                context.l10n?.denmarkCopenhagen ?? 'Denmark, Copenhagen',
                 style: GoogleFonts.inter(
                   textStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Colors.grey[600],
@@ -123,9 +123,12 @@ class ProfileHeader extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildFollowStat('Follow', '72'),
+                  _buildFollowStat(context.l10n?.follow ?? 'Follow', '72'),
                   const SizedBox(width: 32),
-                  _buildFollowStat('Followers', '162'),
+                  _buildFollowStat(
+                    context.l10n?.followers ?? 'Followers',
+                    '162',
+                  ),
                   const SizedBox(width: 16),
                   Semantics(
                     label: 'Export profile data',

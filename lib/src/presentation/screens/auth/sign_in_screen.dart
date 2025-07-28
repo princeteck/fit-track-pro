@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/extensions/context_extensions.dart';
-import '../../../core/di/di.dart';
 import '../../../core/locale/generated/app_localizations.dart';
-import '../../controllers/auth/auth_cubit.dart';
 import '../screens.dart';
 import 'prelude/prelude.dart';
 
@@ -112,10 +109,7 @@ class _SignInScreenState extends State<SignInScreen>
                 Expanded(
                   child: SlideTransition(
                     position: _slideAnimation,
-                    child: BlocProvider<AuthCubit>(
-                      create: (context) => locator<AuthCubit>(),
-                      child: const SignInForm(),
-                    ),
+                    child: const SignInForm(),
                   ),
                 ),
 
