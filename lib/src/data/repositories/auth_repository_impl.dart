@@ -59,12 +59,6 @@ class AuthRepositoryImpl implements AuthRepository {
             message: 'Your account has been disabled. Please contact support.',
           ),
         );
-      } else if (errorMessage.contains('User not found')) {
-        return Left(
-          AuthFailure.userNotFound(
-            message: 'No account found with this email address.',
-          ),
-        );
       } else if (errorMessage.contains('Invalid email')) {
         return Left(
           AuthFailure.invalidEmail(
