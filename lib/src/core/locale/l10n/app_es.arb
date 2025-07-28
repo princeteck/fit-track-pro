@@ -1,6 +1,7 @@
 {
   "@@locale": "es",
   "hello": "Hola",
+  "today": "Hoy",
   "greetUser": "¡Bienvenido, {username}!",
   "appTitle": "Fit Track Pro",
   "appDescription": "Tu rastreador de fitness personal",

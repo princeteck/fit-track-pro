@@ -22,7 +22,7 @@ class WorkoutStatsDashboard extends StatefulWidget {
 }
 
 class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, WidgetsBindingObserver {
   late final WorkoutCubit _cubit;
   late AnimationController _refreshController;
   late AnimationController _fabController;
@@ -43,6 +43,8 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
     _setupAnimations();
     _startInitialAnimations();
 
+    WidgetsBinding.instance.addObserver(this);
+
     Future.delayed(const Duration(milliseconds: 100), () {
       if (mounted && !_cubit.isClosed) {
         _cubit.loadStats();
@@ -55,6 +57,9 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
     super.didChangeDependencies();
 
     if (mounted && !_cubit.isClosed) {
+      debugPrint(
+        '🔄 [WorkoutStatsDashboard] didChangeDependencies - refreshing stats',
+      );
       _cubit.refreshStats();
     }
   }
@@ -129,8 +134,15 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
     _cubit.checkDatabaseIntegrity();
   }
 
+  void _forceRefreshStats() {
+    debugPrint('🚀 [WorkoutStatsDashboard] Force refresh triggered manually');
+    _cubit.forceRefreshStats();
+  }
+
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+
     _refreshController.dispose();
     _fabController.dispose();
     _statsAnimationController.dispose();
@@ -142,6 +154,16 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
     }
 
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+
+    if (state == AppLifecycleState.resumed && mounted && !_cubit.isClosed) {
+      debugPrint('🔄 [WorkoutStatsDashboard] App resumed - refreshing stats');
+      _cubit.forceRefreshStats();
+    }
   }
 
   @override
@@ -213,9 +235,16 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
                     case 'check_db':
                       _checkDatabaseIntegrity();
                       break;
+                    case 'force_refresh':
+                      _forceRefreshStats();
+                      break;
                   }
                 },
                 itemBuilder: (context) => [
+                  PopupMenuItem(
+                    value: 'force_refresh',
+                    child: Text('Force Refresh'),
+                  ),
                   PopupMenuItem(
                     value: 'clear_data',
                     child: Text(context.l10n?.clearData ?? 'Clear Data'),

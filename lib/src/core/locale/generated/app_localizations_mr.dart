@@ -12,6 +12,9 @@ class AppLocalizationsMr extends AppLocalizations {
   String get hello => 'नमस्कार';
 
   @override
+  String get today => 'आज';
+
+  @override
   String greetUser(Object username) {
     return 'स्वागत आहे, $username!';
   }
