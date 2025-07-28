@@ -46,3 +46,11 @@ app.*.map.json
 
 # Exception: Allow APK files in releases folder
 !/releases/*.apk
+
+# Large video files should not be tracked by git
+releases/*.mp4
+releases/*.mov
+releases/*.avi
+*.mp4
+*.mov
+*.avi
