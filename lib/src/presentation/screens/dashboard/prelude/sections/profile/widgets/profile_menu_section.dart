@@ -288,27 +288,18 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
       });
 
       try {
+        // ignore: use_build_context_synchronously
         final authCubit = context.read<AuthCubit>();
-        print(
-          'PROFILE: About to call signOut, cubit isClosed: ${authCubit.isClosed}',
-        );
 
         await authCubit.signOut();
-        print('PROFILE: signOut completed');
 
         // Navigate immediately after sign out completes
         // Don't wait for state changes as the cubit may be disposed during navigation
         if (mounted) {
-          print(
-            'PROFILE: Navigating to sign in screen after successful sign out',
-          );
           navigator(SignInScreen.name);
-        } else {
-          print('PROFILE: Widget unmounted, skipping navigation');
-        }
+        } else {}
         // Remove the unconditional navigation call that was causing the issue
       } catch (e) {
-        print('PROFILE: Sign out error: $e');
         if (mounted) {
           setState(() {
             _isSigningOut = false;

@@ -507,6 +507,60 @@ class AuthCubit extends BaseCubitWrapper<AuthState> {
     );
   }
 
+  /// Initialize user data from storage when app starts with valid authentication
+  Future<void> initializeUserFromStorage() async {
+    try {
+      // Check if we already have user data or if we're not authenticated
+      if (state.user != null ||
+          !await _appStartupService.hasValidAuthentication()) {
+        return;
+      }
+
+      // Only show loading if we don't have user data yet
+      if (state.user == null) {
+        emit(
+          state.copyWith(
+            status: const CubitState.loading(),
+            errorMessage: null,
+          ),
+        );
+      }
+
+      final result = await _getCurrentUserUseCase(NoParams());
+
+      result.fold(
+        (failure) {
+          // If getting user fails but we have valid auth, just mark as authenticated
+          // The user can try to refresh or the data will load eventually
+          emit(
+            state.copyWith(
+              status: const CubitState.loaded(),
+              isAuthenticated: true,
+              errorMessage: null,
+            ),
+          );
+        },
+        (user) => emit(
+          state.copyWith(
+            status: const CubitState.loaded(),
+            user: user,
+            isAuthenticated: true,
+            errorMessage: null,
+          ),
+        ),
+      );
+    } catch (e) {
+      // Silent fail - don't show error for initialization
+      emit(
+        state.copyWith(
+          status: const CubitState.loaded(),
+          isAuthenticated: true,
+          errorMessage: null,
+        ),
+      );
+    }
+  }
+
   void clearError() {
     emit(state.copyWith(errorMessage: null));
   }

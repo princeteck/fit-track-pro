@@ -83,7 +83,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
               persistentUser['id']?.toString() ??
               'persistent_${DateTime.now().millisecondsSinceEpoch}',
           email: normalizedEmail,
-          name: persistentUser['name'] ?? 'User',
+          name:
+              persistentUser['name'] ??
+              persistentUser['email']?.split('@').first ??
+              '',
           isEmailVerified: persistentUser['is_email_verified'] == 1,
           lastLoginAt: DateTime.now(),
         );
@@ -175,7 +178,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       email: normalizedEmail,
       encryptedPassword:
           password, // This will be hashed by the local data source
-      name: name ?? 'User',
+      name: name ?? email.split('@').first,
     );
 
     // Verify the user was added by checking persistent storage again
@@ -185,7 +188,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     final user = _mockUser.copyWith(
       id: userId,
       email: normalizedEmail,
-      name: name ?? 'User',
+      name: name ?? email.split('@').first,
       isEmailVerified: false,
       createdAt: currentTime,
       updatedAt: currentTime,

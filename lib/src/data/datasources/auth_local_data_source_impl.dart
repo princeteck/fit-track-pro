@@ -178,18 +178,12 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<Unit> clearAuthData() async {
     try {
-      print('AUTH LOCAL: Starting clearAuthData...');
-
       // Directly call database helper instead of using isolate to avoid potential hanging
-      print('AUTH LOCAL: Executing database clear operation...');
       await _databaseHelper.clearAuthData();
       _currentUserId = null;
-      print('AUTH LOCAL: Database cleared and currentUserId nullified');
 
-      print('AUTH LOCAL: clearAuthData completed successfully');
       return unit;
     } catch (e) {
-      print('AUTH LOCAL: clearAuthData failed: $e');
       throw Exception('Failed to clear auth data: $e');
     }
   }
