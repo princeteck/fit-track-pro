@@ -56,6 +56,31 @@ class MainActivity : FlutterActivity() {
                         result.error("UNAVAILABLE", "Failed to stop workout tracking", null)
                     }
                 }
+                "startWorkoutSession" -> {
+                    try {
+                        sensorService.startWorkoutTracking()
+                        result.success(null)
+                    } catch (e: Exception) {
+                        result.error("UNAVAILABLE", "Workout session not available", null)
+                    }
+                }
+                "stopWorkoutSession" -> {
+                    try {
+                        sensorService.stopWorkoutTracking()
+                        result.success(null)
+                    } catch (e: Exception) {
+                        result.error("UNAVAILABLE", "Failed to stop workout session", null)
+                    }
+                }
+                "toggleWorkoutPause" -> {
+                    try {
+                        // For now, we'll implement pause as a simple toggle
+                        // In a real implementation, you'd add pause logic to SensorService
+                        result.success(null)
+                    } catch (e: Exception) {
+                        result.error("UNAVAILABLE", "Failed to toggle workout pause", null)
+                    }
+                }
                 "getWorkoutData" -> {
                     try {
                         val workoutData = sensorService.getWorkoutData()

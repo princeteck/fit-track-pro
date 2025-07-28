@@ -36,6 +36,42 @@ class NativeSensorService {
     }
   }
 
+  Future<void> startWorkoutSession() async {
+    try {
+      await _channel.invokeMethod('startWorkoutSession');
+    } on PlatformException catch (e) {
+      developer.log(
+        'Failed to start workout session: ${e.message}',
+        name: 'NativeSensorService',
+        error: e,
+      );
+    }
+  }
+
+  Future<void> stopWorkoutSession() async {
+    try {
+      await _channel.invokeMethod('stopWorkoutSession');
+    } on PlatformException catch (e) {
+      developer.log(
+        'Failed to stop workout session: ${e.message}',
+        name: 'NativeSensorService',
+        error: e,
+      );
+    }
+  }
+
+  Future<void> toggleWorkoutPause() async {
+    try {
+      await _channel.invokeMethod('toggleWorkoutPause');
+    } on PlatformException catch (e) {
+      developer.log(
+        'Failed to toggle workout pause: ${e.message}',
+        name: 'NativeSensorService',
+        error: e,
+      );
+    }
+  }
+
   Future<int> getHeartRateReading() async {
     try {
       final result = await _channel.invokeMethod<int>('getHeartRateReading');
