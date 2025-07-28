@@ -8,8 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/di/di.dart';
 import '../../../core/constants/ui/assets_constants.dart';
+import '../../../core/services/app_startup_service.dart';
 import '../../controllers/splash/splash_cubit.dart';
-import '../walkthrough/walkthrough_screen.dart';
+import '../screens.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -31,12 +32,30 @@ class SplashScreen extends StatelessWidget {
               ),
             );
           } else if (state.isComplete && state.dependenciesReady) {
-            context.goNamed(WalkthroughScreen.name);
+            _navigateToInitialRoute(context, state.initialRoute);
           }
         },
         child: const _SplashScreenView(),
       ),
     );
+  }
+
+  void _navigateToInitialRoute(BuildContext context, AppStartupResult? result) {
+    switch (result) {
+      case AppStartupResult.onboarding:
+        context.goNamed(WalkthroughScreen.name);
+        break;
+      case AppStartupResult.signIn:
+        context.goNamed(SignInScreen.name);
+        break;
+      case AppStartupResult.dashboard:
+        context.goNamed(DashboardScreen.name);
+        break;
+      case null:
+        // Fallback to onboarding if result is null
+        context.goNamed(WalkthroughScreen.name);
+        break;
+    }
   }
 }
 
@@ -60,34 +79,50 @@ class _SplashScreenViewState extends State<_SplashScreenView>
   }
 
   void _initializeAnimations() {
+    // Reduce animation duration and complexity
     _animationController = AnimationController(
-      duration: const Duration(milliseconds: 4000),
+      duration: const Duration(milliseconds: 2000), // Reduced from 4000
       vsync: this,
     );
 
     _gradientController = AnimationController(
-      duration: const Duration(milliseconds: 5000),
+      duration: const Duration(milliseconds: 3000), // Reduced from 5000
       vsync: this,
     );
 
     _blobController = AnimationController(
-      duration: const Duration(milliseconds: 6000),
+      duration: const Duration(milliseconds: 4000), // Reduced from 6000
       vsync: this,
     );
 
-    _animationController.forward().then((_) {
+    // Start animations with staggered delays to reduce initial load
+    Future.delayed(const Duration(milliseconds: 200), () {
       if (mounted) {
-        _animationController.repeat(reverse: true);
+        _animationController.forward().then((_) {
+          if (mounted) {
+            _animationController.repeat(reverse: true);
+          }
+        });
       }
     });
-    _gradientController.forward().then((_) {
+
+    Future.delayed(const Duration(milliseconds: 400), () {
       if (mounted) {
-        _gradientController.repeat(reverse: true);
+        _gradientController.forward().then((_) {
+          if (mounted) {
+            _gradientController.repeat(reverse: true);
+          }
+        });
       }
     });
-    _blobController.forward().then((_) {
+
+    Future.delayed(const Duration(milliseconds: 600), () {
       if (mounted) {
-        _blobController.repeat(reverse: true);
+        _blobController.forward().then((_) {
+          if (mounted) {
+            _blobController.repeat(reverse: true);
+          }
+        });
       }
     });
   }
@@ -132,6 +167,10 @@ class _SplashAnimatedBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isDarkMode = theme.brightness == Brightness.dark;
+
     return AnimatedBuilder(
       animation: Listenable.merge([
         animationController,
@@ -139,21 +178,30 @@ class _SplashAnimatedBackground extends StatelessWidget {
         blobController,
       ]),
       builder: (context, child) {
+        // Theme-responsive colors
         final primaryColor = Color.lerp(
-          const Color(0xFFFAFAFA),
-          const Color(0xFFF5F5F5),
+          isDarkMode ? colorScheme.surface : const Color(0xFFFAFAFA),
+          isDarkMode
+              ? colorScheme.surfaceContainerLow
+              : const Color(0xFFF5F5F5),
           animationController.value,
         )!;
 
         final secondaryColor = Color.lerp(
-          const Color(0xFFF5F5F5),
-          const Color(0xFFE5E5E5),
+          isDarkMode ? colorScheme.surfaceContainer : const Color(0xFFF5F5F5),
+          isDarkMode
+              ? colorScheme.surfaceContainerHigh
+              : const Color(0xFFE5E5E5),
           gradientController.value,
         )!;
 
         final tertiaryColor = Color.lerp(
-          const Color(0xFFE5E5E5),
-          const Color(0xFFD4D4D4),
+          isDarkMode
+              ? colorScheme.surfaceContainerHigh
+              : const Color(0xFFE5E5E5),
+          isDarkMode
+              ? colorScheme.surfaceContainerHighest
+              : const Color(0xFFD4D4D4),
           (animationController.value + gradientController.value) / 2,
         )!;
 
@@ -181,8 +229,14 @@ class _SplashAnimatedBackground extends StatelessWidget {
                 borderRadius: 150 + (50 * animationController.value),
                 colors: [
                   Colors.transparent,
-                  const Color(0xFFF5F5F5).withValues(alpha: 0.15),
-                  const Color(0xFFE5E5E5).withValues(alpha: 0.08),
+                  (isDarkMode
+                          ? colorScheme.surfaceContainer
+                          : const Color(0xFFF5F5F5))
+                      .withValues(alpha: 0.15),
+                  (isDarkMode
+                          ? colorScheme.surfaceContainerHigh
+                          : const Color(0xFFE5E5E5))
+                      .withValues(alpha: 0.08),
                 ],
                 radiusMultipliers: [0.4, 1.6, 1.8, 0.6],
               ),
@@ -194,8 +248,14 @@ class _SplashAnimatedBackground extends StatelessWidget {
                 borderRadius: 180 + (60 * blobController.value),
                 colors: [
                   Colors.transparent,
-                  const Color(0xFFE5E5E5).withValues(alpha: 0.12),
-                  const Color(0xFFD4D4D4).withValues(alpha: 0.06),
+                  (isDarkMode
+                          ? colorScheme.surfaceContainerHigh
+                          : const Color(0xFFE5E5E5))
+                      .withValues(alpha: 0.12),
+                  (isDarkMode
+                          ? colorScheme.surfaceContainerHighest
+                          : const Color(0xFFD4D4D4))
+                      .withValues(alpha: 0.06),
                 ],
                 radiusMultipliers: [1.3, 0.5, 0.7, 1.5],
               ),
@@ -207,8 +267,12 @@ class _SplashAnimatedBackground extends StatelessWidget {
                 borderRadius: 120 + (30 * gradientController.value),
                 colors: [
                   Colors.transparent,
-                  const Color(0xFFD4D4D4).withValues(alpha: 0.10),
-                  const Color(0xFFFAFAFA).withValues(alpha: 0.05),
+                  (isDarkMode
+                          ? colorScheme.surfaceContainerHighest
+                          : const Color(0xFFD4D4D4))
+                      .withValues(alpha: 0.10),
+                  (isDarkMode ? colorScheme.surface : const Color(0xFFFAFAFA))
+                      .withValues(alpha: 0.05),
                 ],
                 radiusMultipliers: [0.8, 1.4, 1.2, 0.3],
               ),
@@ -361,16 +425,22 @@ class _AnimatedLogoState extends State<_AnimatedLogo>
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return AnimatedBuilder(
       animation: _scaleAnimation,
       builder: (context, child) {
         return Transform.scale(scale: _scaleAnimation.value, child: child);
       },
       child: SvgPicture.asset(
-        KIcons.logoIcon,
+        KIcons.logo,
         width: 150,
+        colorFilter: ColorFilter.mode(
+          theme.colorScheme.primary,
+          BlendMode.srcIn,
+        ),
         placeholderBuilder: (BuildContext context) =>
-            Icon(Icons.error, size: 150, color: Colors.red),
+            Icon(Icons.error, size: 150, color: theme.colorScheme.error),
       ),
     );
   }
@@ -381,9 +451,16 @@ class _AppNameText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Text(
       context.l10n?.appTitle ?? '',
-      style: GoogleFonts.poppins(fontSize: 24, fontWeight: FontWeight.bold),
+      style: GoogleFonts.poppins(
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        color: theme.colorScheme.onSurface,
+      ),
+      textAlign: TextAlign.center,
     );
   }
 }

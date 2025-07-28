@@ -99,4 +99,290 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get finishButton => 'समाप्त';
+
+  @override
+  String get forgotPasswordTitle => 'पासवर्ड विसरलात?';
+
+  @override
+  String get forgotPasswordSubtitle =>
+      'तुमचा ईमेल पत्ता टाका आणि आम्ही तुम्हाला तुमचा पासवर्ड रीसेट करण्यासाठी एक लिंक पाठवू';
+
+  @override
+  String get emailLabel => 'ईमेल';
+
+  @override
+  String get emailHint => 'तुमचा ईमेल पत्ता टाका';
+
+  @override
+  String get emailRequired => 'ईमेल आवश्यक आहे';
+
+  @override
+  String get emailInvalid => 'कृपया वैध ईमेल टाका';
+
+  @override
+  String get sendResetLinkButton => 'रीसेट लिंक पाठवा';
+
+  @override
+  String get backToSignInButton => 'साइन इन वर परत जा';
+
+  @override
+  String get passwordResetEmailSent =>
+      'पासवर्ड रीसेट ईमेल पाठवला! तुमचा इनबॉक्स तपासा.';
+
+  @override
+  String get passwordResetEmailFailed => 'रीसेट ईमेल पाठवण्यात अयशस्वी';
+
+  @override
+  String get welcomeBackTitle => 'परत स्वागत आहे!';
+
+  @override
+  String get signInSubtitle =>
+      'तुमचा फिटनेस प्रवास सुरू ठेवण्यासाठी साइन इन करा';
+
+  @override
+  String get dontHaveAccountText => 'खाते नाही? ';
+
+  @override
+  String get signInButtonText => 'साइन इन';
+
+  @override
+  String get createAccountTitle => 'खाते तयार करा';
+
+  @override
+  String get signUpSubtitle =>
+      'आमच्यात सामील व्हा आणि आजच तुमचा फिटनेस प्रवास सुरू करा';
+
+  @override
+  String get alreadyHaveAccountText => 'आधीच खाते आहे? ';
+
+  @override
+  String get signUpButtonText => 'साइन अप';
+
+  @override
+  String get passwordLabel => 'पासवर्ड';
+
+  @override
+  String get passwordHint => 'तुमचा पासवर्ड टाका';
+
+  @override
+  String get passwordRequired => 'पासवर्ड आवश्यक आहे';
+
+  @override
+  String get passwordMinLength => 'पासवर्ड कमीत कमी 6 अक्षरांचा असावा';
+
+  @override
+  String get passwordStrong => 'पासवर्ड कमीत कमी 8 अक्षरांचा असावा';
+
+  @override
+  String get passwordComplexity =>
+      'पासवर्डमध्ये मोठे, लहान अक्षर आणि संख्या असावी';
+
+  @override
+  String get confirmPasswordLabel => 'पासवर्डची पुष्टी करा';
+
+  @override
+  String get confirmPasswordHint => 'तुमच्या पासवर्डची पुष्टी करा';
+
+  @override
+  String get confirmPasswordRequired => 'कृपया तुमच्या पासवर्डची पुष्टी करा';
+
+  @override
+  String get passwordsDoNotMatch => 'पासवर्ड जुळत नाहीत';
+
+  @override
+  String get forgotPasswordLink => 'पासवर्ड विसरलात?';
+
+  @override
+  String get orText => 'किंवा';
+
+  @override
+  String get appleSignInSoon => 'Apple साइन इन लवकरच येत आहे';
+
+  @override
+  String get loginFailed => 'लॉगिन अयशस्वी';
+
+  @override
+  String get signUpFailed => 'साइन अप अयशस्वी';
+
+  @override
+  String get accountCreatedSuccess => 'खाते यशस्वीरित्या तयार झाले!';
+
+  @override
+  String get createAccountButton => 'खाते तयार करा';
+
+  @override
+  String get enterYourEmail => 'तुमचा ईमेल टाका';
+
+  @override
+  String get enterYourPassword => 'तुमचा पासवर्ड टाका';
+
+  @override
+  String get createStrongPassword => 'मजबूत पासवर्ड तयार करा';
+
+  @override
+  String get termsAndConditions =>
+      'खाते तयार करून, तुम्ही आमच्या सेवा अटी आणि गोपनीयता धोरणाशी सहमत आहात';
+
+  @override
+  String get profileGeneral => 'सामान्य';
+
+  @override
+  String get profileNotifications => 'सूचना';
+
+  @override
+  String get profilePersonalInfo => 'वैयक्तिक माहिती';
+
+  @override
+  String get profileCoachContact => 'प्रशिक्षक संपर्क';
+
+  @override
+  String get profileLanguage => 'भाषा';
+
+  @override
+  String get profileLanguageValue => 'मराठी (MR)';
+
+  @override
+  String get profileDarkMode => 'थीम';
+
+  @override
+  String get profileLinkedDevices => 'लिंक केलेली डिव्हाइसेस';
+
+  @override
+  String get profileLinkedDevicesValue => 'Apple Watch';
+
+  @override
+  String get themeTitle => 'थीम';
+
+  @override
+  String get themeDescription => 'तुमची आवडती थीम मोड निवडा';
+
+  @override
+  String get themeLightTitle => 'हलकी';
+
+  @override
+  String get themeLightSubtitle => 'हलकी थीम वापरा';
+
+  @override
+  String get themeDarkTitle => 'गडद';
+
+  @override
+  String get themeDarkSubtitle => 'गडद थीम वापरा';
+
+  @override
+  String get themeSystemTitle => 'सिस्टम';
+
+  @override
+  String get themeSystemSubtitle => 'सिस्टम सेटिंग फॉलो करा';
+
+  @override
+  String get themeLight => 'हलकी';
+
+  @override
+  String get themeDark => 'गडद';
+
+  @override
+  String get themeSystem => 'सिस्टम';
+
+  @override
+  String get profileSecurityPrivacy => 'सुरक्षा आणि गोपनीयता';
+
+  @override
+  String get profileMainSecurity => 'मुख्य सुरक्षा';
+
+  @override
+  String get profileEnableBiometric => 'बायोमेट्रिक सक्षम करा';
+
+  @override
+  String get profilePrivacyPolicy => 'गोपनीयता धोरण';
+
+  @override
+  String get profileHelpSupport => 'मदत आणि समर्थन';
+
+  @override
+  String get profileAboutUs => 'आमच्याबद्दल';
+
+  @override
+  String get profileHelpCenter => 'मदत केंद्र';
+
+  @override
+  String get profileSubmitFeedback => 'अभिप्राय पाठवा';
+
+  @override
+  String get profileDangerZone => 'धोकादायक क्षेत्र';
+
+  @override
+  String get profileCloseAccount => 'खाते बंद करा';
+
+  @override
+  String get profileLogOut => 'लॉग आउट';
+
+  @override
+  String get profileSignOut => 'साइन आउट';
+
+  @override
+  String get profileSignOutTitle => 'साइन आउट';
+
+  @override
+  String get profileSignOutMessage => 'तुम्हाला खरोखर साइन आउट करायचे आहे का?';
+
+  @override
+  String get profileCancel => 'रद्द करा';
+
+  @override
+  String get profileSignOutFailed => 'साइन आउट अयशस्वी';
+
+  @override
+  String get profileBeta => 'बीटा';
+
+  @override
+  String get profileWarning => 'चेतावणी';
+
+  @override
+  String profileRightsReserved(Object year) {
+    return '© $year सर्व हक्क राखीव';
+  }
+
+  @override
+  String profileLoading(Object loadingIndication) {
+    return 'लोड होत आहे$loadingIndication';
+  }
+
+  @override
+  String get fitnessMetricsTitle => 'फिटनेस मेट्रिक्स';
+
+  @override
+  String get viewAllText => 'सर्व पाहा';
+
+  @override
+  String get stepsLabel => 'कदम';
+
+  @override
+  String get hydrationLabel => 'जलयोजन';
+
+  @override
+  String get caloriesLabel => 'कैलोरी';
+
+  @override
+  String get distanceLabel => 'दूरी';
+
+  @override
+  String get scoreLabel => 'स्कोर';
+
+  @override
+  String get sleepLabel => 'नींद';
+
+  @override
+  String get bmiLabel => 'बीएमआई';
+
+  @override
+  String get bpmLabel => 'बीपीएम';
+
+  @override
+  String get calorieLabel => 'कैलोरी';
+
+  @override
+  String get stats => 'आँकड़े';
+
+  @override
+  String get heartRateLabel => 'दिल की धड़कन';
 }

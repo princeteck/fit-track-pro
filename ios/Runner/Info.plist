@@ -45,5 +45,26 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	
+	<!-- Permissions for sensor access -->
+	<key>NSMotionUsageDescription</key>
+	<string>This app needs access to motion sensors to track your workouts and steps.</string>
+	<key>NSHealthShareUsageDescription</key>
+	<string>This app needs access to health data to track your heart rate and fitness metrics.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>This app needs to update health data with your workout information.</string>
+	
+	<!-- Background modes -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>background-fetch</string>
+		<string>background-processing</string>
+	</array>
+	
+	<!-- Background task identifier -->
+	<key>BGTaskSchedulerPermittedIdentifiers</key>
+	<array>
+		<string>com.sonawanes.fittrack_pro.workout-tracking</string>
+	</array>
 </dict>
 </plist>

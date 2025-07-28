@@ -9,5 +9,6 @@ class SplashState with _$SplashState {
     @Default(false) bool dependenciesReady,
     @Default(false) bool hasError,
     @Default('') String errorMessage,
+    AppStartupResult? initialRoute,
   }) = _SplashState;
 }
