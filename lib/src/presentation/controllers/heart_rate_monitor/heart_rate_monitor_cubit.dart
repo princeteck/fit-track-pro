@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:isolate';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -20,7 +19,6 @@ class HeartRateMonitorCubit extends BaseCubitWrapper<HeartRateMonitorState> {
 
   Timer? _monitoringTimer;
   Timer? _sessionTimer;
-  Isolate? _monitoringIsolate;
   String? _currentSessionId;
   DateTime? _sessionStartTime;
   int _sessionDurationSeconds = 30;
