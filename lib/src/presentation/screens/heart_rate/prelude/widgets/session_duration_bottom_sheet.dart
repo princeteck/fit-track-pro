@@ -7,7 +7,10 @@ import '../../../../../core/constants/ui/assets_constants.dart';
 class SessionDurationBottomSheet extends StatelessWidget {
   final Function(Duration) onDurationSelected;
 
-  const SessionDurationBottomSheet({super.key, required this.onDurationSelected});
+  const SessionDurationBottomSheet({
+    super.key,
+    required this.onDurationSelected,
+  });
 
   static const List<Duration> _durations = [
     Duration(seconds: 10),
@@ -113,7 +116,8 @@ class SessionDurationBottomSheet extends StatelessWidget {
                   return Column(
                     children: [
                       _buildDurationOption(context, duration),
-                      if (_durations.last != duration) const SizedBox(height: 12),
+                      if (_durations.last != duration)
+                        const SizedBox(height: 12),
                     ],
                   );
                 }).toList(),

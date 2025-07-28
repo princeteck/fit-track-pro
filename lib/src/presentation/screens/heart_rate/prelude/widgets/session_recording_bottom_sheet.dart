@@ -24,10 +24,12 @@ class SessionRecordingBottomSheet extends StatefulWidget {
   });
 
   @override
-  State<SessionRecordingBottomSheet> createState() => _SessionRecordingBottomSheetState();
+  State<SessionRecordingBottomSheet> createState() =>
+      _SessionRecordingBottomSheetState();
 }
 
-class _SessionRecordingBottomSheetState extends State<SessionRecordingBottomSheet>
+class _SessionRecordingBottomSheetState
+    extends State<SessionRecordingBottomSheet>
     with TickerProviderStateMixin {
   late Timer _sessionTimer;
   late AnimationController _pulseController;
@@ -84,11 +86,13 @@ class _SessionRecordingBottomSheetState extends State<SessionRecordingBottomShee
       });
 
       // Add reading to session data
-      _readings.add(HeartRateReading(
-        bpm: _currentBpm,
-        timestamp: DateTime.now(),
-        intervalMs: 1000.0, // 1 second intervals
-      ));
+      _readings.add(
+        HeartRateReading(
+          bpm: _currentBpm,
+          timestamp: DateTime.now(),
+          intervalMs: 1000.0, // 1 second intervals
+        ),
+      );
     });
   }
 
@@ -313,9 +317,9 @@ class _SessionRecordingBottomSheetState extends State<SessionRecordingBottomShee
                                   height: 120,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: const Color(0xFFE91E63).withValues(
-                                      alpha: 0.1,
-                                    ),
+                                    color: const Color(
+                                      0xFFE91E63,
+                                    ).withValues(alpha: 0.1),
                                     border: Border.all(
                                       color: const Color(0xFFE91E63),
                                       width: 3,
@@ -323,27 +327,37 @@ class _SessionRecordingBottomSheetState extends State<SessionRecordingBottomShee
                                   ),
                                   child: Center(
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Text(
                                           '$_currentBpm',
                                           style: GoogleFonts.inter(
-                                            textStyle: theme.textTheme.displaySmall?.copyWith(
-                                              fontWeight: FontWeight.w900,
-                                              color: const Color(0xFFE91E63),
-                                              height: 1.0,
-                                            ),
+                                            textStyle: theme
+                                                .textTheme
+                                                .displaySmall
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.w900,
+                                                  color: const Color(
+                                                    0xFFE91E63,
+                                                  ),
+                                                  height: 1.0,
+                                                ),
                                           ),
                                         ),
                                         Text(
                                           'BPM',
                                           style: GoogleFonts.inter(
-                                            textStyle: theme.textTheme.bodyMedium?.copyWith(
-                                              fontWeight: FontWeight.w600,
-                                              color: theme.colorScheme.onSurface.withValues(
-                                                alpha: 0.6,
-                                              ),
-                                            ),
+                                            textStyle: theme
+                                                .textTheme
+                                                .bodyMedium
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: theme
+                                                      .colorScheme
+                                                      .onSurface
+                                                      .withValues(alpha: 0.6),
+                                                ),
                                           ),
                                         ),
                                       ],
@@ -384,10 +398,11 @@ class _SessionRecordingBottomSheetState extends State<SessionRecordingBottomShee
                                 Text(
                                   _formatTime(_remainingTime),
                                   style: GoogleFonts.inter(
-                                    textStyle: theme.textTheme.titleMedium?.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                      color: theme.colorScheme.onSurface,
-                                    ),
+                                    textStyle: theme.textTheme.titleMedium
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          color: theme.colorScheme.onSurface,
+                                        ),
                                   ),
                                 ),
                               ],
