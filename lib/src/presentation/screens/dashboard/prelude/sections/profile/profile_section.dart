@@ -82,15 +82,12 @@ class _ProfileSectionImplState extends State<ProfileSectionImpl>
               children: [
                 const SizedBox(height: 20),
 
-                // Profile Header with staggered animation
                 FadeTransition(
                   opacity: _fadeAnimation,
                   child: const ProfileHeader(),
                 ),
-
                 const SizedBox(height: 24),
 
-                // Profile Stats with delayed animation
                 SlideTransition(
                   position:
                       Tween<Offset>(
@@ -117,7 +114,6 @@ class _ProfileSectionImplState extends State<ProfileSectionImpl>
 
                 const SizedBox(height: 32),
 
-                // Profile Menu Section with delayed animation
                 SlideTransition(
                   position:
                       Tween<Offset>(
@@ -141,10 +137,7 @@ class _ProfileSectionImplState extends State<ProfileSectionImpl>
                     child: const ProfileMenuSection(),
                   ),
                 ),
-
-                const SizedBox(
-                  height: 120,
-                ), // Space for bottom navbar and content
+                const SizedBox(height: 120),
               ],
             ),
           ),

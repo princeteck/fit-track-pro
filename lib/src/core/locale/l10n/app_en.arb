@@ -121,5 +121,135 @@
   "calorieLabel": "Calorie",
   "stats": "Stats",
   "heartRateLabel": "Heart Rate",
-  "workoutStatsTitle": "Workout Stats"
+  "workoutStatsTitle": "Workout Stats",
+  "duration": "Duration",
+  "exercises": "Exercises",
+  "difficulty": "Difficulty",
+  "description": "Description",
+  "startWorkout": "Start Workout",
+  "clearData": "Clear Data",
+  "checkDatabase": "Check Database",
+  "close": "Close",
+  "failedToLoadWorkoutPlans": "Failed to load workout plans",
+  "initializeMockData": "Initialize Mock Data",
+  "notes": "Notes",
+  "failedToChangeTheme": "Failed to change theme",
+  "resetToSystemDefault": "Reset to System Default",
+  "clearSavedPreferences": "Clear Saved Preferences",
+  "signOutFailed": "Sign out failed",
+  "home": "Home",
+  "categories": "Categories",
+  "profile": "Profile",
+  "currentHeartRate": "Current Heart Rate",
+  "preWorkoutStretch": "Pre-Workout Stretch",
+  "lowerBodyTraining": "Lower Body Training",
+  "hiitCardioInterval": "HIIT Cardio Interval",
+  "recoverySession": "Recovery Session",
+  "progress": "Progress",
+  "startWeight": "Start Weight",
+  "good": "Good",
+  "dailyCalories": "Daily Calories",
+  "goBack": "Go back",
+  "passwordResetIcon": "Password reset icon",
+  "navigateToSignUp": "Navigate to sign up",
+  "profileStatisticsOverview": "Profile statistics overview",
+  "profilePageHeader": "Profile page header",
+  "profileSettings": "Profile settings",
+  "tapToAccessProfileSettings": "Tap to access profile settings",
+  "profilePictureForSandraGram": "Profile picture for Sandra Gram",
+  "userName": "User name",
+  "userLocationDenmarkCopenhagen": "User location: Denmark, Copenhagen",
+  "userStatisticsAndActions": "User statistics and actions",
+  "exportProfileData": "Export profile data",
+  "tapToExportYourProfileInformation": "Tap to export your profile information",
+  "editProfile": "Edit profile",
+  "tapToEditYourProfileInformation": "Tap to edit your profile information",
+  "navigateToSignIn": "Navigate to sign in",
+  "onboardingSlides": "Onboarding Slides",
+  "sandraGram": "Sandra Gram",
+  "denmarkCopenhagen": "Denmark, Copenhagen",
+  "welcomeToFitTrackPro": "Welcome to \nFit Track Pro",
+  "welcomeDescription": "Personalize your fitness journey with our comprehensive tracking app.",
+  "personalizedFitnessGoals": "Personalized Fitness Goals",
+  "personalizedFitnessGoalsDescription": "Create personalized fitness goals and track your progress towards a healthier you.",
+  "trackYourWorkouts": "Track Your Workouts",
+  "trackYourWorkoutsDescription": "Get insights, reminders, and celebrate your achievements along the way.",
+  "healthMetricsAndFitnessAnalytics": "Health Metrics & Fitness Analytics",
+  "healthMetricsDescription": "Monitor your health profile with ease.",
+  "nutritionAndDietGuidance": "Nutrition & Diet\nGuidance",
+  "nutritionDescription": "Lose weight and get fit with Fit Track Pro.",
+  "virtualAiCoachMentoring": "Virtual AI Coach \nMentoring",
+  "virtualAiCoachDescription": "Say goodbye to manual coaching.",
+  "upperStrength2": "Upper Strength 2",
+  "eightSeriesWorkout": "8 Series Workout",
+  "corePower": "Core Power",
+  "sixSeriesWorkout": "6 Series Workout",
+  "cardioBlast": "Cardio Blast",
+  "tenSeriesWorkout": "10 Series Workout",
+  "workouts": "Workouts",
+  "durationWithMinutes": "Duration: {minutes} minutes",
+  "@durationWithMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "exercisesWithCount": "Exercises ({count})",
+  "@exercisesWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "totalWorkouts": "Total Workouts",
+  "sessions": "sessions",
+  "caloriesBurned": "Calories Burned",
+  "kcal": "kcal",
+  "activeMinutes": "Active Minutes",
+  "min": "min",
+  "thisWeek": "This Week",
+  "workoutsUnit": "workouts",
+  "oneDay": "1 Day",
+  "oneWeek": "1 Week",
+  "oneMonth": "1 Month",
+  "threeMonths": "3 Months",
+  "sixMonths": "6 Months",
+  "twelveMonths": "12 Months",
+  "percentageUnit": " %",
+  "rateUnit": " rate",
+  "mlUnit": " ml",
+  "kcalUnit": " kcal",
+  "kmUnit": " km",
+  "recentWorkouts": "Recent Workouts",
+  "workoutPlans": "Workout Plans",
+  "viewAll": "View All",
+  "workoutsWithCount": "Workouts ({count})",
+  "@workoutsWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "durationMinutes": "Duration: {minutes} minutes",
+  "@durationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "follow": "Follow",
+  "followers": "Followers",
+  "following": "Following",
+  "signOutFailedWithError": "Sign out failed: {error}",
+  "@signOutFailedWithError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

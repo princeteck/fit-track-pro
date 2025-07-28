@@ -1,8 +1,9 @@
+import 'package:fittrack_pro/src/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../core/constants/ui/assets_constants.dart';
-import '../../../../../core/di/di.dart';
 import '../../../../../core/locale/generated/app_localizations.dart';
 import '../../../../controllers/auth/auth_cubit.dart';
 import '../../../../controllers/base/cubit_state.dart';
@@ -109,7 +110,7 @@ class _SignUpFormState extends State<SignUpForm> with TickerProviderStateMixin {
 
   void _signUp() {
     if (_formKey.currentState?.validate() ?? false) {
-      locator<AuthCubit>().signUpWithEmailPassword(
+      context.read<AuthCubit>().signUpWithEmailPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
@@ -117,7 +118,7 @@ class _SignUpFormState extends State<SignUpForm> with TickerProviderStateMixin {
   }
 
   void _signUpWithGoogle() {
-    locator<AuthCubit>().signInWithGoogle();
+    context.read<AuthCubit>().signInWithGoogle();
   }
 
   @override
@@ -126,7 +127,7 @@ class _SignUpFormState extends State<SignUpForm> with TickerProviderStateMixin {
     final l10n = AppLocalizations.of(context);
 
     return BlocListener<AuthCubit, AuthState>(
-      bloc: locator<AuthCubit>(),
+      bloc: context.read<AuthCubit>(),
       listener: (context, state) {
         if (state.signUpStatus.isError) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -147,130 +148,138 @@ class _SignUpFormState extends State<SignUpForm> with TickerProviderStateMixin {
               backgroundColor: theme.colorScheme.primary,
             ),
           );
-          Navigator.pushReplacementNamed(context, '/sign-in');
+          context.goNamed(DashboardScreen.name);
         }
       },
       child: FadeTransition(
         opacity: _fadeAnimation,
         child: SlideTransition(
           position: _slideAnimation,
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                // Email field
-                CustomTextField(
-                  label: l10n?.emailLabel ?? 'Email',
-                  hint: l10n?.enterYourEmail ?? 'Enter your email',
-                  controller: _emailController,
-                  validator: _validateEmail,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  focusNode: _emailFocusNode,
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_passwordFocusNode);
-                  },
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Icon(
-                      Icons.email_outlined,
-                      size: 20,
-                      color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
-                    ),
-                  ),
-                ),
-
-                const SizedBox(height: 16),
-
-                // Password field
-                PasswordField(
-                  label: l10n?.passwordLabel ?? 'Password',
-                  hint:
-                      l10n?.createStrongPassword ?? 'Create a strong password',
-                  controller: _passwordController,
-                  validator: _validatePassword,
-                  focusNode: _passwordFocusNode,
-                  textInputAction: TextInputAction.next,
-                  onFieldSubmitted: (_) {
-                    FocusScope.of(
-                      context,
-                    ).requestFocus(_confirmPasswordFocusNode);
-                  },
-                ),
-
-                const SizedBox(height: 16),
-
-                // Confirm Password field
-                PasswordField(
-                  label: l10n?.confirmPasswordLabel ?? 'Confirm Password',
-                  hint: l10n?.confirmPasswordHint ?? 'Confirm your password',
-                  controller: _confirmPasswordController,
-                  validator: _validateConfirmPassword,
-                  focusNode: _confirmPasswordFocusNode,
-                  onFieldSubmitted: (_) => _signUp(),
-                ),
-
-                const SizedBox(height: 24),
-
-                // Sign up button
-                BlocBuilder<AuthCubit, AuthState>(
-                  bloc: locator<AuthCubit>(),
-                  builder: (context, state) {
-                    final isLoading = state.signUpStatus.isSubmitting;
-                    return PrimaryButton(
-                      text: l10n?.createAccountButton ?? 'Create Account',
-                      onPressed: isLoading ? null : _signUp,
-                      isLoading: isLoading,
-                    );
-                  },
-                ),
-
-                const SizedBox(height: 16),
-
-                // Divider with text
-                Row(
-                  children: [
-                    Expanded(child: Divider(color: theme.dividerColor)),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        l10n?.orText ?? 'or',
-                        style: GoogleFonts.inter(
-                          fontSize: 14,
-                          color: theme.colorScheme.onSurface.withValues(
-                            alpha: 0.6,
-                          ),
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // Email field
+                  CustomTextField(
+                    label: l10n?.emailLabel ?? 'Email',
+                    hint: l10n?.enterYourEmail ?? 'Enter your email',
+                    controller: _emailController,
+                    validator: _validateEmail,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
+                    focusNode: _emailFocusNode,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(context).requestFocus(_passwordFocusNode);
+                    },
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Icon(
+                        Icons.email_outlined,
+                        size: 20,
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.6,
                         ),
                       ),
                     ),
-                    Expanded(child: Divider(color: theme.dividerColor)),
-                  ],
-                ),
-
-                const SizedBox(height: 16),
-
-                // Social login button
-                Center(
-                  child: SocialButton(
-                    iconPath: KIcons.google,
-                    onPressed: _signUpWithGoogle,
                   ),
-                ),
 
-                const SizedBox(height: 24),
+                  const SizedBox(height: 16),
 
-                // Terms and conditions
-                Text(
-                  l10n?.termsAndConditions ??
-                      'By creating an account, you agree to our Terms of Service and Privacy Policy',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                  // Password field
+                  PasswordField(
+                    label: l10n?.passwordLabel ?? 'Password',
+                    hint:
+                        l10n?.createStrongPassword ??
+                        'Create a strong password',
+                    controller: _passwordController,
+                    validator: _validatePassword,
+                    focusNode: _passwordFocusNode,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (_) {
+                      FocusScope.of(
+                        context,
+                      ).requestFocus(_confirmPasswordFocusNode);
+                    },
                   ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+
+                  const SizedBox(height: 16),
+
+                  // Confirm Password field
+                  PasswordField(
+                    label: l10n?.confirmPasswordLabel ?? 'Confirm Password',
+                    hint: l10n?.confirmPasswordHint ?? 'Confirm your password',
+                    controller: _confirmPasswordController,
+                    validator: _validateConfirmPassword,
+                    focusNode: _confirmPasswordFocusNode,
+                    onFieldSubmitted: (_) => _signUp(),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Sign up button
+                  BlocBuilder<AuthCubit, AuthState>(
+                    bloc: context.read<AuthCubit>(),
+                    builder: (context, state) {
+                      return PrimaryButton(
+                        text: l10n?.createAccountButton ?? 'Create Account',
+                        onPressed:
+                            (state.signUpStatus == CubitState.submitting())
+                            ? null
+                            : _signUp,
+                        isLoading:
+                            (state.signUpStatus == CubitState.submitting()),
+                      );
+                    },
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // Divider with text
+                  Row(
+                    children: [
+                      Expanded(child: Divider(color: theme.dividerColor)),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          l10n?.orText ?? 'or',
+                          style: GoogleFonts.inter(
+                            fontSize: 14,
+                            color: theme.colorScheme.onSurface.withValues(
+                              alpha: 0.6,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(child: Divider(color: theme.dividerColor)),
+                    ],
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // Social login button
+                  Center(
+                    child: SocialButton(
+                      iconPath: KIcons.google,
+                      onPressed: _signUpWithGoogle,
+                    ),
+                  ),
+
+                  const SizedBox(height: 24),
+
+                  // Terms and conditions
+                  Text(
+                    l10n?.termsAndConditions ??
+                        'By creating an account, you agree to our Terms of Service and Privacy Policy',
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

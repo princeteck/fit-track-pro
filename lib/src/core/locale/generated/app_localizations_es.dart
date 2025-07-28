@@ -393,5 +393,311 @@ class AppLocalizationsEs extends AppLocalizations {
   String get heartRateLabel => 'Frecuencia Cardíaca';
 
   @override
-  String get workoutStatsTitle => 'Workout Stats';
+  String get workoutStatsTitle => 'Estadísticas de Entrenamiento';
+
+  @override
+  String get duration => 'Duración';
+
+  @override
+  String get exercises => 'Ejercicios';
+
+  @override
+  String get difficulty => 'Dificultad';
+
+  @override
+  String get description => 'Descripción';
+
+  @override
+  String get startWorkout => 'Comenzar Entrenamiento';
+
+  @override
+  String get clearData => 'Limpiar Datos';
+
+  @override
+  String get checkDatabase => 'Verificar Base de Datos';
+
+  @override
+  String get close => 'Cerrar';
+
+  @override
+  String get failedToLoadWorkoutPlans =>
+      'Error al cargar planes de entrenamiento';
+
+  @override
+  String get initializeMockData => 'Inicializar Datos de Prueba';
+
+  @override
+  String get notes => 'Notas';
+
+  @override
+  String get failedToChangeTheme => 'Error al cambiar tema';
+
+  @override
+  String get resetToSystemDefault => 'Restablecer a Predeterminado del Sistema';
+
+  @override
+  String get clearSavedPreferences => 'Limpiar Preferencias Guardadas';
+
+  @override
+  String get signOutFailed => 'Error al cerrar sesión';
+
+  @override
+  String get home => 'Inicio';
+
+  @override
+  String get categories => 'Categorías';
+
+  @override
+  String get profile => 'Perfil';
+
+  @override
+  String get currentHeartRate => 'Frecuencia Cardíaca Actual';
+
+  @override
+  String get preWorkoutStretch => 'Estiramiento Previo al Entrenamiento';
+
+  @override
+  String get lowerBodyTraining => 'Entrenamiento de Cuerpo Inferior';
+
+  @override
+  String get hiitCardioInterval => 'Intervalo de Cardio HIIT';
+
+  @override
+  String get recoverySession => 'Sesión de Recuperación';
+
+  @override
+  String get progress => 'Progreso';
+
+  @override
+  String get startWeight => 'Peso Inicial';
+
+  @override
+  String get good => 'Bueno';
+
+  @override
+  String get dailyCalories => 'Calorías Diarias';
+
+  @override
+  String get goBack => 'Volver';
+
+  @override
+  String get passwordResetIcon => 'Icono de restablecimiento de contraseña';
+
+  @override
+  String get navigateToSignUp => 'Navegar al registro';
+
+  @override
+  String get profileStatisticsOverview => 'Resumen de estadísticas del perfil';
+
+  @override
+  String get profilePageHeader => 'Encabezado de página de perfil';
+
+  @override
+  String get profileSettings => 'Configuraciones de perfil';
+
+  @override
+  String get tapToAccessProfileSettings =>
+      'Toca para acceder a la configuración del perfil';
+
+  @override
+  String get profilePictureForSandraGram => 'Foto de perfil de Sandra Gram';
+
+  @override
+  String get userName => 'Nombre de usuario';
+
+  @override
+  String get userLocationDenmarkCopenhagen =>
+      'Ubicación del usuario: Dinamarca, Copenhague';
+
+  @override
+  String get userStatisticsAndActions => 'Estadísticas y acciones del usuario';
+
+  @override
+  String get exportProfileData => 'Exportar datos del perfil';
+
+  @override
+  String get tapToExportYourProfileInformation =>
+      'Toca para exportar tu información de perfil';
+
+  @override
+  String get editProfile => 'Editar perfil';
+
+  @override
+  String get tapToEditYourProfileInformation =>
+      'Toca para editar tu información de perfil';
+
+  @override
+  String get navigateToSignIn => 'Navegar al inicio de sesión';
+
+  @override
+  String get onboardingSlides => 'Diapositivas de Introducción';
+
+  @override
+  String get sandraGram => 'Sandra Gram';
+
+  @override
+  String get denmarkCopenhagen => 'Dinamarca, Copenhague';
+
+  @override
+  String get welcomeToFitTrackPro => 'Bienvenido a \nFit Track Pro';
+
+  @override
+  String get welcomeDescription =>
+      'Personaliza tu viaje de fitness con nuestra aplicación integral de seguimiento.';
+
+  @override
+  String get personalizedFitnessGoals => 'Objetivos de Fitness Personalizados';
+
+  @override
+  String get personalizedFitnessGoalsDescription =>
+      'Crea objetivos de fitness personalizados y rastrea tu progreso hacia una versión más saludable.';
+
+  @override
+  String get trackYourWorkouts => 'Rastrea Tus Entrenamientos';
+
+  @override
+  String get trackYourWorkoutsDescription =>
+      'Obtén información, recordatorios y celebra tus logros en el camino.';
+
+  @override
+  String get healthMetricsAndFitnessAnalytics =>
+      'Métricas de Salud y Análisis de Fitness';
+
+  @override
+  String get healthMetricsDescription =>
+      'Monitorea tu perfil de salud con facilidad.';
+
+  @override
+  String get nutritionAndDietGuidance => 'Orientación de Nutrición\ny Dieta';
+
+  @override
+  String get nutritionDescription =>
+      'Pierde peso y ponte en forma con Fit Track Pro.';
+
+  @override
+  String get virtualAiCoachMentoring => 'Mentoría de Entrenador\nIA Virtual';
+
+  @override
+  String get virtualAiCoachDescription => 'Despídete del entrenamiento manual.';
+
+  @override
+  String get upperStrength2 => 'Fuerza Superior 2';
+
+  @override
+  String get eightSeriesWorkout => 'Entrenamiento de 8 Series';
+
+  @override
+  String get corePower => 'Poder Central';
+
+  @override
+  String get sixSeriesWorkout => 'Entrenamiento de 6 Series';
+
+  @override
+  String get cardioBlast => 'Explosión de Cardio';
+
+  @override
+  String get tenSeriesWorkout => 'Entrenamiento de 10 Series';
+
+  @override
+  String get workouts => 'Entrenamientos';
+
+  @override
+  String durationWithMinutes(int minutes) {
+    return 'Duración: $minutes minutos';
+  }
+
+  @override
+  String exercisesWithCount(int count) {
+    return 'Ejercicios ($count)';
+  }
+
+  @override
+  String get totalWorkouts => 'Entrenamientos Totales';
+
+  @override
+  String get sessions => 'sesiones';
+
+  @override
+  String get caloriesBurned => 'Calorías Quemadas';
+
+  @override
+  String get kcal => 'kcal';
+
+  @override
+  String get activeMinutes => 'Minutos Activos';
+
+  @override
+  String get min => 'min';
+
+  @override
+  String get thisWeek => 'Esta Semana';
+
+  @override
+  String get workoutsUnit => 'entrenamientos';
+
+  @override
+  String get oneDay => '1 Día';
+
+  @override
+  String get oneWeek => '1 Semana';
+
+  @override
+  String get oneMonth => '1 Mes';
+
+  @override
+  String get threeMonths => '3 Meses';
+
+  @override
+  String get sixMonths => '6 Meses';
+
+  @override
+  String get twelveMonths => '12 Meses';
+
+  @override
+  String get percentageUnit => ' %';
+
+  @override
+  String get rateUnit => ' ritmo';
+
+  @override
+  String get mlUnit => ' ml';
+
+  @override
+  String get kcalUnit => ' kcal';
+
+  @override
+  String get kmUnit => ' km';
+
+  @override
+  String get recentWorkouts => 'Entrenamientos Recientes';
+
+  @override
+  String get workoutPlans => 'Planes de Entrenamiento';
+
+  @override
+  String get viewAll => 'Ver Todo';
+
+  @override
+  String workoutsWithCount(int count) {
+    return 'Entrenamientos ($count)';
+  }
+
+  @override
+  String durationMinutes(int minutes) {
+    return 'Duración: $minutes minutos';
+  }
+
+  @override
+  String get follow => 'Seguir';
+
+  @override
+  String get followers => 'Seguidores';
+
+  @override
+  String get following => 'Siguiendo';
+
+  @override
+  String signOutFailedWithError(String error) {
+    return 'Error al cerrar sesión: $error';
+  }
 }

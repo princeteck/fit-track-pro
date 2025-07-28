@@ -10,25 +10,27 @@ class BottomNavbarCubit extends BaseCubitWrapper<BottomNavbarState> {
   BottomNavbarCubit() : super(const BottomNavbarState());
 
   void changeTab(int index) {
-    if (index != state.selectedIndex) {
+    if (!isClosed && index != state.selectedIndex) {
       emit(state.copyWith(selectedIndex: index));
     }
   }
 
   void updateVisibility(bool isVisible) {
-    if (isVisible != state.isVisible) {
+    if (!isClosed && isVisible != state.isVisible) {
       emit(state.copyWith(isVisible: isVisible));
     }
   }
 
   void updateScrollDirection(bool isScrollingDown) {
-    if (isScrollingDown != state.isScrollingDown) {
+    if (!isClosed && isScrollingDown != state.isScrollingDown) {
       emit(state.copyWith(isScrollingDown: isScrollingDown));
     }
   }
 
   /// Reset to initial state (useful for sign out)
   void reset() {
-    emit(const BottomNavbarState());
+    if (!isClosed) {
+      emit(const BottomNavbarState());
+    }
   }
 }

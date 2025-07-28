@@ -435,10 +435,6 @@ class _AnimatedLogoState extends State<_AnimatedLogo>
       child: SvgPicture.asset(
         KIcons.logo,
         width: 150,
-        colorFilter: ColorFilter.mode(
-          theme.colorScheme.primary,
-          BlendMode.srcIn,
-        ),
         placeholderBuilder: (BuildContext context) =>
             Icon(Icons.error, size: 150, color: theme.colorScheme.error),
       ),
