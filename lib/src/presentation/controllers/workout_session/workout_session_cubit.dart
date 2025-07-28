@@ -6,10 +6,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:uuid/uuid.dart';
 
+import '../../../core/di/di.dart';
 import '../../../core/services/native_sensor_service.dart';
 import '../../../data/repositories/workout_session_repository.dart';
 import '../../../domain/entities/workout_session_entity.dart';
 import '../base/base_cubit_wrapper.dart';
+import '../workout/workout_cubit.dart';
 
 part 'workout_session_state.dart';
 part 'workout_session_cubit.freezed.dart';
@@ -111,7 +113,6 @@ class WorkoutSessionCubit extends BaseCubitWrapper<WorkoutSessionState> {
       ),
     );
 
-    // Save the workout session
     _saveWorkoutSession(endTime);
 
     _nativeSensorService.stopWorkoutSession();
@@ -143,8 +144,21 @@ class WorkoutSessionCubit extends BaseCubitWrapper<WorkoutSessionState> {
 
     try {
       await _sessionRepository.saveSession(session);
+
+      _notifyWorkoutCubitOfNewSession();
     } catch (e) {
-      debugPrint('Failed to save workout session: $e');
+      debugPrint('❌ [WorkoutSessionCubit] Failed to save workout session: $e');
+    }
+  }
+
+  void _notifyWorkoutCubitOfNewSession() {
+    try {
+      final workoutCubit = locator<WorkoutCubit>();
+      if (!workoutCubit.isClosed) {
+        workoutCubit.forceRefreshStats();
+      }
+    } catch (e) {
+      debugPrint('⚠️ [WorkoutSessionCubit] Failed to notify WorkoutCubit: $e');
     }
   }
 
@@ -160,12 +174,10 @@ class WorkoutSessionCubit extends BaseCubitWrapper<WorkoutSessionState> {
           ),
         );
 
-        // Record sensor data every second
         _recordSensorData();
 
         _updateProgress();
 
-        // Check if workout time is complete
         if (state.elapsedTime >= state.totalDurationSeconds) {
           completeWorkout();
         }
@@ -194,10 +206,8 @@ class WorkoutSessionCubit extends BaseCubitWrapper<WorkoutSessionState> {
     _heartRateTimer?.cancel();
     _heartRateTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
       if (state.isActive && !state.isPaused) {
-        // Simulate heart rate data
         final baseHeartRate = 75;
-        final workoutIntensity =
-            (state.elapsedTime / 60) * 0.5; // Increases over time
+        final workoutIntensity = (state.elapsedTime / 60) * 0.5;
         final randomVariation = (math.Random().nextDouble() - 0.5) * 10;
         final newHeartRate =
             (baseHeartRate + workoutIntensity * 50 + randomVariation).round();
@@ -210,26 +220,22 @@ class WorkoutSessionCubit extends BaseCubitWrapper<WorkoutSessionState> {
   }
 
   void _updateProgress() {
-    // Calculate progress based on time elapsed vs total duration
     final timeProgress = state.elapsedTime / state.totalDurationSeconds;
 
-    // Also calculate exercise progress as a secondary metric
     final exerciseProgress =
         state.currentExerciseIndex / state.exercises.length;
     final setProgress =
         (state.currentSet - 1) / state.totalSets / state.exercises.length;
     final exerciseBasedProgress = exerciseProgress + setProgress;
 
-    // Use time progress as primary, but ensure we don't go backwards when skipping exercises
     final newProgress = math.max(timeProgress, exerciseBasedProgress);
 
     emit(state.copyWith(progress: math.min(1.0, newProgress)));
   }
 
   int _calculateCaloriesBurned() {
-    // Simplified calorie calculation
     final timeInMinutes = state.elapsedTime / 60;
-    final averageCaloriesPerMinute = 8; // Moderate intensity
+    final averageCaloriesPerMinute = 8;
     return (timeInMinutes * averageCaloriesPerMinute).round();
   }
 

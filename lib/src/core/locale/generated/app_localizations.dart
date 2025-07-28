@@ -110,6 +110,12 @@ abstract class AppLocalizations {
   /// **'Hello'**
   String get hello;
 
+  /// No description provided for @today.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get today;
+
   /// No description provided for @greetUser.
   ///
   /// In en, this message translates to:

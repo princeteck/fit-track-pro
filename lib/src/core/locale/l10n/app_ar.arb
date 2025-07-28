@@ -1,6 +1,7 @@
 {
   "@@locale": "ar",
   "hello": "مرحبا",
+  "today": "اليوم",
   "greetUser": "أهلا بك، {username}!",
   "appTitle": "Fit Track Pro",
   "appDescription": "متعقب اللياقة البدنية الشخصي الخاص بك",

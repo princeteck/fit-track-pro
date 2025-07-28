@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../../../core/constants/ui/assets_constants.dart';
+import '../../../../../../../../core/extensions/context_extensions.dart';
 import '../../../../../../../controllers/auth/auth_cubit.dart';
 import '../../../../../../../controllers/base/cubit_state.dart';
 
@@ -17,7 +18,6 @@ class GreetingHeader extends StatelessWidget {
 
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, authState) {
-        // Get user display name - prefer name, fallback to email, then default
         final user = authState.user;
         String displayName = (authState.status.isLoading)
             ? 'Loading...'
@@ -25,7 +25,6 @@ class GreetingHeader extends StatelessWidget {
 
         return Row(
           children: [
-            // User Avatar
             Container(
               width: 48,
               height: 48,
@@ -49,23 +48,20 @@ class GreetingHeader extends StatelessWidget {
 
             const SizedBox(width: 12),
 
-            // Greeting Text
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hello, $displayName',
+                    '${context.l10n?.hello ?? 'Hello'}, $displayName',
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: Colors.black,
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'Today $dayNumber $monthName',
+                    '${context.l10n?.today ?? 'Today'} $dayNumber $monthName',
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey[600],
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -73,7 +69,6 @@ class GreetingHeader extends StatelessWidget {
               ),
             ),
 
-            // Search Icon
             Container(
               width: 40,
               height: 40,
@@ -117,7 +112,5 @@ class GreetingHeader extends StatelessWidget {
     return months[month - 1];
   }
 
-  static void _onImageError(Object exception, StackTrace? stackTrace) {
-    // Handle image loading error silently
-  }
+  static void _onImageError(Object exception, StackTrace? stackTrace) {}
 }

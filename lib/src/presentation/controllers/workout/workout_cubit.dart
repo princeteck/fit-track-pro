@@ -19,35 +19,24 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
 
   void loadStats() async {
     if (isClosed) return;
-    debugPrint('🔥 [WorkoutCubit] loadStats() called');
     emit(state.copyWith(isLoading: true));
 
     try {
-      // Load all data from database sessions
       final sessions = await _sessionRepository.getAllSessions();
-      debugPrint(
-        '🔥 [WorkoutCubit] Found ${sessions.length} sessions in database',
-      );
 
       final recentSessions = await _loadRecentSessions();
-      debugPrint(
-        '🔥 [WorkoutCubit] Found ${recentSessions.length} recent sessions',
-      );
-
-      // Calculate statistics from actual session data
       final totalWorkouts = sessions.length;
       final totalCalories = sessions.fold(
         0,
         (sum, session) => sum + session.caloriesBurned,
       );
-      // Convert total seconds to minutes (rounded)
+
       final totalSeconds = sessions.fold(
         0,
         (sum, session) => sum + session.durationSeconds,
       );
       final activeMinutes = (totalSeconds / 60).round();
 
-      // Calculate this week's workouts
       final now = DateTime.now();
       final weekStart = DateTime(
         now.year,
@@ -56,30 +45,14 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
       ).subtract(Duration(days: now.weekday - 1));
       final weekEnd = weekStart.add(const Duration(days: 7));
 
-      debugPrint(
-        '🔥 [WorkoutCubit] Week range: ${weekStart.toIso8601String()} to ${weekEnd.toIso8601String()}',
-      );
-
       final weeklyWorkouts = sessions.where((session) {
         final sessionDate = session.startTime;
         final isInWeek =
             sessionDate.isAfter(weekStart) && sessionDate.isBefore(weekEnd);
-        debugPrint(
-          '🔥 [WorkoutCubit] Session ${session.id} at ${sessionDate.toIso8601String()}: $isInWeek',
-        );
         return isInWeek;
       }).length;
 
-      debugPrint(
-        '🔥 [WorkoutCubit] Stats calculated - Total: $totalWorkouts, Calories: $totalCalories, Minutes: $activeMinutes, Weekly: $weeklyWorkouts',
-      );
-
-      // Generate weekly data from actual sessions
       final weeklyData = _generateWeeklyDataFromSessions(sessions);
-      debugPrint(
-        '🔥 [WorkoutCubit] Generated ${weeklyData.length} weekly data points',
-      );
-
       if (!isClosed) {
         emit(
           state.copyWith(
@@ -94,7 +67,6 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
         );
       }
     } catch (e) {
-      // Fallback to generated data if database fails
       if (!isClosed) {
         emit(
           state.copyWith(
@@ -123,7 +95,7 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
               timeAgo: _formatTimeAgo(session.endTime),
               icon: Icons.fitness_center,
               color: Colors.blue,
-              sessionId: session.id, // Include session ID
+              sessionId: session.id,
             ),
           )
           .toList();
@@ -149,35 +121,25 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
 
   void refreshStats() async {
     if (isClosed) return;
-    debugPrint('🔄 [WorkoutCubit] refreshStats() called');
     emit(state.copyWith(isRefreshing: true));
 
     try {
-      // Refresh data from database sessions
       final sessions = await _sessionRepository.getAllSessions();
-      debugPrint(
-        '🔄 [WorkoutCubit] Found ${sessions.length} sessions during refresh',
-      );
 
       final recentSessions = await _loadRecentSessions();
-      debugPrint(
-        '🔄 [WorkoutCubit] Found ${recentSessions.length} recent sessions during refresh',
-      );
 
-      // Calculate refreshed statistics from actual session data
       final totalWorkouts = sessions.length;
       final totalCalories = sessions.fold(
         0,
         (sum, session) => sum + session.caloriesBurned,
       );
-      // Convert total seconds to minutes (rounded)
+
       final totalSeconds = sessions.fold(
         0,
         (sum, session) => sum + session.durationSeconds,
       );
       final activeMinutes = (totalSeconds / 60).round();
 
-      // Calculate this week's workouts
       final now = DateTime.now();
       final weekStart = DateTime(
         now.year,
@@ -186,29 +148,14 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
       ).subtract(Duration(days: now.weekday - 1));
       final weekEnd = weekStart.add(const Duration(days: 7));
 
-      debugPrint(
-        '🔄 [WorkoutCubit] Week range: ${weekStart.toIso8601String()} to ${weekEnd.toIso8601String()}',
-      );
-
       final weeklyWorkouts = sessions.where((session) {
         final sessionDate = session.startTime;
         final isInWeek =
             sessionDate.isAfter(weekStart) && sessionDate.isBefore(weekEnd);
-        debugPrint(
-          '🔄 [WorkoutCubit] Session ${session.id} at ${sessionDate.toIso8601String()}: $isInWeek',
-        );
         return isInWeek;
       }).length;
 
-      debugPrint(
-        '🔄 [WorkoutCubit] Refreshed stats - Total: $totalWorkouts, Calories: $totalCalories, Minutes: $activeMinutes, Weekly: $weeklyWorkouts',
-      );
-
-      // Generate weekly data from actual sessions
       final weeklyData = _generateWeeklyDataFromSessions(sessions);
-      debugPrint(
-        '🔄 [WorkoutCubit] Generated ${weeklyData.length} weekly data points during refresh',
-      );
 
       if (!isClosed) {
         emit(
@@ -224,16 +171,16 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
         );
       }
     } catch (e) {
-      // Fallback refresh using current state
       if (!isClosed) {
-        emit(
-          state.copyWith(
-            isRefreshing: false,
-            // Keep current values
-          ),
-        );
+        emit(state.copyWith(isRefreshing: false));
       }
     }
+  }
+
+  void forceRefreshStats() {
+    if (isClosed) return;
+    debugPrint('🚀 [WorkoutCubit] Force refresh triggered');
+    refreshStats();
   }
 
   List<ChartDataPoint> _generateWeeklyData() {
@@ -242,7 +189,7 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
 
     return List.generate(7, (index) {
       final date = now.subtract(Duration(days: 6 - index));
-      final value = 20 + random.nextDouble() * 60; // 20-80 minutes
+      final value = 20 + random.nextDouble() * 60;
       final dayName = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][index];
 
       return ChartDataPoint(value: value, label: dayName, date: date);
@@ -253,33 +200,24 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
     List<WorkoutSessionEntity> sessions,
   ) {
     final now = DateTime.now();
-    debugPrint(
-      '📊 [WorkoutCubit] Generating weekly data from ${sessions.length} sessions',
-    );
 
     return List.generate(7, (index) {
       final date = now.subtract(Duration(days: 6 - index));
       final dayStart = DateTime(date.year, date.month, date.day);
       final dayEnd = dayStart.add(const Duration(days: 1));
 
-      // Filter sessions for this day
       final daySessions = sessions.where(
         (session) =>
             session.startTime.isAfter(dayStart) &&
             session.startTime.isBefore(dayEnd),
       );
 
-      // Calculate total minutes for this day
       final totalMinutes = daySessions.fold(
         0.0,
         (sum, session) => sum + (session.durationSeconds / 60.0),
       );
 
       final dayName = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'][index];
-
-      debugPrint(
-        '📊 [WorkoutCubit] Day $dayName (${dayStart.toIso8601String()}): ${daySessions.length} sessions, $totalMinutes minutes',
-      );
 
       return ChartDataPoint(value: totalMinutes, label: dayName, date: date);
     });
@@ -290,7 +228,6 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
     emit(state.copyWith(isLoading: true));
 
     try {
-      // Clear all workout data and reset to empty state
       if (!isClosed) {
         emit(
           state.copyWith(
@@ -313,11 +250,8 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
 
   Future<void> checkDatabaseIntegrity() async {
     try {
-      // In a real app, this would check workout database integrity
-      // For now, we'll just reload the current data and log debug info
       loadStats();
 
-      // Log some debug information (in debug mode only)
       if (!isClosed) {
         final currentState = state;
         debugPrint('=== Workout Database Integrity Check ===');
@@ -337,7 +271,6 @@ class WorkoutCubit extends BaseCubitWrapper<WorkoutState> {
   }
 }
 
-// Data models
 class ChartDataPoint {
   final double value;
   final String label;
@@ -369,7 +302,7 @@ class WorkoutSummary {
   final String timeAgo;
   final IconData icon;
   final Color color;
-  final String? sessionId; // Add session ID for real sessions
+  final String? sessionId;
 
   const WorkoutSummary({
     required this.name,

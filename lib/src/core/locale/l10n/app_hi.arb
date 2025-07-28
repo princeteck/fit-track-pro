@@ -1,6 +1,7 @@
 {
   "@@locale": "hi",
   "hello": "नमस्ते",
+  "today": "आज",
   "greetUser": "स्वागत है, {username}!",
   "appTitle": "Fit Track Pro",
   "appDescription": "आपका व्यक्तिगत फिटनेस ट्रैकर",
