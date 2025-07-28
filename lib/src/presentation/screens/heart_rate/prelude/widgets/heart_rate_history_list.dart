@@ -5,6 +5,7 @@ import 'package:mrx_charts/mrx_charts.dart';
 
 import '../../../../../core/constants/ui/assets_constants.dart';
 import '../../../../../data/models/heart_rate_model.dart';
+import 'heart_rate_session_detail_modal.dart';
 
 class HeartRateHistoryList extends StatelessWidget {
   final List<HeartRateModel> readings;
@@ -42,7 +43,6 @@ class HeartRateHistoryList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
             child: Row(
@@ -80,7 +80,6 @@ class HeartRateHistoryList extends StatelessWidget {
             ),
           ),
 
-          // List content
           if (isLoading)
             _buildLoadingState(theme)
           else if (readings.isEmpty)
@@ -249,107 +248,113 @@ class HeartRateHistoryList extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 16),
       child: Material(
         color: Colors.transparent,
-        child: InkWell(
-          onTap: () => onReadingTap?.call(session),
-          borderRadius: BorderRadius.circular(16),
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: isDarkMode ? theme.colorScheme.surface : Colors.grey[50],
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                color: typeInfo.color.withValues(alpha: 0.2),
-                width: 1,
+        child: Builder(
+          builder: (context) => InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                builder: (context) =>
+                    HeartRateSessionDetailModal(session: session),
+              );
+            },
+            borderRadius: BorderRadius.circular(16),
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: isDarkMode ? theme.colorScheme.surface : Colors.grey[50],
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: typeInfo.color.withValues(alpha: 0.2),
+                  width: 1,
+                ),
               ),
-            ),
-            child: Row(
-              children: [
-                // Session details
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Session name
-                      Text(
-                        _getTypeLabel(session.type),
-                        style: GoogleFonts.inter(
-                          textStyle: theme.textTheme.bodyLarge?.copyWith(
-                            color: theme.colorScheme.onSurface,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 16,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          _getTypeLabel(session.type),
+                          style: GoogleFonts.inter(
+                            textStyle: theme.textTheme.bodyLarge?.copyWith(
+                              color: theme.colorScheme.onSurface,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 12),
+                        const SizedBox(height: 12),
 
-                      // BPM and Duration
-                      Row(
-                        children: [
-                          // BPM
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                KIcons.heartSolid,
-                                width: 16,
-                                height: 16,
-                                colorFilter: ColorFilter.mode(
-                                  typeInfo.color,
-                                  BlendMode.srcIn,
-                                ),
-                              ),
-                              const SizedBox(width: 6),
-                              Text(
-                                '${session.bpm} bpm',
-                                style: GoogleFonts.inter(
-                                  textStyle: theme.textTheme.bodyMedium
-                                      ?.copyWith(
-                                        color: theme.colorScheme.onSurface,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                ),
-                              ),
-                            ],
-                          ),
-
-                          const SizedBox(width: 20),
-
-                          // Duration
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                KIcons.infinite,
-                                width: 16,
-                                height: 16,
-                                colorFilter: ColorFilter.mode(
-                                  theme.colorScheme.onSurface.withValues(
-                                    alpha: 0.6,
+                        Row(
+                          children: [
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                  KIcons.heartSolid,
+                                  width: 16,
+                                  height: 16,
+                                  colorFilter: ColorFilter.mode(
+                                    typeInfo.color,
+                                    BlendMode.srcIn,
                                   ),
-                                  BlendMode.srcIn,
                                 ),
-                              ),
-                              const SizedBox(width: 6),
-                              Text(
-                                durationText,
-                                style: GoogleFonts.inter(
-                                  textStyle: theme.textTheme.bodyMedium
-                                      ?.copyWith(
-                                        color: theme.colorScheme.onSurface
-                                            .withValues(alpha: 0.6),
-                                        fontWeight: FontWeight.w500,
-                                      ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  '${session.bpm} bpm',
+                                  style: GoogleFonts.inter(
+                                    textStyle: theme.textTheme.bodyMedium
+                                        ?.copyWith(
+                                          color: theme.colorScheme.onSurface,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                              ],
+                            ),
 
-                // Chart visualization
-                _buildMiniChart(session, typeInfo.color, theme),
-              ],
+                            const SizedBox(width: 20),
+
+                            Row(
+                              children: [
+                                SvgPicture.asset(
+                                  KIcons.infinite,
+                                  width: 16,
+                                  height: 16,
+                                  colorFilter: ColorFilter.mode(
+                                    theme.colorScheme.onSurface.withValues(
+                                      alpha: 0.6,
+                                    ),
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  durationText,
+                                  style: GoogleFonts.inter(
+                                    textStyle: theme.textTheme.bodyMedium
+                                        ?.copyWith(
+                                          color: theme.colorScheme.onSurface
+                                              .withValues(alpha: 0.6),
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  IgnorePointer(
+                    child: _buildMiniChart(session, typeInfo.color, theme),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -376,7 +381,6 @@ class HeartRateHistoryList extends StatelessWidget {
       );
     }
 
-    // Convert ChartDataPoint to ChartLineDataItem for mrx_charts
     final chartItems = session.chartData.asMap().entries.map((entry) {
       return ChartLineDataItem(x: entry.key.toDouble(), value: entry.value.y);
     }).toList();
@@ -389,14 +393,13 @@ class HeartRateHistoryList extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Chart(
           layers: [
-            // Add an axis layer to help with scaling
             ChartAxisLayer(
               settings: ChartAxisSettings(
                 x: ChartAxisSettingsAxis(
                   frequency: 5,
                   max: chartItems.length.toDouble(),
                   min: 0,
-                  textStyle: const TextStyle(fontSize: 0), // Hide text
+                  textStyle: const TextStyle(fontSize: 0),
                 ),
                 y: ChartAxisSettingsAxis(
                   frequency: 5,
@@ -410,7 +413,7 @@ class HeartRateHistoryList extends StatelessWidget {
                           .map((item) => item.value)
                           .reduce((a, b) => a < b ? a : b) -
                       5,
-                  textStyle: const TextStyle(fontSize: 0), // Hide text
+                  textStyle: const TextStyle(fontSize: 0),
                 ),
               ),
               labelX: (value) => '',
@@ -474,21 +477,18 @@ class HeartRateHistoryList extends StatelessWidget {
     final seconds = duration.inSeconds.remainder(60);
 
     if (hours > 0) {
-      // Show hours and minutes (if minutes > 0)
       if (minutes > 0) {
         return '${hours}h ${minutes}m';
       } else {
         return '${hours}h';
       }
     } else if (minutes > 0) {
-      // Show minutes and seconds (if seconds > 0)
       if (seconds > 0) {
         return '${minutes}m ${seconds}s';
       } else {
         return '${minutes}m';
       }
     } else {
-      // Only seconds
       return '${seconds}s';
     }
   }

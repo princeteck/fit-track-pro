@@ -282,7 +282,6 @@ class HeartRateLocalDataSource {
             )
             .toList();
       } catch (e) {
-        print('Error parsing chart data: $e');
         chartData = [];
       }
     }
@@ -304,7 +303,6 @@ class HeartRateLocalDataSource {
             )
             .toList();
       } catch (e) {
-        print('Error parsing readings data: $e');
         readings = [];
       }
     }
