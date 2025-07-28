@@ -751,6 +751,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Loading{loadingIndication}'**
   String profileLoading(Object loadingIndication);
+
+  /// No description provided for @fitnessMetricsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fitness Metrics'**
+  String get fitnessMetricsTitle;
+
+  /// No description provided for @viewAllText.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get viewAllText;
+
+  /// No description provided for @stepsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Steps'**
+  String get stepsLabel;
+
+  /// No description provided for @hydrationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Hydration'**
+  String get hydrationLabel;
+
+  /// No description provided for @caloriesLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Calories'**
+  String get caloriesLabel;
+
+  /// No description provided for @distanceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Distance'**
+  String get distanceLabel;
+
+  /// No description provided for @scoreLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Score'**
+  String get scoreLabel;
+
+  /// No description provided for @sleepLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sleep'**
+  String get sleepLabel;
+
+  /// No description provided for @bmiLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'bmi'**
+  String get bmiLabel;
+
+  /// No description provided for @bpmLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'bpm'**
+  String get bpmLabel;
+
+  /// No description provided for @calorieLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Calorie'**
+  String get calorieLabel;
+
+  /// No description provided for @stats.
+  ///
+  /// In en, this message translates to:
+  /// **'Stats'**
+  String get stats;
+
+  /// No description provided for @heartRateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Heart Rate'**
+  String get heartRateLabel;
 }
 
 class _AppLocalizationsDelegate

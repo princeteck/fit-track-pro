@@ -52,6 +52,8 @@ class EnhancedTransitionPage<T> extends Page<T> {
         return _scale(animation, child);
       case TransitionType.fadeScale:
         return _fadeScale(animation, child);
+      case TransitionType.fadeForwards:
+        return _fadeForwards(animation, secondaryAnimation, child);
     }
   }
 
@@ -118,6 +120,23 @@ class EnhancedTransitionPage<T> extends Page<T> {
       child: ScaleTransition(scale: animation.drive(scaleTween), child: child),
     );
   }
+
+  Widget _fadeForwards(
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    // Use FadeForwardsPageTransitionsBuilder logic
+    // This creates a fade transition similar to Material Design forward transitions
+    const transitionsBuilder = FadeForwardsPageTransitionsBuilder();
+    return transitionsBuilder.buildTransitions<T>(
+      null, // route - not needed for this implementation
+      null, // context - not needed for this implementation
+      animation,
+      secondaryAnimation,
+      child,
+    );
+  }
 }
 
 /// Enum for different transition types
@@ -129,4 +148,5 @@ enum TransitionType {
   fade,
   scale,
   fadeScale,
+  fadeForwards,
 }

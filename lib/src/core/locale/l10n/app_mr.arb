@@ -107,5 +107,18 @@
   "profileBeta": "बीटा",
   "profileWarning": "चेतावणी",
   "profileRightsReserved": "© {year} सर्व हक्क राखीव",
-  "profileLoading": "लोड होत आहे{loadingIndication}"
+  "profileLoading": "लोड होत आहे{loadingIndication}",
+  "fitnessMetricsTitle": "फिटनेस मेट्रिक्स",
+  "viewAllText": "सर्व पाहा",
+  "stepsLabel": "कदम",
+  "hydrationLabel": "जलयोजन",
+  "caloriesLabel": "कैलोरी",
+  "distanceLabel": "दूरी",
+  "scoreLabel": "स्कोर",
+  "sleepLabel": "नींद",
+  "bmiLabel": "बीएमआई",
+  "bpmLabel": "बीपीएम",
+  "calorieLabel": "कैलोरी",
+  "stats": "आँकड़े",
+  "heartRateLabel": "दिल की धड़कन"
 }

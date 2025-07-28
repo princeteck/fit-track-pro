@@ -67,13 +67,21 @@ class KIcons {
   // Feature icons
   static const String search = '$_basePath/search.svg';
   static const String fire = '$_basePath/fire.svg';
+  static const String infinite = '$_basePath/infinite.svg';
   static const String heart = '$_basePath/heart.svg';
+  static const String heartSolid = '$_basePath/heart-solid.svg';
+  static const String bpmRead = '$_basePath/bpm-read.svg';
   static const String star = '$_basePath/star.svg';
   static const String trophy = '$_basePath/trophy.svg';
   static const String spark = '$_basePath/spark.svg';
+  static const String sparkSolid = '$_basePath/spark-solid.svg';
   static const String edit = '$_basePath/edit.svg';
   static const String documentText = '$_basePath/document-text.svg';
   static const String slideHorizontal = '$_basePath/slide-horizontal.svg';
+  static const String mcScore = '$_basePath/mc-score.svg';
+  static const String mcHydration = '$_basePath/mc-hydration.svg';
+  static const String mcCalories = '$_basePath/mc-calories.svg';
+  static const String drop = '$_basePath/drop.svg';
 
   // Export icons
   static const String export = '$_basePath/export.svg';

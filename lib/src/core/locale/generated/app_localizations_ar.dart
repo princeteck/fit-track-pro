@@ -345,4 +345,43 @@ class AppLocalizationsAr extends AppLocalizations {
   String profileLoading(Object loadingIndication) {
     return 'جاري التحميل$loadingIndication';
   }
+
+  @override
+  String get fitnessMetricsTitle => 'مقاييس اللياقة البدنية';
+
+  @override
+  String get viewAllText => 'عرض الكل';
+
+  @override
+  String get stepsLabel => 'خطوات';
+
+  @override
+  String get hydrationLabel => 'ترطيب';
+
+  @override
+  String get caloriesLabel => 'سعرات حرارية';
+
+  @override
+  String get distanceLabel => 'مسافة';
+
+  @override
+  String get scoreLabel => 'درجة';
+
+  @override
+  String get sleepLabel => 'نوم';
+
+  @override
+  String get bmiLabel => 'مؤشر كتلة الجسم';
+
+  @override
+  String get bpmLabel => 'معدل ضربات القلب';
+
+  @override
+  String get calorieLabel => 'سعر حراري';
+
+  @override
+  String get stats => 'الإحصائيات';
+
+  @override
+  String get heartRateLabel => 'معدل ضربات القلب';
 }

@@ -6,3 +6,4 @@ export 'dashboard/dashboard_screen.dart';
 export 'auth/forgot_password_screen.dart';
 export 'auth/sign_in_screen.dart';
 export 'auth/sign_up_screen.dart';
+export 'heart_rate/heart_stats_dashboard.dart';
