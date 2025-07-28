@@ -1,7 +1,6 @@
-import 'package:fittrack_pro/src/presentation/screens/dashboard/prelude/sections/home/prelude/sections/fitness_metrics/fitness_metrics.dart';
 import 'package:flutter/material.dart';
 
-import 'prelude/widgets/greeting_header.dart';
+import 'prelude/prelude.dart';
 
 class HomeSectionImpl extends StatefulWidget {
   const HomeSectionImpl({super.key});
@@ -80,7 +79,6 @@ class _HomeSectionImplState extends State<HomeSectionImpl>
             children: [
               const SizedBox(height: 20),
 
-              // Greeting Header with staggered animation
               FadeTransition(
                 opacity: _fadeAnimation,
                 child: const GreetingHeader(),
@@ -88,7 +86,6 @@ class _HomeSectionImplState extends State<HomeSectionImpl>
 
               const SizedBox(height: 24),
 
-              // Daily Challenge Card with delayed animation
               SlideTransition(
                 position:
                     Tween<Offset>(
@@ -112,62 +109,29 @@ class _HomeSectionImplState extends State<HomeSectionImpl>
                   child: const FitnessMetrics(),
                 ),
               ),
-
-              // const SizedBox(height: 24),
-
-              // // Weekly Calendar with delayed animation
-              // SlideTransition(
-              //   position:
-              //       Tween<Offset>(
-              //         begin: const Offset(0, 0.5),
-              //         end: Offset.zero,
-              //       ).animate(
-              //         CurvedAnimation(
-              //           parent: _slideAnimationController,
-              //           curve: const Interval(
-              //             0.4,
-              //             1.0,
-              //             curve: Curves.easeOutCubic,
-              //           ),
-              //         ),
-              //       ),
-              //   child: FadeTransition(
-              //     opacity: CurvedAnimation(
-              //       parent: _fadeAnimationController,
-              //       curve: const Interval(0.4, 1.0),
-              //     ),
-              //     child: const WeeklyCalendar(),
-              //   ),
-              // ),
-
-              // const SizedBox(height: 32),
-
-              // // Your Plan Section with delayed animation
-              // SlideTransition(
-              //   position:
-              //       Tween<Offset>(
-              //         begin: const Offset(0, 0.5),
-              //         end: Offset.zero,
-              //       ).animate(
-              //         CurvedAnimation(
-              //           parent: _slideAnimationController,
-              //           curve: const Interval(
-              //             0.6,
-              //             1.0,
-              //             curve: Curves.easeOutCubic,
-              //           ),
-              //         ),
-              //       ),
-              //   child: FadeTransition(
-              //     opacity: CurvedAnimation(
-              //       parent: _fadeAnimationController,
-              //       curve: const Interval(0.6, 1.0),
-              //     ),
-              //     child: const WorkoutPlanSection(),
-              //   ),
-              // ),
-
-              // const SizedBox(height: 100), // Space for bottom navbar
+              SlideTransition(
+                position:
+                    Tween<Offset>(
+                      begin: const Offset(0, 0.5),
+                      end: Offset.zero,
+                    ).animate(
+                      CurvedAnimation(
+                        parent: _slideAnimationController,
+                        curve: const Interval(
+                          0.2,
+                          1.0,
+                          curve: Curves.easeOutCubic,
+                        ),
+                      ),
+                    ),
+                child: FadeTransition(
+                  opacity: CurvedAnimation(
+                    parent: _fadeAnimationController,
+                    curve: const Interval(0.2, 1.0),
+                  ),
+                  child: const WorkoutSection(),
+                ),
+              ),
             ],
           ),
         ),

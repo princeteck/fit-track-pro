@@ -7,6 +7,7 @@ class SensorService: NSObject {
     
     private var isHeartRateMonitoring = false
     private var isWorkoutTracking = false
+    private var isWorkoutPaused = false
     private var heartRateTimer: Timer?
     private var workoutTimer: Timer?
     
@@ -15,6 +16,8 @@ class SensorService: NSObject {
     private var totalSteps = 0
     private var totalCalories = 0
     private var workoutStartTime: Date?
+    private var pausedDuration: TimeInterval = 0
+    private var lastPauseTime: Date?
     
     // Core Motion for step tracking (simulated)
     private let motionManager = CMMotionManager()
@@ -98,9 +101,12 @@ class SensorService: NSObject {
     
     func stopWorkoutTracking(completion: @escaping (String?) -> Void) {
         isWorkoutTracking = false
+        isWorkoutPaused = false
         workoutTimer?.invalidate()
         workoutTimer = nil
         workoutStartTime = nil
+        pausedDuration = 0
+        lastPauseTime = nil
         
         // Stop step tracking
         stopStepTracking()
@@ -111,24 +117,46 @@ class SensorService: NSObject {
         completion(nil)
     }
     
+    func toggleWorkoutPause() {
+        guard isWorkoutTracking else { return }
+        
+        isWorkoutPaused = !isWorkoutPaused
+        
+        if isWorkoutPaused {
+            lastPauseTime = Date()
+        } else {
+            // Add paused time to total paused duration
+            if let pauseTime = lastPauseTime {
+                pausedDuration += Date().timeIntervalSince(pauseTime)
+                lastPauseTime = nil
+            }
+        }
+        
+        scheduleWorkoutNotification()
+    }
+    
     func getWorkoutData() -> [String: Any] {
         let duration: TimeInterval
         if let startTime = workoutStartTime {
-            duration = Date().timeIntervalSince(startTime)
+            let totalTime = Date().timeIntervalSince(startTime)
+            let activePausedTime = isWorkoutPaused && lastPauseTime != nil 
+                ? Date().timeIntervalSince(lastPauseTime!) 
+                : 0
+            duration = totalTime - pausedDuration - activePausedTime
         } else {
             duration = 0
         }
-        
+
         return [
             "heartRate": currentHeartRate,
             "steps": totalSteps,
             "calories": totalCalories,
-            "duration": Int(duration)
+            "duration": Int(duration),
+            "isPaused": isWorkoutPaused,
+            "isActive": isWorkoutTracking
         ]
-    }
-    
-    private func simulateWorkoutData() {
-        guard isWorkoutTracking else { return }
+    }    private func simulateWorkoutData() {
+        guard isWorkoutTracking && !isWorkoutPaused else { return }
         
         // Simulate steps (1-3 steps per second during workout)
         totalSteps += Int.random(in: 1...3)
@@ -163,17 +191,22 @@ class SensorService: NSObject {
     
     private func scheduleWorkoutNotification() {
         let content = UNMutableNotificationContent()
-        content.title = "Workout in Progress"
+        content.title = isWorkoutPaused ? "Workout Paused" : "Workout in Progress"
         
         let duration: String
         if let startTime = workoutStartTime {
-            let seconds = Int(Date().timeIntervalSince(startTime))
-            duration = String(format: "%02d:%02d", seconds / 60, seconds % 60)
+            let totalTime = Date().timeIntervalSince(startTime)
+            let activePausedTime = isWorkoutPaused && lastPauseTime != nil 
+                ? Date().timeIntervalSince(lastPauseTime!) 
+                : 0
+            let activeTime = Int(totalTime - pausedDuration - activePausedTime)
+            duration = String(format: "%02d:%02d", activeTime / 60, activeTime % 60)
         } else {
             duration = "00:00"
         }
         
-        content.body = "❤️ \(currentHeartRate) BPM | 🔥 \(totalCalories) cal | 👟 \(totalSteps) steps | ⏱️ \(duration)"
+        let statusIcon = isWorkoutPaused ? "⏸️" : "▶️"
+        content.body = "\(statusIcon) ❤️ \(currentHeartRate) BPM | 🔥 \(totalCalories) cal | 👟 \(totalSteps) steps | ⏱️ \(duration)"
         content.sound = .none
         
         // Add action buttons

@@ -6,3 +6,4 @@ export 'splash/splash_cubit.dart';
 export 'walkthrough/walkthrough_cubit.dart';
 export 'bottom_navbar/bottom_navbar_cubit.dart';
 export 'auth/auth_cubit.dart';
+export 'workout_session/workout_session_cubit.dart';

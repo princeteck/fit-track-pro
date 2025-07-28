@@ -1,0 +1,254 @@
+{
+  "stats": {
+    "totalWorkouts": 42,
+    "totalCalories": 3240,
+    "activeMinutes": 1080,
+    "weeklyWorkouts": 5
+  },
+  "weeklyData": [
+    {
+      "value": 45.5,
+      "label": "Mon",
+      "date": "2025-07-21T00:00:00.000Z"
+    },
+    {
+      "value": 62.3,
+      "label": "Tue", 
+      "date": "2025-07-22T00:00:00.000Z"
+    },
+    {
+      "value": 38.7,
+      "label": "Wed",
+      "date": "2025-07-23T00:00:00.000Z"
+    },
+    {
+      "value": 71.2,
+      "label": "Thu",
+      "date": "2025-07-24T00:00:00.000Z"
+    },
+    {
+      "value": 54.8,
+      "label": "Fri",
+      "date": "2025-07-25T00:00:00.000Z"
+    },
+    {
+      "value": 80.1,
+      "label": "Sat",
+      "date": "2025-07-26T00:00:00.000Z"
+    },
+    {
+      "value": 43.9,
+      "label": "Sun",
+      "date": "2025-07-27T00:00:00.000Z"
+    }
+  ],
+  "recentWorkouts": [
+    {
+      "id": "1",
+      "name": "Morning Run",
+      "duration": 35,
+      "calories": 280,
+      "timeAgo": "2 hours ago",
+      "iconName": "directions_run",
+      "colorValue": "0xFF2196F3"
+    },
+    {
+      "id": "2", 
+      "name": "Strength Training",
+      "duration": 48,
+      "calories": 195,
+      "timeAgo": "5 hours ago",
+      "iconName": "fitness_center",
+      "colorValue": "0xFFFF9800"
+    },
+    {
+      "id": "3",
+      "name": "HIIT Circuit",
+      "duration": 22,
+      "calories": 185,
+      "timeAgo": "1 day ago",
+      "iconName": "flash_on",
+      "colorValue": "0xFFF44336"
+    }
+  ],
+  "workoutPlans": [
+    {
+      "id": "upper_strength_2",
+      "title": "Upper Strength 2",
+      "subtitle": "8 Series Workout",
+      "duration": "25min",
+      "calories": "412kcal",
+      "difficulty": "Intense",
+      "imageAsset": "assets/images/workouts/upper_strength.jpg",
+      "colorValue": "0xFF1A1A1A",
+      "exercises": [
+        {
+          "name": "Push-ups",
+          "sets": 3,
+          "reps": 15,
+          "restTime": 60,
+          "description": "Standard push-ups targeting chest, shoulders and triceps"
+        },
+        {
+          "name": "Pull-ups",
+          "sets": 3,
+          "reps": 8,
+          "restTime": 90,
+          "description": "Pull-ups for back and bicep development"
+        },
+        {
+          "name": "Dumbbell Press",
+          "sets": 3,
+          "reps": 12,
+          "restTime": 75,
+          "description": "Chest press with dumbbells"
+        },
+        {
+          "name": "Shoulder Press",
+          "sets": 3,
+          "reps": 10,
+          "restTime": 60,
+          "description": "Overhead shoulder press"
+        }
+      ]
+    },
+    {
+      "id": "core_power",
+      "title": "Core Power",
+      "subtitle": "6 Series Workout", 
+      "duration": "20min",
+      "calories": "320kcal",
+      "difficulty": "Medium",
+      "imageAsset": "assets/images/workouts/core_power.jpg",
+      "colorValue": "0xFF2A2A2A",
+      "exercises": [
+        {
+          "name": "Planks",
+          "sets": 3,
+          "reps": 1,
+          "restTime": 45,
+          "duration": 60,
+          "description": "Hold plank position for core stability"
+        },
+        {
+          "name": "Russian Twists",
+          "sets": 3,
+          "reps": 20,
+          "restTime": 30,
+          "description": "Seated twists for oblique muscles"
+        },
+        {
+          "name": "Mountain Climbers",
+          "sets": 3,
+          "reps": 30,
+          "restTime": 45,
+          "description": "Dynamic core and cardio exercise"
+        },
+        {
+          "name": "Dead Bug",
+          "sets": 3,
+          "reps": 12,
+          "restTime": 30,
+          "description": "Core stability exercise"
+        }
+      ]
+    },
+    {
+      "id": "cardio_blast",
+      "title": "Cardio Blast",
+      "subtitle": "10 Series Workout",
+      "duration": "30min", 
+      "calories": "540kcal",
+      "difficulty": "High",
+      "imageAsset": "assets/images/workouts/cardio_blast.jpg",
+      "colorValue": "0xFF1F1F1F",
+      "exercises": [
+        {
+          "name": "Jumping Jacks",
+          "sets": 4,
+          "reps": 30,
+          "restTime": 30,
+          "description": "Full body cardio movement"
+        },
+        {
+          "name": "Burpees",
+          "sets": 4,
+          "reps": 10,
+          "restTime": 60,
+          "description": "High intensity full body exercise"
+        },
+        {
+          "name": "High Knees",
+          "sets": 4,
+          "reps": 30,
+          "restTime": 30,
+          "description": "Running in place with high knees"
+        },
+        {
+          "name": "Sprint Intervals",
+          "sets": 5,
+          "reps": 1,
+          "restTime": 90,
+          "duration": 30,
+          "description": "30-second all-out sprints"
+        }
+      ]
+    }
+  ],
+  "sessionTemplates": [
+    {
+      "id": "quick_cardio",
+      "name": "Quick Cardio",
+      "duration": 15,
+      "exercises": ["Jumping Jacks", "High Knees", "Burpees", "Mountain Climbers"],
+      "totalSets": 3
+    },
+    {
+      "id": "strength_basics", 
+      "name": "Strength Basics",
+      "duration": 25,
+      "exercises": ["Push-ups", "Squats", "Planks", "Pull-ups"],
+      "totalSets": 4
+    },
+    {
+      "id": "full_body_blast",
+      "name": "Full Body Blast", 
+      "duration": 35,
+      "exercises": ["Burpees", "Push-ups", "Squats", "Jumping Jacks", "Planks"],
+      "totalSets": 5
+    }
+  ],
+  "userProgress": {
+    "currentStreak": 7,
+    "longestStreak": 21,
+    "totalSessionsCompleted": 156,
+    "averageSessionDuration": 28.5,
+    "totalCaloriesBurned": 12450,
+    "favoriteWorkoutType": "HIIT",
+    "weeklyGoal": 5,
+    "monthlyGoal": 20,
+    "achievements": [
+      {
+        "id": "first_workout",
+        "name": "First Steps",
+        "description": "Complete your first workout",
+        "unlockedAt": "2025-06-15T10:30:00.000Z",
+        "iconName": "emoji_events"
+      },
+      {
+        "id": "week_streak",
+        "name": "Week Warrior",
+        "description": "Complete 7 consecutive days of workouts",
+        "unlockedAt": "2025-07-20T18:45:00.000Z", 
+        "iconName": "local_fire_department"
+      },
+      {
+        "id": "calorie_burner",
+        "name": "Calorie Crusher",
+        "description": "Burn 10,000 calories total",
+        "unlockedAt": "2025-07-25T14:20:00.000Z",
+        "iconName": "whatshot"
+      }
+    ]
+  }
+}

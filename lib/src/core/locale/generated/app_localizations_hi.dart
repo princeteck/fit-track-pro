@@ -385,4 +385,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get heartRateLabel => 'दिल की धड़कन';
+
+  @override
+  String get workoutStatsTitle => 'Workout Stats';
 }
