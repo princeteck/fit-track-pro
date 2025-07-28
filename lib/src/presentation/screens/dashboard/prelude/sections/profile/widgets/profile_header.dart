@@ -200,37 +200,5 @@ class ProfileHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildFollowStat(String label, String count) {
-    return Semantics(
-      label: '$count $label',
-      value: count,
-      child: Column(
-        children: [
-          Text(
-            label,
-            style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                color: Colors.grey,
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            count,
-            style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   static void _onImageError(Object exception, StackTrace? stackTrace) {}
 }
