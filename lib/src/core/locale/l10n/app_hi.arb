@@ -120,5 +120,6 @@
   "bpmLabel": "बीपीएम",
   "calorieLabel": "कैलोरी",
   "stats": "आँकड़े",
-  "heartRateLabel": "दिल की धड़कन"
+  "heartRateLabel": "दिल की धड़कन",
+  "workoutStatsTitle": "वर्कआउट आँकड़े"
 }

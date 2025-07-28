@@ -120,5 +120,6 @@
   "bpmLabel": "FCM",
   "calorieLabel": "Caloría",
   "stats": "Estadísticas",
-  "heartRateLabel": "Frecuencia Cardíaca"
+  "heartRateLabel": "Frecuencia Cardíaca",
+  "workoutStatsTitle": "Estadísticas de Entrenamiento"
 }

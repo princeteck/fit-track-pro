@@ -70,127 +70,110 @@ class _SignInScreenState extends State<SignInScreen>
       backgroundColor: theme.colorScheme.surface,
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: SizedBox(
-          height: size.height - MediaQuery.of(context).padding.top,
-          child: Column(
-            children: [
-              const SizedBox(height: 60),
+        child: SafeArea(
+          child: SizedBox(
+            height: size.height - MediaQuery.of(context).padding.top,
+            child: Column(
+              children: [
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 32),
 
-              FadeTransition(
-                opacity: _fadeAnimation,
-                child: Column(
-                  children: [
-                    Semantics(
-                      label: 'App logo',
-                      child: Container(
-                        width: 80,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.primary,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Icon(
-                          Icons.fitness_center,
-                          size: 40,
-                          color: theme.colorScheme.onPrimary,
+                      Text(
+                        context.l10n?.signInButtonText ?? '',
+                        style: GoogleFonts.inter(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: theme.colorScheme.onSurface,
                         ),
                       ),
-                    ),
 
-                    const SizedBox(height: 16),
+                      const SizedBox(height: 8),
 
-                    Text(
-                      context.l10n?.welcomeBackTitle ?? 'Welcome Back!',
-                      style: GoogleFonts.inter(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: theme.colorScheme.onSurface,
-                      ),
-                    ),
-
-                    const SizedBox(height: 8),
-
-                    Text(
-                      context.l10n?.signInSubtitle ??
-                          'Sign in to continue your fitness journey',
-                      style: GoogleFonts.inter(
-                        fontSize: 16,
-                        color: theme.colorScheme.onSurface.withValues(
-                          alpha: 0.7,
-                        ),
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 28),
-
-              Expanded(
-                child: SlideTransition(
-                  position: _slideAnimation,
-                  child: BlocProvider<AuthCubit>(
-                    create: (context) => locator<AuthCubit>(),
-                    child: const SignInForm(),
-                  ),
-                ),
-              ),
-
-              Column(
-                children: [
-                  FadeTransition(
-                    opacity: _fadeAnimation,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          context.l10n?.dontHaveAccountText ??
-                              "Don't have an account? ",
-                          style: GoogleFonts.inter(
-                            fontSize: 14,
-                            color: theme.colorScheme.onSurface.withValues(
-                              alpha: 0.7,
-                            ),
+                      Text(
+                        context.l10n?.signInSubtitle ??
+                            'Sign in to continue your fitness journey',
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          color: theme.colorScheme.onSurface.withValues(
+                            alpha: 0.7,
                           ),
                         ),
-                        Semantics(
-                          button: true,
-                          label: 'Navigate to sign up',
-                          child: TextButton(
-                            onPressed: () {
-                              context.pushNamed(SignUpScreen.name);
-                            },
-                            child: Text(
-                              context.l10n?.signUpButton ?? 'Sign Up',
-                              style: GoogleFonts.inter(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: theme.colorScheme.primary,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+
+                const SizedBox(height: 28),
+
+                Expanded(
+                  child: SlideTransition(
+                    position: _slideAnimation,
+                    child: BlocProvider<AuthCubit>(
+                      create: (context) => locator<AuthCubit>(),
+                      child: const SignInForm(),
+                    ),
+                  ),
+                ),
+
+                Column(
+                  children: [
+                    FadeTransition(
+                      opacity: _fadeAnimation,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            context.l10n?.dontHaveAccountText ??
+                                "Don't have an account? ",
+                            style: GoogleFonts.inter(
+                              fontSize: 14,
+                              color: theme.colorScheme.onSurface.withValues(
+                                alpha: 0.7,
                               ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  // Forgot password link
-                  TextButton(
-                    onPressed: () {
-                      context.go(ForgotPasswordScreen.name);
-                    },
-                    child: Text(
-                      l10n?.forgotPasswordLink ?? 'Forgot Password?',
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
-                        color: theme.colorScheme.primary,
-                        fontWeight: FontWeight.w500,
+                          Semantics(
+                            button: true,
+                            label: 'Navigate to sign up',
+                            child: TextButton(
+                              onPressed: () {
+                                context.pushNamed(SignUpScreen.name);
+                              },
+                              child: Text(
+                                context.l10n?.signUpButton ?? 'Sign Up',
+                                style: GoogleFonts.inter(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: theme.colorScheme.primary,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    // Forgot password link
+                    TextButton(
+                      onPressed: () {
+                        context.go(ForgotPasswordScreen.name);
+                      },
+                      child: Text(
+                        l10n?.forgotPasswordLink ?? 'Forgot Password?',
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          color: theme.colorScheme.primary,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

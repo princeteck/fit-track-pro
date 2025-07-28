@@ -39,6 +39,7 @@ class _AppState extends State<App> {
           builder: (context, systemState) {
             return MaterialApp.router(
               title: 'Fit Track Pro',
+              debugShowCheckedModeBanner: false,
               routerConfig: AppRoutes.router,
               locale: localeState.locale,
               supportedLocales: locator<LocaleCubit>().supportedLocales,

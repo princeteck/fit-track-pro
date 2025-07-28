@@ -120,5 +120,6 @@
   "bpmLabel": "معدل ضربات القلب",
   "calorieLabel": "سعر حراري",
   "stats": "الإحصائيات",
-  "heartRateLabel": "معدل ضربات القلب"
+  "heartRateLabel": "معدل ضربات القلب",
+  "workoutStatsTitle": "إحصائيات التمرين"
 }
