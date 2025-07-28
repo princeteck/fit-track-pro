@@ -5,9 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../core/constants/ui/assets_constants.dart';
 import '../../../../../data/models/heart_rate_model.dart';
-import 'heart_rate_type_dialog.dart';
-import 'session_duration_dialog.dart';
-import 'session_recording_widget.dart';
+import 'heart_rate_type_bottom_sheet.dart';
+import 'session_duration_bottom_sheet.dart';
+import 'session_recording_bottom_sheet.dart';
 
 // Controller to manage swipe button state from outside
 class SwipeButtonController {
@@ -163,10 +163,11 @@ class _SwipeToRecalibrateButtonState extends State<SwipeToRecalibrateButton>
   }
 
   void _showHeartRateTypeDialog() {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: true,
-      builder: (context) => HeartRateTypeDialog(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => HeartRateTypeBottomSheet(
         onTypeSelected: (HeartRateType selectedType) {
           _selectedHeartRateType = selectedType;
           _showDurationSelectionDialog();
@@ -181,10 +182,11 @@ class _SwipeToRecalibrateButtonState extends State<SwipeToRecalibrateButton>
   }
 
   void _showDurationSelectionDialog() {
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: true,
-      builder: (context) => SessionDurationDialog(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => SessionDurationBottomSheet(
         onDurationSelected: (Duration selectedDuration) {
           _selectedDuration = selectedDuration;
           _startSessionRecording();
@@ -205,10 +207,13 @@ class _SwipeToRecalibrateButtonState extends State<SwipeToRecalibrateButton>
     }
 
     // Show session recording widget
-    showDialog(
+    showModalBottomSheet(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => SessionRecordingWidget(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      isDismissible: false,
+      enableDrag: false,
+      builder: (context) => SessionRecordingBottomSheet(
         sessionDuration: _selectedDuration!,
         heartRateType: _selectedHeartRateType!,
         onSessionCompleted: () {
