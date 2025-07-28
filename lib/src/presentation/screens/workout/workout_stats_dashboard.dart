@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/di/di.dart';
+import '../../../core/extensions/context_extensions.dart';
 import '../../../data/services/workout_api_service.dart';
 import '../../../data/repositories/workout_session_repository.dart';
 import '../../controllers/workout/workout_cubit.dart';
@@ -185,7 +186,7 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
             child: Opacity(
               opacity: _staggeredController.value,
               child: Text(
-                'Workout Stats',
+                context.l10n?.workoutStatsTitle ?? 'Workout Stats',
                 style: TextStyle(
                   color: theme.colorScheme.onSurface,
                   fontWeight: FontWeight.w600,
@@ -215,13 +216,15 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
                   }
                 },
                 itemBuilder: (context) => [
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'clear_data',
-                    child: Text('Clear Data'),
+                    child: Text(context.l10n?.clearData ?? 'Clear Data'),
                   ),
-                  const PopupMenuItem(
+                  PopupMenuItem(
                     value: 'check_db',
-                    child: Text('Check Database'),
+                    child: Text(
+                      context.l10n?.checkDatabase ?? 'Check Database',
+                    ),
                   ),
                 ],
               ),
@@ -286,33 +289,33 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
   Widget _buildStatCard(int index, WorkoutState state) {
     final stats = [
       {
-        'title': 'Total Workouts',
+        'title': context.l10n?.totalWorkouts ?? 'Total Workouts',
         'value': state.totalWorkouts.toString(),
-        'unit': 'sessions',
+        'unit': context.l10n?.sessions ?? 'sessions',
         'icon': Icons.fitness_center,
         'color': Colors.blue,
         'gradient': [Colors.blue.shade400, Colors.blue.shade600],
       },
       {
-        'title': 'Calories Burned',
+        'title': context.l10n?.caloriesBurned ?? 'Calories Burned',
         'value': '${state.totalCalories}',
-        'unit': 'kcal',
+        'unit': context.l10n?.kcal ?? 'kcal',
         'icon': Icons.local_fire_department,
         'color': Colors.orange,
         'gradient': [Colors.orange.shade400, Colors.orange.shade600],
       },
       {
-        'title': 'Active Minutes',
+        'title': context.l10n?.activeMinutes ?? 'Active Minutes',
         'value': '${state.activeMinutes}',
-        'unit': 'min',
+        'unit': context.l10n?.min ?? 'min',
         'icon': Icons.timer,
         'color': Colors.green,
         'gradient': [Colors.green.shade400, Colors.green.shade600],
       },
       {
-        'title': 'This Week',
+        'title': context.l10n?.thisWeek ?? 'This Week',
         'value': '${state.weeklyWorkouts}',
-        'unit': 'workouts',
+        'unit': context.l10n?.workoutsUnit ?? 'workouts',
         'icon': Icons.trending_up,
         'color': Colors.purple,
         'gradient': [Colors.purple.shade400, Colors.purple.shade600],
@@ -522,14 +525,14 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Recent Workouts',
+                        context.l10n?.recentWorkouts ?? 'Recent Workouts',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       TextButton(
                         onPressed: () {},
-                        child: const Text('View All'),
+                        child: Text(context.l10n?.viewAll ?? 'View All'),
                       ),
                     ],
                   ),
@@ -678,7 +681,7 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Workout Plans',
+                  context.l10n?.workoutPlans ?? 'Workout Plans',
                   style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -692,7 +695,7 @@ class _WorkoutStatsDashboardState extends State<WorkoutStatsDashboard>
                       ),
                     );
                   },
-                  child: const Text('View All'),
+                  child: Text(context.l10n?.viewAll ?? 'View All'),
                 ),
               ],
             ),

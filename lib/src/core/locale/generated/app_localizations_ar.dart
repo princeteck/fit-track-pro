@@ -386,5 +386,310 @@ class AppLocalizationsAr extends AppLocalizations {
   String get heartRateLabel => 'معدل ضربات القلب';
 
   @override
-  String get workoutStatsTitle => 'Workout Stats';
+  String get workoutStatsTitle => 'إحصائيات التمرين';
+
+  @override
+  String get duration => 'المدة';
+
+  @override
+  String get exercises => 'التمارين';
+
+  @override
+  String get difficulty => 'الصعوبة';
+
+  @override
+  String get description => 'الوصف';
+
+  @override
+  String get startWorkout => 'بدء التمرين';
+
+  @override
+  String get clearData => 'مسح البيانات';
+
+  @override
+  String get checkDatabase => 'فحص قاعدة البيانات';
+
+  @override
+  String get close => 'إغلاق';
+
+  @override
+  String get failedToLoadWorkoutPlans => 'فشل في تحميل خطط التمرين';
+
+  @override
+  String get initializeMockData => 'تهيئة البيانات التجريبية';
+
+  @override
+  String get notes => 'ملاحظات';
+
+  @override
+  String get failedToChangeTheme => 'فشل في تغيير السمة';
+
+  @override
+  String get resetToSystemDefault => 'إعادة تعيين إلى افتراضيات النظام';
+
+  @override
+  String get clearSavedPreferences => 'مسح التفضيلات المحفوظة';
+
+  @override
+  String get signOutFailed => 'فشل تسجيل الخروج';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get categories => 'الفئات';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get currentHeartRate => 'معدل ضربات القلب الحالي';
+
+  @override
+  String get preWorkoutStretch => 'إطالة ما قبل التمرين';
+
+  @override
+  String get lowerBodyTraining => 'تدريب الجزء السفلي من الجسم';
+
+  @override
+  String get hiitCardioInterval => 'فترة كارديو عالية الكثافة';
+
+  @override
+  String get recoverySession => 'جلسة الاستشفاء';
+
+  @override
+  String get progress => 'التقدم';
+
+  @override
+  String get startWeight => 'الوزن الأولي';
+
+  @override
+  String get good => 'جيد';
+
+  @override
+  String get dailyCalories => 'السعرات الحرارية اليومية';
+
+  @override
+  String get goBack => 'العودة';
+
+  @override
+  String get passwordResetIcon => 'أيقونة إعادة تعيين كلمة المرور';
+
+  @override
+  String get navigateToSignUp => 'الانتقال إلى التسجيل';
+
+  @override
+  String get profileStatisticsOverview => 'نظرة عامة على إحصائيات الملف الشخصي';
+
+  @override
+  String get profilePageHeader => 'رأس صفحة الملف الشخصي';
+
+  @override
+  String get profileSettings => 'إعدادات الملف الشخصي';
+
+  @override
+  String get tapToAccessProfileSettings =>
+      'اضغط للوصول إلى إعدادات الملف الشخصي';
+
+  @override
+  String get profilePictureForSandraGram => 'صورة الملف الشخصي لـ Sandra Gram';
+
+  @override
+  String get userName => 'اسم المستخدم';
+
+  @override
+  String get userLocationDenmarkCopenhagen =>
+      'موقع المستخدم: الدنمارك، كوبنهاغن';
+
+  @override
+  String get userStatisticsAndActions => 'إحصائيات وإجراءات المستخدم';
+
+  @override
+  String get exportProfileData => 'تصدير بيانات الملف الشخصي';
+
+  @override
+  String get tapToExportYourProfileInformation =>
+      'اضغط لتصدير معلومات ملفك الشخصي';
+
+  @override
+  String get editProfile => 'تحرير الملف الشخصي';
+
+  @override
+  String get tapToEditYourProfileInformation =>
+      'اضغط لتحرير معلومات ملفك الشخصي';
+
+  @override
+  String get navigateToSignIn => 'الانتقال إلى تسجيل الدخول';
+
+  @override
+  String get onboardingSlides => 'شرائح التعريف';
+
+  @override
+  String get sandraGram => 'Sandra Gram';
+
+  @override
+  String get denmarkCopenhagen => 'الدنمارك، كوبنهاغن';
+
+  @override
+  String get welcomeToFitTrackPro => 'مرحباً بك في\\nFit Track Pro';
+
+  @override
+  String get welcomeDescription =>
+      'خصص رحلة اللياقة البدنية الخاصة بك مع تطبيق التتبع الشامل لدينا.';
+
+  @override
+  String get personalizedFitnessGoals => 'أهداف اللياقة البدنية الشخصية';
+
+  @override
+  String get personalizedFitnessGoalsDescription =>
+      'أنشئ أهداف لياقة بدنية شخصية وتتبع تقدمك نحو حياة أكثر صحة.';
+
+  @override
+  String get trackYourWorkouts => 'تتبع تماريك';
+
+  @override
+  String get trackYourWorkoutsDescription =>
+      'احصل على رؤى وتذكيرات واحتفل بإنجازاتك في الطريق.';
+
+  @override
+  String get healthMetricsAndFitnessAnalytics =>
+      'مقاييس الصحة وتحليلات اللياقة';
+
+  @override
+  String get healthMetricsDescription => 'راقب ملفك الصحي بسهولة.';
+
+  @override
+  String get nutritionAndDietGuidance => 'إرشادات التغذية\\nوالنظام الغذائي';
+
+  @override
+  String get nutritionDescription =>
+      'اخسر الوزن وتمتع باللياقة مع Fit Track Pro.';
+
+  @override
+  String get virtualAiCoachMentoring =>
+      'إرشاد مدرب الذكاء\\nالاصطناعي الافتراضي';
+
+  @override
+  String get virtualAiCoachDescription => 'قل وداعاً للتدريب اليدوي.';
+
+  @override
+  String get upperStrength2 => 'القوة العلوية 2';
+
+  @override
+  String get eightSeriesWorkout => 'تمرين 8 سلاسل';
+
+  @override
+  String get corePower => 'قوة الجذع';
+
+  @override
+  String get sixSeriesWorkout => 'تمرين 6 سلاسل';
+
+  @override
+  String get cardioBlast => 'انفجار كارديو';
+
+  @override
+  String get tenSeriesWorkout => 'تمرين 10 سلاسل';
+
+  @override
+  String get workouts => 'التمارين';
+
+  @override
+  String durationWithMinutes(int minutes) {
+    return 'المدة: $minutes دقيقة';
+  }
+
+  @override
+  String exercisesWithCount(int count) {
+    return 'التمارين ($count)';
+  }
+
+  @override
+  String get totalWorkouts => 'إجمالي التمارين';
+
+  @override
+  String get sessions => 'جلسات';
+
+  @override
+  String get caloriesBurned => 'السعرات المحروقة';
+
+  @override
+  String get kcal => 'kcal';
+
+  @override
+  String get activeMinutes => 'الدقائق النشطة';
+
+  @override
+  String get min => 'دقيقة';
+
+  @override
+  String get thisWeek => 'هذا الأسبوع';
+
+  @override
+  String get workoutsUnit => 'تمارين';
+
+  @override
+  String get oneDay => 'يوم واحد';
+
+  @override
+  String get oneWeek => 'أسبوع واحد';
+
+  @override
+  String get oneMonth => 'شهر واحد';
+
+  @override
+  String get threeMonths => '3 أشهر';
+
+  @override
+  String get sixMonths => '6 أشهر';
+
+  @override
+  String get twelveMonths => '12 شهر';
+
+  @override
+  String get percentageUnit => ' %';
+
+  @override
+  String get rateUnit => ' معدل';
+
+  @override
+  String get mlUnit => ' مل';
+
+  @override
+  String get kcalUnit => ' kcal';
+
+  @override
+  String get kmUnit => ' كم';
+
+  @override
+  String get recentWorkouts => 'التمارين الأخيرة';
+
+  @override
+  String get workoutPlans => 'خطط التمرين';
+
+  @override
+  String get viewAll => 'عرض الكل';
+
+  @override
+  String workoutsWithCount(int count) {
+    return 'التمارين ($count)';
+  }
+
+  @override
+  String durationMinutes(int minutes) {
+    return 'المدة: $minutes دقيقة';
+  }
+
+  @override
+  String get follow => 'متابعة';
+
+  @override
+  String get followers => 'المتابعون';
+
+  @override
+  String get following => 'يتابع';
+
+  @override
+  String signOutFailedWithError(String error) {
+    return 'فشل تسجيل الخروج: $error';
+  }
 }

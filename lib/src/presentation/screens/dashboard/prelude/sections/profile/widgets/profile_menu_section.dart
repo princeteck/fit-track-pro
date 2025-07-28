@@ -1,3 +1,4 @@
+import 'package:fittrack_pro/src/core/constants/ui/colors_constants.dart';
 import 'package:fittrack_pro/src/presentation/screens/auth/sign_in_screen.dart';
 import 'package:fittrack_pro/src/presentation/screens/settings/locale_settings_screen.dart';
 import 'package:fittrack_pro/src/presentation/screens/settings/theme_settings_bottom_sheet.dart';
@@ -79,7 +80,7 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
         ),
         _MenuTile(
           icon: KIcons.slideHorizontal,
-          title: 'Onboarding Slides',
+          title: context.l10n?.onboardingSlides ?? 'Onboarding Slides',
           subtitle: '',
           hasNotification: false,
           onTap: () {
@@ -269,6 +270,7 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
+            style: TextButton.styleFrom(foregroundColor: KColors.gray80),
             child: Text(context.l10n?.profileCancel ?? 'Cancel'),
           ),
           TextButton(
@@ -286,12 +288,17 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
       });
 
       try {
-        final authCubit = locator<AuthCubit>();
+        // ignore: use_build_context_synchronously
+        final authCubit = context.read<AuthCubit>();
+
         await authCubit.signOut();
 
+        // Navigate immediately after sign out completes
+        // Don't wait for state changes as the cubit may be disposed during navigation
         if (mounted) {
           navigator(SignInScreen.name);
-        }
+        } else {}
+        // Remove the unconditional navigation call that was causing the issue
       } catch (e) {
         if (mounted) {
           setState(() {
@@ -300,7 +307,11 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
 
           messenger.showSnackBar(
             SnackBar(
-              content: Text('Sign out failed: ${e.toString()}'),
+              content: Text(
+                // ignore: use_build_context_synchronously
+                context.l10n?.signOutFailedWithError(e.toString()) ??
+                    'Sign out failed: ${e.toString()}',
+              ),
               backgroundColor: Colors.red,
             ),
           );

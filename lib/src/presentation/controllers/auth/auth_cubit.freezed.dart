@@ -21,6 +21,7 @@ mixin _$AuthState {
   CubitState get status => throw _privateConstructorUsedError;
   CubitState get signInStatus => throw _privateConstructorUsedError;
   CubitState get signUpStatus => throw _privateConstructorUsedError;
+  CubitState get signOutStatus => throw _privateConstructorUsedError;
   CubitState get passwordResetStatus => throw _privateConstructorUsedError;
   CubitState get verificationEmailStatus => throw _privateConstructorUsedError;
   CubitState get twoFactorStatus => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $AuthStateCopyWith<$Res> {
     CubitState status,
     CubitState signInStatus,
     CubitState signUpStatus,
+    CubitState signOutStatus,
     CubitState passwordResetStatus,
     CubitState verificationEmailStatus,
     CubitState twoFactorStatus,
@@ -57,6 +59,7 @@ abstract class $AuthStateCopyWith<$Res> {
   $CubitStateCopyWith<$Res> get status;
   $CubitStateCopyWith<$Res> get signInStatus;
   $CubitStateCopyWith<$Res> get signUpStatus;
+  $CubitStateCopyWith<$Res> get signOutStatus;
   $CubitStateCopyWith<$Res> get passwordResetStatus;
   $CubitStateCopyWith<$Res> get verificationEmailStatus;
   $CubitStateCopyWith<$Res> get twoFactorStatus;
@@ -81,6 +84,7 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
     Object? status = null,
     Object? signInStatus = null,
     Object? signUpStatus = null,
+    Object? signOutStatus = null,
     Object? passwordResetStatus = null,
     Object? verificationEmailStatus = null,
     Object? twoFactorStatus = null,
@@ -105,6 +109,10 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
             signUpStatus: null == signUpStatus
                 ? _value.signUpStatus
                 : signUpStatus // ignore: cast_nullable_to_non_nullable
+                      as CubitState,
+            signOutStatus: null == signOutStatus
+                ? _value.signOutStatus
+                : signOutStatus // ignore: cast_nullable_to_non_nullable
                       as CubitState,
             passwordResetStatus: null == passwordResetStatus
                 ? _value.passwordResetStatus
@@ -183,6 +191,16 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
+  $CubitStateCopyWith<$Res> get signOutStatus {
+    return $CubitStateCopyWith<$Res>(_value.signOutStatus, (value) {
+      return _then(_value.copyWith(signOutStatus: value) as $Val);
+    });
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
   $CubitStateCopyWith<$Res> get passwordResetStatus {
     return $CubitStateCopyWith<$Res>(_value.passwordResetStatus, (value) {
       return _then(_value.copyWith(passwordResetStatus: value) as $Val);
@@ -224,6 +242,7 @@ abstract class _$$AuthStateImplCopyWith<$Res>
     CubitState status,
     CubitState signInStatus,
     CubitState signUpStatus,
+    CubitState signOutStatus,
     CubitState passwordResetStatus,
     CubitState verificationEmailStatus,
     CubitState twoFactorStatus,
@@ -240,6 +259,8 @@ abstract class _$$AuthStateImplCopyWith<$Res>
   $CubitStateCopyWith<$Res> get signInStatus;
   @override
   $CubitStateCopyWith<$Res> get signUpStatus;
+  @override
+  $CubitStateCopyWith<$Res> get signOutStatus;
   @override
   $CubitStateCopyWith<$Res> get passwordResetStatus;
   @override
@@ -266,6 +287,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
     Object? status = null,
     Object? signInStatus = null,
     Object? signUpStatus = null,
+    Object? signOutStatus = null,
     Object? passwordResetStatus = null,
     Object? verificationEmailStatus = null,
     Object? twoFactorStatus = null,
@@ -290,6 +312,10 @@ class __$$AuthStateImplCopyWithImpl<$Res>
         signUpStatus: null == signUpStatus
             ? _value.signUpStatus
             : signUpStatus // ignore: cast_nullable_to_non_nullable
+                  as CubitState,
+        signOutStatus: null == signOutStatus
+            ? _value.signOutStatus
+            : signOutStatus // ignore: cast_nullable_to_non_nullable
                   as CubitState,
         passwordResetStatus: null == passwordResetStatus
             ? _value.passwordResetStatus
@@ -328,6 +354,7 @@ class _$AuthStateImpl implements _AuthState {
     this.status = const CubitState.initial(),
     this.signInStatus = const CubitState.initial(),
     this.signUpStatus = const CubitState.initial(),
+    this.signOutStatus = const CubitState.initial(),
     this.passwordResetStatus = const CubitState.initial(),
     this.verificationEmailStatus = const CubitState.initial(),
     this.twoFactorStatus = const CubitState.initial(),
@@ -349,6 +376,9 @@ class _$AuthStateImpl implements _AuthState {
   final CubitState signUpStatus;
   @override
   @JsonKey()
+  final CubitState signOutStatus;
+  @override
+  @JsonKey()
   final CubitState passwordResetStatus;
   @override
   @JsonKey()
@@ -366,7 +396,7 @@ class _$AuthStateImpl implements _AuthState {
 
   @override
   String toString() {
-    return 'AuthState(user: $user, status: $status, signInStatus: $signInStatus, signUpStatus: $signUpStatus, passwordResetStatus: $passwordResetStatus, verificationEmailStatus: $verificationEmailStatus, twoFactorStatus: $twoFactorStatus, isAuthenticated: $isAuthenticated, twoFactorSecret: $twoFactorSecret, errorMessage: $errorMessage)';
+    return 'AuthState(user: $user, status: $status, signInStatus: $signInStatus, signUpStatus: $signUpStatus, signOutStatus: $signOutStatus, passwordResetStatus: $passwordResetStatus, verificationEmailStatus: $verificationEmailStatus, twoFactorStatus: $twoFactorStatus, isAuthenticated: $isAuthenticated, twoFactorSecret: $twoFactorSecret, errorMessage: $errorMessage)';
   }
 
   @override
@@ -380,6 +410,8 @@ class _$AuthStateImpl implements _AuthState {
                 other.signInStatus == signInStatus) &&
             (identical(other.signUpStatus, signUpStatus) ||
                 other.signUpStatus == signUpStatus) &&
+            (identical(other.signOutStatus, signOutStatus) ||
+                other.signOutStatus == signOutStatus) &&
             (identical(other.passwordResetStatus, passwordResetStatus) ||
                 other.passwordResetStatus == passwordResetStatus) &&
             (identical(
@@ -404,6 +436,7 @@ class _$AuthStateImpl implements _AuthState {
     status,
     signInStatus,
     signUpStatus,
+    signOutStatus,
     passwordResetStatus,
     verificationEmailStatus,
     twoFactorStatus,
@@ -427,6 +460,7 @@ abstract class _AuthState implements AuthState {
     final CubitState status,
     final CubitState signInStatus,
     final CubitState signUpStatus,
+    final CubitState signOutStatus,
     final CubitState passwordResetStatus,
     final CubitState verificationEmailStatus,
     final CubitState twoFactorStatus,
@@ -443,6 +477,8 @@ abstract class _AuthState implements AuthState {
   CubitState get signInStatus;
   @override
   CubitState get signUpStatus;
+  @override
+  CubitState get signOutStatus;
   @override
   CubitState get passwordResetStatus;
   @override

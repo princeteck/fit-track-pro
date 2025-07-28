@@ -3,6 +3,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../base/base_cubit_wrapper.dart';
+import '../auth/auth_cubit.dart';
+import '../../../core/di/di.dart';
 import '../../../core/services/app_startup_service.dart';
 import '../../../core/services/memory_manager_service.dart';
 
@@ -74,6 +76,16 @@ class SplashCubit extends BaseCubitWrapper<SplashState> {
   Future<void> _determineNextRoute() async {
     try {
       final result = await _appStartupService.determineInitialRoute();
+
+      // If user has valid authentication, initialize user data in AuthCubit
+      if (result == AppStartupResult.dashboard) {
+        try {
+          locator<AuthCubit>().initializeUserFromStorage();
+        } catch (e) {
+          // Silent fail - don't prevent navigation if user data loading fails
+          showLog('Failed to initialize user data: $e');
+        }
+      }
 
       if (!isClosed) {
         emit(state.copyWith(isComplete: true, initialRoute: result));

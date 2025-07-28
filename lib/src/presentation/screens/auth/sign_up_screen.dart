@@ -86,31 +86,10 @@ class _SignUpScreenState extends State<SignUpScreen>
                 MediaQuery.of(context).padding.top,
             child: Column(
               children: [
-                const SizedBox(height: 20),
-
                 FadeTransition(
                   opacity: _fadeAnimation,
                   child: Column(
                     children: [
-                      Semantics(
-                        label: 'App logo',
-                        child: Container(
-                          width: 80,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            color: theme.colorScheme.primary,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Icon(
-                            Icons.fitness_center,
-                            size: 40,
-                            color: theme.colorScheme.onPrimary,
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: 24),
-
                       Text(
                         context.l10n?.createAccountTitle ?? 'Create Account',
                         style: GoogleFonts.inter(

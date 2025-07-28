@@ -341,8 +341,12 @@ class DatabaseHelper {
 
   /// Clear all authentication data
   Future<void> clearAuthData() async {
-    final db = await database;
-    await db.delete(_authTokensTable);
+    try {
+      final db = await database;
+      await db.delete(_authTokensTable);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   // Utility methods

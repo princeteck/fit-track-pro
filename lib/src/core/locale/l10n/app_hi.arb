@@ -120,5 +120,136 @@
   "bpmLabel": "बीपीएम",
   "calorieLabel": "कैलोरी",
   "stats": "आँकड़े",
-  "heartRateLabel": "दिल की धड़कन"
+  "heartRateLabel": "दिल की धड़कन",
+  "workoutStatsTitle": "वर्कआउट आँकड़े",
+  "duration": "अवधि",
+  "exercises": "व्यायाम",
+  "difficulty": "कठिनाई",
+  "description": "विवरण",
+  "startWorkout": "वर्कआउट शुरू करें",
+  "clearData": "डेटा साफ़ करें",
+  "checkDatabase": "डेटाबेस जांचें",
+  "close": "बंद करें",
+  "failedToLoadWorkoutPlans": "वर्कआउट प्लान लोड करने में विफल",
+  "initializeMockData": "मॉक डेटा प्रारंभ करें",
+  "notes": "नोट्स",
+  "failedToChangeTheme": "थीम बदलने में विफल",
+  "resetToSystemDefault": "सिस्टम डिफ़ॉल्ट पर रीसेट करें",
+  "clearSavedPreferences": "सहेजी गई प्राथमिकताएं साफ़ करें",
+  "signOutFailed": "साइन आउट विफल",
+  "home": "होम",
+  "categories": "श्रेणियां",
+  "profile": "प्रोफ़ाइल",
+  "currentHeartRate": "वर्तमान हृदय गति",
+  "preWorkoutStretch": "वर्कआउट पूर्व स्ट्रेच",
+  "lowerBodyTraining": "निचली शरीर प्रशिक्षण",
+  "hiitCardioInterval": "HIIT कार्डियो इंटर्वल",
+  "recoverySession": "रिकवरी सेशन",
+  "progress": "प्रगति",
+  "startWeight": "प्रारंभिक वजन",
+  "good": "अच्छा",
+  "dailyCalories": "दैनिक कैलोरी",
+  "goBack": "वापस जाएं",
+  "passwordResetIcon": "पासवर्ड रीसेट आइकन",
+  "navigateToSignUp": "साइन अप पर नेविगेट करें",
+  "profileStatisticsOverview": "प्रोफ़ाइल आंकड़े अवलोकन",
+  "profilePageHeader": "प्रोफ़ाइल पृष्ठ हेडर",
+  "profileSettings": "प्रोफ़ाइल सेटिंग्स",
+  "tapToAccessProfileSettings": "प्रोफ़ाइल सेटिंग्स तक पहुंचने के लिए टैप करें",
+  "profilePictureForSandraGram": "Sandra Gram के लिए प्रोफ़ाइल चित्र",
+  "userName": "उपयोगकर्ता नाम",
+  "userLocationDenmarkCopenhagen": "उपयोगकर्ता स्थान: डेनमार्क, कोपेनहेगन",
+  "userStatisticsAndActions": "उपयोगकर्ता आंकड़े और क्रियाएं",
+  "exportProfileData": "प्रोफ़ाइल डेटा एक्सपोर्ट करें",
+  "tapToExportYourProfileInformation": "अपनी प्रोफ़ाइल जानकारी एक्सपोर्ट करने के लिए टैप करें",
+  "editProfile": "प्रोफ़ाइल संपादित करें",
+  "tapToEditYourProfileInformation": "अपनी प्रोफ़ाइल जानकारी संपादित करने के लिए टैप करें",
+  "navigateToSignIn": "साइन इन पर नेविगेट करें",
+  "onboardingSlides": "ऑनबोर्डिंग स्लाइड्स",
+  "sandraGram": "Sandra Gram",
+  "denmarkCopenhagen": "डेनमार्क, कोपेनहेगन",
+  "welcomeToFitTrackPro": "Fit Track Pro में\nआपका स्वागत है",
+  "welcomeDescription": "हमारे व्यापक ट्रैकिंग ऐप के साथ अपनी फिटनेस यात्रा को व्यक्तिगत बनाएं।",
+  "personalizedFitnessGoals": "व्यक्तिगत फिटनेस लक्ष्य",
+  "personalizedFitnessGoalsDescription": "व्यक्तिगत फिटनेस लक्ष्य बनाएं और स्वस्थ जीवन की दिशा में अपनी प्रगति को ट्रैक करें।",
+  "trackYourWorkouts": "अपनी वर्कआउट ट्रैक करें",
+  "trackYourWorkoutsDescription": "अंतर्दृष्टि प्राप्त करें, रिमाइंडर पाएं और अपनी उपलब्धियों का जश्न मनाएं।",
+  "healthMetricsAndFitnessAnalytics": "स्वास्थ्य मेट्रिक्स और फिटनेस एनालिटिक्स",
+  "healthMetricsDescription": "आसानी से अपनी स्वास्थ्य प्रोफ़ाइल की निगरानी करें।",
+  "nutritionAndDietGuidance": "पोषण और आहार\nमार्गदर्शन",
+  "nutritionDescription": "Fit Track Pro के साथ वजन कम करें और फिट हो जाएं।",
+  "virtualAiCoachMentoring": "वर्चुअल AI कोच\nमेंटरिंग",
+  "virtualAiCoachDescription": "मैन्युअल कोचिंग को अलविदा कहें।",
+  "upperStrength2": "ऊपरी शक्ति 2",
+  "eightSeriesWorkout": "8 सीरीज वर्कआउट",
+  "corePower": "कोर पावर",
+  "sixSeriesWorkout": "6 सीरीज वर्कआउट",
+  "cardioBlast": "कार्डियो ब्लास्ट",
+  "tenSeriesWorkout": "10 सीरीज वर्कआउट",
+  "workouts": "वर्कआउट",
+  "durationWithMinutes": "अवधि: {minutes} मिनट",
+  "@durationWithMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "exercisesWithCount": "व्यायाम ({count})",
+  "@exercisesWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "totalWorkouts": "कुल वर्कआउट",
+  "sessions": "सेशन",
+  "caloriesBurned": "जली हुई कैलोरी",
+  "kcal": "kcal",
+  "activeMinutes": "सक्रिय मिनट",
+  "min": "मिनट",
+  "thisWeek": "इस सप्ताह",
+  "workoutsUnit": "वर्कआउट",
+  "oneDay": "1 दिन",
+  "oneWeek": "1 सप्ताह",
+  "oneMonth": "1 महीना",
+  "threeMonths": "3 महीने",
+  "sixMonths": "6 महीने",
+  "twelveMonths": "12 महीने",
+  "percentageUnit": " %",
+  "rateUnit": " दर",
+  "mlUnit": " ml",
+  "kcalUnit": " kcal",
+  "kmUnit": " km",
+  "recentWorkouts": "हाल की वर्कआउट",
+  "workoutPlans": "वर्कआउट योजनाएं",
+  "viewAll": "सभी देखें",
+  "workoutsWithCount": "वर्कआउट ({count})",
+  "@workoutsWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "durationMinutes": "अवधि: {minutes} मिनट",
+  "@durationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "follow": "फॉलो करें",
+  "followers": "फॉलोअर्स",
+  "following": "फॉलोइंग",
+  "signOutFailedWithError": "साइन आउट विफल: {error}",
+  "@signOutFailedWithError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

@@ -120,5 +120,136 @@
   "bpmLabel": "FCM",
   "calorieLabel": "Caloría",
   "stats": "Estadísticas",
-  "heartRateLabel": "Frecuencia Cardíaca"
+  "heartRateLabel": "Frecuencia Cardíaca",
+  "workoutStatsTitle": "Estadísticas de Entrenamiento",
+  "duration": "Duración",
+  "exercises": "Ejercicios",
+  "difficulty": "Dificultad",
+  "description": "Descripción",
+  "startWorkout": "Comenzar Entrenamiento",
+  "clearData": "Limpiar Datos",
+  "checkDatabase": "Verificar Base de Datos",
+  "close": "Cerrar",
+  "failedToLoadWorkoutPlans": "Error al cargar planes de entrenamiento",
+  "initializeMockData": "Inicializar Datos de Prueba",
+  "notes": "Notas",
+  "failedToChangeTheme": "Error al cambiar tema",
+  "resetToSystemDefault": "Restablecer a Predeterminado del Sistema",
+  "clearSavedPreferences": "Limpiar Preferencias Guardadas",
+  "signOutFailed": "Error al cerrar sesión",
+  "home": "Inicio",
+  "categories": "Categorías",
+  "profile": "Perfil",
+  "currentHeartRate": "Frecuencia Cardíaca Actual",
+  "preWorkoutStretch": "Estiramiento Previo al Entrenamiento",
+  "lowerBodyTraining": "Entrenamiento de Cuerpo Inferior",
+  "hiitCardioInterval": "Intervalo de Cardio HIIT",
+  "recoverySession": "Sesión de Recuperación",
+  "progress": "Progreso",
+  "startWeight": "Peso Inicial",
+  "good": "Bueno",
+  "dailyCalories": "Calorías Diarias",
+  "goBack": "Volver",
+  "passwordResetIcon": "Icono de restablecimiento de contraseña",
+  "navigateToSignUp": "Navegar al registro",
+  "profileStatisticsOverview": "Resumen de estadísticas del perfil",
+  "profilePageHeader": "Encabezado de página de perfil",
+  "profileSettings": "Configuraciones de perfil",
+  "tapToAccessProfileSettings": "Toca para acceder a la configuración del perfil",
+  "profilePictureForSandraGram": "Foto de perfil de Sandra Gram",
+  "userName": "Nombre de usuario",
+  "userLocationDenmarkCopenhagen": "Ubicación del usuario: Dinamarca, Copenhague",
+  "userStatisticsAndActions": "Estadísticas y acciones del usuario",
+  "exportProfileData": "Exportar datos del perfil",
+  "tapToExportYourProfileInformation": "Toca para exportar tu información de perfil",
+  "editProfile": "Editar perfil",
+  "tapToEditYourProfileInformation": "Toca para editar tu información de perfil",
+  "navigateToSignIn": "Navegar al inicio de sesión",
+  "onboardingSlides": "Diapositivas de Introducción",
+  "sandraGram": "Sandra Gram",
+  "denmarkCopenhagen": "Dinamarca, Copenhague",
+  "welcomeToFitTrackPro": "Bienvenido a \nFit Track Pro",
+  "welcomeDescription": "Personaliza tu viaje de fitness con nuestra aplicación integral de seguimiento.",
+  "personalizedFitnessGoals": "Objetivos de Fitness Personalizados",
+  "personalizedFitnessGoalsDescription": "Crea objetivos de fitness personalizados y rastrea tu progreso hacia una versión más saludable.",
+  "trackYourWorkouts": "Rastrea Tus Entrenamientos",
+  "trackYourWorkoutsDescription": "Obtén información, recordatorios y celebra tus logros en el camino.",
+  "healthMetricsAndFitnessAnalytics": "Métricas de Salud y Análisis de Fitness",
+  "healthMetricsDescription": "Monitorea tu perfil de salud con facilidad.",
+  "nutritionAndDietGuidance": "Orientación de Nutrición\ny Dieta",
+  "nutritionDescription": "Pierde peso y ponte en forma con Fit Track Pro.",
+  "virtualAiCoachMentoring": "Mentoría de Entrenador\nIA Virtual",
+  "virtualAiCoachDescription": "Despídete del entrenamiento manual.",
+  "upperStrength2": "Fuerza Superior 2",
+  "eightSeriesWorkout": "Entrenamiento de 8 Series",
+  "corePower": "Poder Central",
+  "sixSeriesWorkout": "Entrenamiento de 6 Series",
+  "cardioBlast": "Explosión de Cardio",
+  "tenSeriesWorkout": "Entrenamiento de 10 Series",
+  "workouts": "Entrenamientos",
+  "durationWithMinutes": "Duración: {minutes} minutos",
+  "@durationWithMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "exercisesWithCount": "Ejercicios ({count})",
+  "@exercisesWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "totalWorkouts": "Entrenamientos Totales",
+  "sessions": "sesiones",
+  "caloriesBurned": "Calorías Quemadas",
+  "kcal": "kcal",
+  "activeMinutes": "Minutos Activos",
+  "min": "min",
+  "thisWeek": "Esta Semana",
+  "workoutsUnit": "entrenamientos",
+  "oneDay": "1 Día",
+  "oneWeek": "1 Semana",
+  "oneMonth": "1 Mes",
+  "threeMonths": "3 Meses",
+  "sixMonths": "6 Meses",
+  "twelveMonths": "12 Meses",
+  "percentageUnit": " %",
+  "rateUnit": " ritmo",
+  "mlUnit": " ml",
+  "kcalUnit": " kcal",
+  "kmUnit": " km",
+  "recentWorkouts": "Entrenamientos Recientes",
+  "workoutPlans": "Planes de Entrenamiento",
+  "viewAll": "Ver Todo",
+  "workoutsWithCount": "Entrenamientos ({count})",
+  "@workoutsWithCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "durationMinutes": "Duración: {minutes} minutos",
+  "@durationMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "follow": "Seguir",
+  "followers": "Seguidores",
+  "following": "Siguiendo",
+  "signOutFailedWithError": "Error al cerrar sesión: {error}",
+  "@signOutFailedWithError": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
 }

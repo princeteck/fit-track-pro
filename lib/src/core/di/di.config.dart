@@ -68,7 +68,6 @@ _i174.GetIt init(
 }) {
   final gh = _i526.GetItHelper(getIt, environment, environmentFilter);
   final services = _$Services();
-  gh.factory<_i879.AuthCubit>(() => _i879.AuthCubit());
   gh.singleton<_i329.LocalStorage>(() => _i329.LocalStorage());
   gh.singleton<_i1014.MemoryManagerService>(
     () => _i1014.MemoryManagerService(),
@@ -84,9 +83,6 @@ _i174.GetIt init(
     () => _i559.WorkoutDatabaseService(),
   );
   gh.lazySingleton<_i716.LocaleCubit>(() => _i716.LocaleCubit());
-  gh.factory<_i716.AuthRemoteDataSource>(
-    () => _i209.AuthRemoteDataSourceImpl(),
-  );
   gh.factory<_i369.LocaleRepository>(() => _i579.LocaleRepositoryImpl());
   gh.singleton<_i578.HeartRateLocalDataSource>(
     () => _i578.HeartRateLocalDataSource(gh<_i778.DatabaseHelper>()),
@@ -133,6 +129,9 @@ _i174.GetIt init(
   gh.singleton<_i219.WalkthroughCubit>(
     () => _i219.WalkthroughCubit(gh<_i25.AppStartupService>()),
   );
+  gh.factory<_i716.AuthRemoteDataSource>(
+    () => _i209.AuthRemoteDataSourceImpl(gh<_i565.AuthLocalDataSource>()),
+  );
   gh.singleton<_i361.WorkoutCubit>(
     () => _i361.WorkoutCubit(gh<_i121.WorkoutSessionRepository>()),
   );
@@ -177,6 +176,19 @@ _i174.GetIt init(
   );
   gh.factory<_i720.SignOutUseCase>(
     () => _i720.SignOutUseCase(gh<_i1073.AuthRepository>()),
+  );
+  gh.singleton<_i879.AuthCubit>(
+    () => _i879.AuthCubit(
+      gh<_i518.SignInWithEmailAndPasswordUseCase>(),
+      gh<_i33.SignUpWithEmailAndPasswordUseCase>(),
+      gh<_i409.SignInWithGoogleUseCase>(),
+      gh<_i873.SignInWithInstagramUseCase>(),
+      gh<_i720.SignOutUseCase>(),
+      gh<_i1072.SendPasswordResetEmailUseCase>(),
+      gh<_i317.ResendVerificationEmailUseCase>(),
+      gh<_i190.GetCurrentUserUseCase>(),
+      gh<_i25.AppStartupService>(),
+    ),
   );
   return getIt;
 }
