@@ -391,4 +391,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get heartRateLabel => 'Frecuencia Cardíaca';
+
+  @override
+  String get workoutStatsTitle => 'Workout Stats';
 }

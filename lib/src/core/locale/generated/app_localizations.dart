@@ -829,6 +829,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Heart Rate'**
   String get heartRateLabel;
+
+  /// No description provided for @workoutStatsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Workout Stats'**
+  String get workoutStatsTitle;
 }
 
 class _AppLocalizationsDelegate

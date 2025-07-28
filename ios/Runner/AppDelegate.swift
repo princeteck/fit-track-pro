@@ -72,6 +72,26 @@ import CoreMotion
                         result(nil)
                     }
                 }
+            case "startWorkoutSession":
+                sensorService.startWorkoutTracking { error in
+                    if let error = error {
+                        result(FlutterError(code: "UNAVAILABLE", message: error, details: nil))
+                    } else {
+                        result(nil)
+                    }
+                }
+            case "stopWorkoutSession":
+                sensorService.stopWorkoutTracking { error in
+                    if let error = error {
+                        result(FlutterError(code: "UNAVAILABLE", message: error, details: nil))
+                    } else {
+                        result(nil)
+                    }
+                }
+            case "toggleWorkoutPause":
+                // For now, we'll implement pause as a simple acknowledgment
+                // In a real implementation, you'd add pause logic to SensorService
+                result(nil)
             case "getWorkoutData":
                 let workoutData = sensorService.getWorkoutData()
                 result(workoutData)

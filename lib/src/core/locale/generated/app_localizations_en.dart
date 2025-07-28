@@ -384,4 +384,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get heartRateLabel => 'Heart Rate';
+
+  @override
+  String get workoutStatsTitle => 'Workout Stats';
 }

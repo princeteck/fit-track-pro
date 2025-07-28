@@ -63,12 +63,20 @@ class __$$HeartRateStatsStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$HeartRateStatsStateImpl implements _HeartRateStatsState {
+class _$HeartRateStatsStateImpl
+    with DiagnosticableTreeMixin
+    implements _HeartRateStatsState {
   const _$HeartRateStatsStateImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'HeartRateStatsState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'HeartRateStatsState'));
   }
 
   @override
