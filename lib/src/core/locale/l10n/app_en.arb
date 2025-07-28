@@ -120,5 +120,6 @@
   "bpmLabel": "bpm",
   "calorieLabel": "Calorie",
   "stats": "Stats",
-  "heartRateLabel": "Heart Rate"
+  "heartRateLabel": "Heart Rate",
+  "workoutStatsTitle": "Workout Stats"
 }

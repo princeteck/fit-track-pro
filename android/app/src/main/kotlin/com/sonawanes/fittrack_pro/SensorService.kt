@@ -19,6 +19,7 @@ class SensorService(private val context: Context) {
     
     private var isHeartRateMonitoring = false
     private var isWorkoutTracking = false
+    private var isWorkoutPaused = false
     private var heartRateHandler: Handler? = null
     private var workoutHandler: Handler? = null
     private var wakeLock: PowerManager.WakeLock? = null
@@ -28,6 +29,8 @@ class SensorService(private val context: Context) {
     private var totalSteps = 0
     private var totalCalories = 0
     private var workoutStartTime = 0L
+    private var pausedDuration = 0L
+    private var lastPauseTime = 0L
     
     companion object {
         private const val NOTIFICATION_CHANNEL_ID = "workout_tracking"
@@ -96,6 +99,7 @@ class SensorService(private val context: Context) {
     
     fun stopWorkoutTracking() {
         isWorkoutTracking = false
+        isWorkoutPaused = false
         workoutHandler?.removeCallbacksAndMessages(null)
         workoutHandler = null
         
@@ -106,20 +110,43 @@ class SensorService(private val context: Context) {
         hideWorkoutNotification()
     }
     
-    fun getWorkoutData(): Map<String, Any> {
-        val duration = if (workoutStartTime > 0) {
-            (System.currentTimeMillis() - workoutStartTime) / 1000
-        } else 0
+    fun toggleWorkoutPause() {
+        if (!isWorkoutTracking) return
         
+        isWorkoutPaused = !isWorkoutPaused
+        
+        if (isWorkoutPaused) {
+            lastPauseTime = System.currentTimeMillis()
+        } else {
+            // Add paused time to total paused duration
+            if (lastPauseTime > 0) {
+                pausedDuration += System.currentTimeMillis() - lastPauseTime
+                lastPauseTime = 0
+            }
+        }
+        
+        updateWorkoutNotification()
+    }
+    
+    fun getWorkoutData(): Map<String, Any> {
+        val currentTime = System.currentTimeMillis()
+        val duration = if (workoutStartTime > 0) {
+            val totalTime = currentTime - workoutStartTime
+            val activePausedTime = if (isWorkoutPaused && lastPauseTime > 0) {
+                currentTime - lastPauseTime
+            } else 0
+            (totalTime - pausedDuration - activePausedTime) / 1000
+        } else 0
+
         return mapOf(
             "heartRate" to currentHeartRate,
             "steps" to totalSteps,
             "calories" to totalCalories,
-            "duration" to duration
+            "duration" to duration,
+            "isPaused" to isWorkoutPaused,
+            "isActive" to isWorkoutTracking
         )
-    }
-    
-    private fun simulateHeartRateReading(): Int {
+    }    private fun simulateHeartRateReading(): Int {
         // Simulate realistic heart rate variations
         val baseRate = if (isWorkoutTracking) 140 else 72
         val variation = Random.nextInt(-10, 11)
@@ -128,8 +155,9 @@ class SensorService(private val context: Context) {
     }
     
     private fun simulateWorkoutData() {
-        // Simulate steps (1-3 steps per second during workout)
-        if (isWorkoutTracking) {
+        // Don't simulate data when workout is paused
+        if (isWorkoutTracking && !isWorkoutPaused) {
+            // Simulate steps (1-3 steps per second during workout)
             totalSteps += Random.nextInt(1, 4)
             
             // Simulate calories burned (roughly 1 calorie per 20 steps)
@@ -196,15 +224,23 @@ class SensorService(private val context: Context) {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         
+        val currentTime = System.currentTimeMillis()
         val duration = if (workoutStartTime > 0) {
-            val seconds = (System.currentTimeMillis() - workoutStartTime) / 1000
-            String.format("%02d:%02d", seconds / 60, seconds % 60)
+            val totalTime = currentTime - workoutStartTime
+            val activePausedTime = if (isWorkoutPaused && lastPauseTime > 0) {
+                currentTime - lastPauseTime
+            } else 0
+            val activeTime = (totalTime - pausedDuration - activePausedTime) / 1000
+            String.format("%02d:%02d", activeTime / 60, activeTime % 60)
         } else "00:00"
         
+        val title = if (isWorkoutPaused) "Workout Paused" else "Workout in Progress"
+        val statusIcon = if (isWorkoutPaused) "⏸️" else "▶️"
+        
         return NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
-            .setContentTitle("Workout in Progress")
-            .setContentText("❤️ ${currentHeartRate} BPM | 🔥 ${totalCalories} cal | 👟 ${totalSteps} steps | ⏱️ $duration")
-            .setSmallIcon(android.R.drawable.ic_media_play)
+            .setContentTitle(title)
+            .setContentText("$statusIcon ❤️ ${currentHeartRate} BPM | 🔥 ${totalCalories} cal | 👟 ${totalSteps} steps | ⏱️ $duration")
+            .setSmallIcon(if (isWorkoutPaused) android.R.drawable.ic_media_pause else android.R.drawable.ic_media_play)
             .setContentIntent(pendingIntent)
             .setOngoing(true)
             .setPriority(NotificationCompat.PRIORITY_LOW)

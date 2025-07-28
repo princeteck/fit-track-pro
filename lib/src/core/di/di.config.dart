@@ -21,6 +21,9 @@ import '../../data/datasources/heart_rate_local_data_source.dart' as _i578;
 import '../../data/repositories/auth_repository_impl.dart' as _i895;
 import '../../data/repositories/locale_repository_impl.dart' as _i579;
 import '../../data/repositories/theme_repository_impl.dart' as _i858;
+import '../../data/repositories/workout_session_repository.dart' as _i121;
+import '../../data/services/workout_api_service.dart' as _i1031;
+import '../../data/services/workout_database_service.dart' as _i559;
 import '../../domain/repositories/auth_repository.dart' as _i1073;
 import '../../domain/repositories/locale_repository.dart' as _i369;
 import '../../domain/repositories/theme_repository.dart' as _i964;
@@ -46,6 +49,9 @@ import '../../presentation/controllers/splash/splash_cubit.dart' as _i820;
 import '../../presentation/controllers/system/system_cubit.dart' as _i885;
 import '../../presentation/controllers/walkthrough/walkthrough_cubit.dart'
     as _i219;
+import '../../presentation/controllers/workout/workout_cubit.dart' as _i361;
+import '../../presentation/controllers/workout_session/workout_session_cubit.dart'
+    as _i75;
 import '../services/app_startup_service.dart' as _i25;
 import '../services/isolate_service.dart' as _i548;
 import '../services/memory_manager_service.dart' as _i1014;
@@ -71,8 +77,12 @@ _i174.GetIt init(
   gh.singleton<_i548.IsolateService>(() => _i548.IsolateService());
   gh.singleton<_i913.NavigationService>(() => services.navigationService);
   gh.singleton<_i778.DatabaseHelper>(() => _i778.DatabaseHelper());
+  gh.singleton<_i1031.WorkoutApiService>(() => _i1031.WorkoutApiService());
   gh.singleton<_i885.SystemCubit>(() => _i885.SystemCubit());
   gh.singleton<_i338.BottomNavbarCubit>(() => _i338.BottomNavbarCubit());
+  gh.singleton<_i559.WorkoutDatabaseService>(
+    () => _i559.WorkoutDatabaseService(),
+  );
   gh.lazySingleton<_i716.LocaleCubit>(() => _i716.LocaleCubit());
   gh.factory<_i716.AuthRemoteDataSource>(
     () => _i209.AuthRemoteDataSourceImpl(),
@@ -82,6 +92,12 @@ _i174.GetIt init(
     () => _i578.HeartRateLocalDataSource(gh<_i778.DatabaseHelper>()),
   );
   gh.factory<_i964.ThemeRepository>(() => _i858.ThemeRepositoryImpl());
+  gh.factory<_i121.WorkoutSessionRepository>(
+    () => _i121.WorkoutSessionRepositoryImpl(
+      gh<_i548.IsolateService>(),
+      gh<_i559.WorkoutDatabaseService>(),
+    ),
+  );
   gh.factory<_i565.AuthLocalDataSource>(
     () => _i515.AuthLocalDataSourceImpl(
       gh<_i778.DatabaseHelper>(),
@@ -116,6 +132,15 @@ _i174.GetIt init(
   );
   gh.singleton<_i219.WalkthroughCubit>(
     () => _i219.WalkthroughCubit(gh<_i25.AppStartupService>()),
+  );
+  gh.singleton<_i361.WorkoutCubit>(
+    () => _i361.WorkoutCubit(gh<_i121.WorkoutSessionRepository>()),
+  );
+  gh.factory<_i75.WorkoutSessionCubit>(
+    () => _i75.WorkoutSessionCubit(
+      gh<_i180.NativeSensorService>(),
+      gh<_i121.WorkoutSessionRepository>(),
+    ),
   );
   gh.factory<_i1073.AuthRepository>(
     () => _i895.AuthRepositoryImpl(
