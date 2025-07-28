@@ -2,6 +2,9 @@
 
 **Fit Track Pro** is a modern, offline-capable health and fitness tracker built using Flutter. It helps users monitor and log their daily fitness journey securely with features like onboarding walkthroughs, secure authentication, local data storage, and more.
 
+## Latest Build
+[📱 Download Release APK](./releases/app-release.apk)
+
 ---
 
 ## 🚀 Features
@@ -58,6 +61,33 @@ flutter run
 ```
 
 > Make sure your Flutter version is managed via `puro` or a compatible SDK (e.g., 3.32.7).
+
+---
+
+## 📱 Releases & APK Downloads
+
+### Latest Release APK
+You can download the latest release APK from the [`releases/`](releases/) directory:
+- **Latest**: [`app-release.apk`](releases/app-release.apk)
+
+### Building Release APK
+To build and generate a release APK:
+
+```bash
+# Automated build script
+./scripts/build-release.sh
+
+# Manual build
+flutter build apk --release
+cp build/app/outputs/flutter-apk/app-release.apk releases/app-release.apk
+```
+
+### Installation Instructions
+1. Download the APK file
+2. Enable "Unknown Sources" in Android settings
+3. Install the APK by tapping on it
+
+> **Note**: APK files are for testing and internal distribution only.
 
 ---
 
