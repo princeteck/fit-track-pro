@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../../core/di/di.dart';
@@ -31,40 +31,44 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LocaleCubit, LocaleState>(
-      bloc: locator<LocaleCubit>(),
-      builder: (context, localeState) {
-        return BlocBuilder<SystemCubit, SystemState>(
-          bloc: locator<SystemCubit>(),
-          builder: (context, systemState) {
-            return MaterialApp.router(
-              title: 'Fit Track Pro',
-              debugShowCheckedModeBanner: false,
-              routerConfig: AppRoutes.router,
-              locale: localeState.locale,
-              supportedLocales: locator<LocaleCubit>().supportedLocales,
-              themeMode: systemState.themeMode.themeMode,
-              theme: AppTheme.lightTheme,
-              darkTheme: AppTheme.darkTheme,
-              localizationsDelegates: const [
-                AppLocalizations.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              localeResolutionCallback: (locale, supportedLocales) {
-                if (localeState.locale != null) return localeState.locale;
-                for (var supported in supportedLocales) {
-                  if (supported.languageCode == locale?.languageCode) {
-                    return supported;
+    return BlocProvider<AuthCubit>(
+      create: (context) => locator<AuthCubit>(),
+      child: BlocBuilder<LocaleCubit, LocaleState>(
+        bloc: locator<LocaleCubit>(),
+        builder: (context, localeState) {
+          return BlocBuilder<SystemCubit, SystemState>(
+            bloc: locator<SystemCubit>(),
+            builder: (context, systemState) {
+              return MaterialApp.router(
+                title:
+                    AppLocalizations.of(context)?.appTitle ?? 'Fit Track Pro',
+                debugShowCheckedModeBanner: false,
+                routerConfig: AppRoutes.router,
+                locale: localeState.locale,
+                supportedLocales: locator<LocaleCubit>().supportedLocales,
+                themeMode: systemState.themeMode.themeMode,
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                localizationsDelegates: const [
+                  AppLocalizations.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                localeResolutionCallback: (locale, supportedLocales) {
+                  if (localeState.locale != null) return localeState.locale;
+                  for (var supported in supportedLocales) {
+                    if (supported.languageCode == locale?.languageCode) {
+                      return supported;
+                    }
                   }
-                }
-                return supportedLocales.first;
-              },
-            );
-          },
-        );
-      },
+                  return supportedLocales.first;
+                },
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }

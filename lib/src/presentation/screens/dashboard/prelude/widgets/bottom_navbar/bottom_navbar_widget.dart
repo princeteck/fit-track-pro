@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../../core/constants/ui/assets_constants.dart';
 import '../../../../../../core/di/di.dart';
+import '../../../../../../core/extensions/context_extensions.dart';
 import '../../../../../controllers/bottom_navbar/bottom_navbar_cubit.dart';
 
 class BottomNavBarWidget extends StatefulWidget {
@@ -51,11 +52,14 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget>
   bool _isScrollingDown = false;
   static const double _scrollThreshold = 100.0;
 
-  final List<NavItem> _navItems = [
-    NavItem(icon: KIcons.home, label: 'Home'),
-    NavItem(icon: KIcons.category, label: 'Categories'),
-    NavItem(icon: KIcons.chart, label: 'Stats'),
-    NavItem(icon: KIcons.user, label: 'Profile'),
+  List<NavItem> _getNavItems(BuildContext context) => [
+    NavItem(icon: KIcons.home, label: context.l10n?.home ?? 'Home'),
+    NavItem(
+      icon: KIcons.category,
+      label: context.l10n?.categories ?? 'Categories',
+    ),
+    NavItem(icon: KIcons.chart, label: context.l10n?.stats ?? 'Stats'),
+    NavItem(icon: KIcons.user, label: context.l10n?.profile ?? 'Profile'),
   ];
 
   @override
@@ -180,7 +184,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget>
                   children: [
                     _LiquidIndicator(
                       selectedIndex: state.selectedIndex,
-                      itemCount: _navItems.length,
+                      itemCount: _getNavItems(context).length,
                       color: widget.activeIndicatorColor,
                       size: 60,
                       animationDuration: widget.animationDuration,
@@ -189,7 +193,9 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget>
                     ),
 
                     Row(
-                      children: _navItems.asMap().entries.map((entry) {
+                      children: _getNavItems(context).asMap().entries.map((
+                        entry,
+                      ) {
                         final index = entry.key;
                         final item = entry.value;
                         final isSelected = index == state.selectedIndex;

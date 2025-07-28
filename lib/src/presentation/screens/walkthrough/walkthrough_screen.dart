@@ -156,41 +156,62 @@ class _WalkthroughViewState extends State<_WalkthroughView>
                 onPageChanged: _onPageChanged,
                 children: [
                   _WalkthroughSlide(
-                    title: 'Welcome to \nFit Track Pro',
+                    title:
+                        context.l10n?.welcomeToFitTrackPro ??
+                        'Welcome to \nFit Track Pro',
                     description:
+                        context.l10n?.welcomeDescription ??
                         'Personalize your fitness journey with our comprehensive tracking app.',
                     slideIndex: 0,
                     isActive: state.currentIndex == 0,
                   ),
                   _WalkthroughSlide(
-                    title: 'Personalized Fitness Goals',
+                    title:
+                        context.l10n?.personalizedFitnessGoals ??
+                        'Personalized Fitness Goals',
                     description:
+                        context.l10n?.personalizedFitnessGoalsDescription ??
                         'Create personalized fitness goals and track your progress towards a healthier you.',
                     slideIndex: 1,
                     isActive: state.currentIndex == 1,
                   ),
                   _WalkthroughSlide(
-                    title: 'Track Your Workouts',
+                    title:
+                        context.l10n?.trackYourWorkouts ??
+                        'Track Your Workouts',
                     description:
+                        context.l10n?.trackYourWorkoutsDescription ??
                         'Get insights, reminders, and celebrate your achievements along the way.',
                     slideIndex: 2,
                     isActive: state.currentIndex == 2,
                   ),
                   _WalkthroughSlide(
-                    title: 'Health Metrics & Fitness Analytics',
-                    description: 'Monitor your health profile with ease.',
+                    title:
+                        context.l10n?.healthMetricsAndFitnessAnalytics ??
+                        'Health Metrics & Fitness Analytics',
+                    description:
+                        context.l10n?.healthMetricsDescription ??
+                        'Monitor your health profile with ease.',
                     slideIndex: 3,
                     isActive: state.currentIndex == 3,
                   ),
                   _WalkthroughSlide(
-                    title: 'Nutrition & Diet\nGuidance',
-                    description: 'Lose weight and get fit with Fit Track Pro.',
+                    title:
+                        context.l10n?.nutritionAndDietGuidance ??
+                        'Nutrition & Diet\nGuidance',
+                    description:
+                        context.l10n?.nutritionDescription ??
+                        'Lose weight and get fit with Fit Track Pro.',
                     slideIndex: 4,
                     isActive: state.currentIndex == 4,
                   ),
                   _WalkthroughSlide(
-                    title: 'Virtual AI Coach \nMentoring',
-                    description: 'Say goodbye to manual coaching.',
+                    title:
+                        context.l10n?.virtualAiCoachMentoring ??
+                        'Virtual AI Coach \nMentoring',
+                    description:
+                        context.l10n?.virtualAiCoachDescription ??
+                        'Say goodbye to manual coaching.',
                     slideIndex: 5,
                     isActive: state.currentIndex == 5,
                   ),

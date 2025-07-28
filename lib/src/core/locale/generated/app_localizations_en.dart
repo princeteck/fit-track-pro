@@ -387,4 +387,308 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get workoutStatsTitle => 'Workout Stats';
+
+  @override
+  String get duration => 'Duration';
+
+  @override
+  String get exercises => 'Exercises';
+
+  @override
+  String get difficulty => 'Difficulty';
+
+  @override
+  String get description => 'Description';
+
+  @override
+  String get startWorkout => 'Start Workout';
+
+  @override
+  String get clearData => 'Clear Data';
+
+  @override
+  String get checkDatabase => 'Check Database';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String get failedToLoadWorkoutPlans => 'Failed to load workout plans';
+
+  @override
+  String get initializeMockData => 'Initialize Mock Data';
+
+  @override
+  String get notes => 'Notes';
+
+  @override
+  String get failedToChangeTheme => 'Failed to change theme';
+
+  @override
+  String get resetToSystemDefault => 'Reset to System Default';
+
+  @override
+  String get clearSavedPreferences => 'Clear Saved Preferences';
+
+  @override
+  String get signOutFailed => 'Sign out failed';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get categories => 'Categories';
+
+  @override
+  String get profile => 'Profile';
+
+  @override
+  String get currentHeartRate => 'Current Heart Rate';
+
+  @override
+  String get preWorkoutStretch => 'Pre-Workout Stretch';
+
+  @override
+  String get lowerBodyTraining => 'Lower Body Training';
+
+  @override
+  String get hiitCardioInterval => 'HIIT Cardio Interval';
+
+  @override
+  String get recoverySession => 'Recovery Session';
+
+  @override
+  String get progress => 'Progress';
+
+  @override
+  String get startWeight => 'Start Weight';
+
+  @override
+  String get good => 'Good';
+
+  @override
+  String get dailyCalories => 'Daily Calories';
+
+  @override
+  String get goBack => 'Go back';
+
+  @override
+  String get passwordResetIcon => 'Password reset icon';
+
+  @override
+  String get navigateToSignUp => 'Navigate to sign up';
+
+  @override
+  String get profileStatisticsOverview => 'Profile statistics overview';
+
+  @override
+  String get profilePageHeader => 'Profile page header';
+
+  @override
+  String get profileSettings => 'Profile settings';
+
+  @override
+  String get tapToAccessProfileSettings => 'Tap to access profile settings';
+
+  @override
+  String get profilePictureForSandraGram => 'Profile picture for Sandra Gram';
+
+  @override
+  String get userName => 'User name';
+
+  @override
+  String get userLocationDenmarkCopenhagen =>
+      'User location: Denmark, Copenhagen';
+
+  @override
+  String get userStatisticsAndActions => 'User statistics and actions';
+
+  @override
+  String get exportProfileData => 'Export profile data';
+
+  @override
+  String get tapToExportYourProfileInformation =>
+      'Tap to export your profile information';
+
+  @override
+  String get editProfile => 'Edit profile';
+
+  @override
+  String get tapToEditYourProfileInformation =>
+      'Tap to edit your profile information';
+
+  @override
+  String get navigateToSignIn => 'Navigate to sign in';
+
+  @override
+  String get onboardingSlides => 'Onboarding Slides';
+
+  @override
+  String get sandraGram => 'Sandra Gram';
+
+  @override
+  String get denmarkCopenhagen => 'Denmark, Copenhagen';
+
+  @override
+  String get welcomeToFitTrackPro => 'Welcome to \nFit Track Pro';
+
+  @override
+  String get welcomeDescription =>
+      'Personalize your fitness journey with our comprehensive tracking app.';
+
+  @override
+  String get personalizedFitnessGoals => 'Personalized Fitness Goals';
+
+  @override
+  String get personalizedFitnessGoalsDescription =>
+      'Create personalized fitness goals and track your progress towards a healthier you.';
+
+  @override
+  String get trackYourWorkouts => 'Track Your Workouts';
+
+  @override
+  String get trackYourWorkoutsDescription =>
+      'Get insights, reminders, and celebrate your achievements along the way.';
+
+  @override
+  String get healthMetricsAndFitnessAnalytics =>
+      'Health Metrics & Fitness Analytics';
+
+  @override
+  String get healthMetricsDescription =>
+      'Monitor your health profile with ease.';
+
+  @override
+  String get nutritionAndDietGuidance => 'Nutrition & Diet\nGuidance';
+
+  @override
+  String get nutritionDescription =>
+      'Lose weight and get fit with Fit Track Pro.';
+
+  @override
+  String get virtualAiCoachMentoring => 'Virtual AI Coach \nMentoring';
+
+  @override
+  String get virtualAiCoachDescription => 'Say goodbye to manual coaching.';
+
+  @override
+  String get upperStrength2 => 'Upper Strength 2';
+
+  @override
+  String get eightSeriesWorkout => '8 Series Workout';
+
+  @override
+  String get corePower => 'Core Power';
+
+  @override
+  String get sixSeriesWorkout => '6 Series Workout';
+
+  @override
+  String get cardioBlast => 'Cardio Blast';
+
+  @override
+  String get tenSeriesWorkout => '10 Series Workout';
+
+  @override
+  String get workouts => 'Workouts';
+
+  @override
+  String durationWithMinutes(int minutes) {
+    return 'Duration: $minutes minutes';
+  }
+
+  @override
+  String exercisesWithCount(int count) {
+    return 'Exercises ($count)';
+  }
+
+  @override
+  String get totalWorkouts => 'Total Workouts';
+
+  @override
+  String get sessions => 'sessions';
+
+  @override
+  String get caloriesBurned => 'Calories Burned';
+
+  @override
+  String get kcal => 'kcal';
+
+  @override
+  String get activeMinutes => 'Active Minutes';
+
+  @override
+  String get min => 'min';
+
+  @override
+  String get thisWeek => 'This Week';
+
+  @override
+  String get workoutsUnit => 'workouts';
+
+  @override
+  String get oneDay => '1 Day';
+
+  @override
+  String get oneWeek => '1 Week';
+
+  @override
+  String get oneMonth => '1 Month';
+
+  @override
+  String get threeMonths => '3 Months';
+
+  @override
+  String get sixMonths => '6 Months';
+
+  @override
+  String get twelveMonths => '12 Months';
+
+  @override
+  String get percentageUnit => ' %';
+
+  @override
+  String get rateUnit => ' rate';
+
+  @override
+  String get mlUnit => ' ml';
+
+  @override
+  String get kcalUnit => ' kcal';
+
+  @override
+  String get kmUnit => ' km';
+
+  @override
+  String get recentWorkouts => 'Recent Workouts';
+
+  @override
+  String get workoutPlans => 'Workout Plans';
+
+  @override
+  String get viewAll => 'View All';
+
+  @override
+  String workoutsWithCount(int count) {
+    return 'Workouts ($count)';
+  }
+
+  @override
+  String durationMinutes(int minutes) {
+    return 'Duration: $minutes minutes';
+  }
+
+  @override
+  String get follow => 'Follow';
+
+  @override
+  String get followers => 'Followers';
+
+  @override
+  String get following => 'Following';
+
+  @override
+  String signOutFailedWithError(String error) {
+    return 'Sign out failed: $error';
+  }
 }

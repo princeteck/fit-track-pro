@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/constants/ui/assets_constants.dart';
+import '../../../core/extensions/context_extensions.dart';
 import '../../../data/services/workout_api_service.dart';
 import 'widgets/workout_duration_bottom_sheet.dart';
 import '../workout_session/workout_session_screen.dart';
@@ -236,7 +237,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen>
         Expanded(
           child: _buildStatCard(
             context,
-            'Duration',
+            context.l10n?.duration ?? 'Duration',
             widget.workoutPlan.duration,
             Icons.access_time,
             const Color(0xFF2196F3),
@@ -247,7 +248,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen>
         Expanded(
           child: _buildStatCard(
             context,
-            'Exercises',
+            context.l10n?.exercises ?? 'Exercises',
             '${widget.workoutPlan.exercises.length}',
             Icons.fitness_center,
             const Color(0xFFFF9800),
@@ -258,7 +259,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen>
         Expanded(
           child: _buildStatCard(
             context,
-            'Difficulty',
+            context.l10n?.difficulty ?? 'Difficulty',
             widget.workoutPlan.difficulty,
             Icons.trending_up,
             const Color(0xFFE91E63),
@@ -330,7 +331,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Description',
+          context.l10n?.description ?? 'Description',
           style: GoogleFonts.inter(
             fontSize: 20,
             fontWeight: FontWeight.w700,
@@ -358,7 +359,10 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Exercises (${widget.workoutPlan.exercises.length})',
+          context.l10n?.exercisesWithCount(
+                widget.workoutPlan.exercises.length,
+              ) ??
+              'Exercises (${widget.workoutPlan.exercises.length})',
           style: GoogleFonts.inter(
             fontSize: 20,
             fontWeight: FontWeight.w700,
@@ -488,7 +492,7 @@ class _WorkoutDetailScreenState extends State<WorkoutDetailScreen>
               const Icon(Icons.play_arrow, size: 24),
               const SizedBox(width: 8),
               Text(
-                'Start Workout',
+                context.l10n?.startWorkout ?? 'Start Workout',
                 style: GoogleFonts.inter(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,

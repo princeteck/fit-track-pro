@@ -835,6 +835,576 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Workout Stats'**
   String get workoutStatsTitle;
+
+  /// No description provided for @duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration'**
+  String get duration;
+
+  /// No description provided for @exercises.
+  ///
+  /// In en, this message translates to:
+  /// **'Exercises'**
+  String get exercises;
+
+  /// No description provided for @difficulty.
+  ///
+  /// In en, this message translates to:
+  /// **'Difficulty'**
+  String get difficulty;
+
+  /// No description provided for @description.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get description;
+
+  /// No description provided for @startWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Workout'**
+  String get startWorkout;
+
+  /// No description provided for @clearData.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Data'**
+  String get clearData;
+
+  /// No description provided for @checkDatabase.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Database'**
+  String get checkDatabase;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @failedToLoadWorkoutPlans.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load workout plans'**
+  String get failedToLoadWorkoutPlans;
+
+  /// No description provided for @initializeMockData.
+  ///
+  /// In en, this message translates to:
+  /// **'Initialize Mock Data'**
+  String get initializeMockData;
+
+  /// No description provided for @notes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get notes;
+
+  /// No description provided for @failedToChangeTheme.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to change theme'**
+  String get failedToChangeTheme;
+
+  /// No description provided for @resetToSystemDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to System Default'**
+  String get resetToSystemDefault;
+
+  /// No description provided for @clearSavedPreferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Saved Preferences'**
+  String get clearSavedPreferences;
+
+  /// No description provided for @signOutFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out failed'**
+  String get signOutFailed;
+
+  /// No description provided for @home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @currentHeartRate.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Heart Rate'**
+  String get currentHeartRate;
+
+  /// No description provided for @preWorkoutStretch.
+  ///
+  /// In en, this message translates to:
+  /// **'Pre-Workout Stretch'**
+  String get preWorkoutStretch;
+
+  /// No description provided for @lowerBodyTraining.
+  ///
+  /// In en, this message translates to:
+  /// **'Lower Body Training'**
+  String get lowerBodyTraining;
+
+  /// No description provided for @hiitCardioInterval.
+  ///
+  /// In en, this message translates to:
+  /// **'HIIT Cardio Interval'**
+  String get hiitCardioInterval;
+
+  /// No description provided for @recoverySession.
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery Session'**
+  String get recoverySession;
+
+  /// No description provided for @progress.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress'**
+  String get progress;
+
+  /// No description provided for @startWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Weight'**
+  String get startWeight;
+
+  /// No description provided for @good.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get good;
+
+  /// No description provided for @dailyCalories.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Calories'**
+  String get dailyCalories;
+
+  /// No description provided for @goBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Go back'**
+  String get goBack;
+
+  /// No description provided for @passwordResetIcon.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset icon'**
+  String get passwordResetIcon;
+
+  /// No description provided for @navigateToSignUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Navigate to sign up'**
+  String get navigateToSignUp;
+
+  /// No description provided for @profileStatisticsOverview.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile statistics overview'**
+  String get profileStatisticsOverview;
+
+  /// No description provided for @profilePageHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile page header'**
+  String get profilePageHeader;
+
+  /// No description provided for @profileSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile settings'**
+  String get profileSettings;
+
+  /// No description provided for @tapToAccessProfileSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to access profile settings'**
+  String get tapToAccessProfileSettings;
+
+  /// No description provided for @profilePictureForSandraGram.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile picture for Sandra Gram'**
+  String get profilePictureForSandraGram;
+
+  /// No description provided for @userName.
+  ///
+  /// In en, this message translates to:
+  /// **'User name'**
+  String get userName;
+
+  /// No description provided for @userLocationDenmarkCopenhagen.
+  ///
+  /// In en, this message translates to:
+  /// **'User location: Denmark, Copenhagen'**
+  String get userLocationDenmarkCopenhagen;
+
+  /// No description provided for @userStatisticsAndActions.
+  ///
+  /// In en, this message translates to:
+  /// **'User statistics and actions'**
+  String get userStatisticsAndActions;
+
+  /// No description provided for @exportProfileData.
+  ///
+  /// In en, this message translates to:
+  /// **'Export profile data'**
+  String get exportProfileData;
+
+  /// No description provided for @tapToExportYourProfileInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to export your profile information'**
+  String get tapToExportYourProfileInformation;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfile;
+
+  /// No description provided for @tapToEditYourProfileInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to edit your profile information'**
+  String get tapToEditYourProfileInformation;
+
+  /// No description provided for @navigateToSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Navigate to sign in'**
+  String get navigateToSignIn;
+
+  /// No description provided for @onboardingSlides.
+  ///
+  /// In en, this message translates to:
+  /// **'Onboarding Slides'**
+  String get onboardingSlides;
+
+  /// No description provided for @sandraGram.
+  ///
+  /// In en, this message translates to:
+  /// **'Sandra Gram'**
+  String get sandraGram;
+
+  /// No description provided for @denmarkCopenhagen.
+  ///
+  /// In en, this message translates to:
+  /// **'Denmark, Copenhagen'**
+  String get denmarkCopenhagen;
+
+  /// No description provided for @welcomeToFitTrackPro.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to \nFit Track Pro'**
+  String get welcomeToFitTrackPro;
+
+  /// No description provided for @welcomeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalize your fitness journey with our comprehensive tracking app.'**
+  String get welcomeDescription;
+
+  /// No description provided for @personalizedFitnessGoals.
+  ///
+  /// In en, this message translates to:
+  /// **'Personalized Fitness Goals'**
+  String get personalizedFitnessGoals;
+
+  /// No description provided for @personalizedFitnessGoalsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Create personalized fitness goals and track your progress towards a healthier you.'**
+  String get personalizedFitnessGoalsDescription;
+
+  /// No description provided for @trackYourWorkouts.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Your Workouts'**
+  String get trackYourWorkouts;
+
+  /// No description provided for @trackYourWorkoutsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Get insights, reminders, and celebrate your achievements along the way.'**
+  String get trackYourWorkoutsDescription;
+
+  /// No description provided for @healthMetricsAndFitnessAnalytics.
+  ///
+  /// In en, this message translates to:
+  /// **'Health Metrics & Fitness Analytics'**
+  String get healthMetricsAndFitnessAnalytics;
+
+  /// No description provided for @healthMetricsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Monitor your health profile with ease.'**
+  String get healthMetricsDescription;
+
+  /// No description provided for @nutritionAndDietGuidance.
+  ///
+  /// In en, this message translates to:
+  /// **'Nutrition & Diet\nGuidance'**
+  String get nutritionAndDietGuidance;
+
+  /// No description provided for @nutritionDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Lose weight and get fit with Fit Track Pro.'**
+  String get nutritionDescription;
+
+  /// No description provided for @virtualAiCoachMentoring.
+  ///
+  /// In en, this message translates to:
+  /// **'Virtual AI Coach \nMentoring'**
+  String get virtualAiCoachMentoring;
+
+  /// No description provided for @virtualAiCoachDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Say goodbye to manual coaching.'**
+  String get virtualAiCoachDescription;
+
+  /// No description provided for @upperStrength2.
+  ///
+  /// In en, this message translates to:
+  /// **'Upper Strength 2'**
+  String get upperStrength2;
+
+  /// No description provided for @eightSeriesWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'8 Series Workout'**
+  String get eightSeriesWorkout;
+
+  /// No description provided for @corePower.
+  ///
+  /// In en, this message translates to:
+  /// **'Core Power'**
+  String get corePower;
+
+  /// No description provided for @sixSeriesWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'6 Series Workout'**
+  String get sixSeriesWorkout;
+
+  /// No description provided for @cardioBlast.
+  ///
+  /// In en, this message translates to:
+  /// **'Cardio Blast'**
+  String get cardioBlast;
+
+  /// No description provided for @tenSeriesWorkout.
+  ///
+  /// In en, this message translates to:
+  /// **'10 Series Workout'**
+  String get tenSeriesWorkout;
+
+  /// No description provided for @workouts.
+  ///
+  /// In en, this message translates to:
+  /// **'Workouts'**
+  String get workouts;
+
+  /// No description provided for @durationWithMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration: {minutes} minutes'**
+  String durationWithMinutes(int minutes);
+
+  /// No description provided for @exercisesWithCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Exercises ({count})'**
+  String exercisesWithCount(int count);
+
+  /// No description provided for @totalWorkouts.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Workouts'**
+  String get totalWorkouts;
+
+  /// No description provided for @sessions.
+  ///
+  /// In en, this message translates to:
+  /// **'sessions'**
+  String get sessions;
+
+  /// No description provided for @caloriesBurned.
+  ///
+  /// In en, this message translates to:
+  /// **'Calories Burned'**
+  String get caloriesBurned;
+
+  /// No description provided for @kcal.
+  ///
+  /// In en, this message translates to:
+  /// **'kcal'**
+  String get kcal;
+
+  /// No description provided for @activeMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Minutes'**
+  String get activeMinutes;
+
+  /// No description provided for @min.
+  ///
+  /// In en, this message translates to:
+  /// **'min'**
+  String get min;
+
+  /// No description provided for @thisWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'This Week'**
+  String get thisWeek;
+
+  /// No description provided for @workoutsUnit.
+  ///
+  /// In en, this message translates to:
+  /// **'workouts'**
+  String get workoutsUnit;
+
+  /// No description provided for @oneDay.
+  ///
+  /// In en, this message translates to:
+  /// **'1 Day'**
+  String get oneDay;
+
+  /// No description provided for @oneWeek.
+  ///
+  /// In en, this message translates to:
+  /// **'1 Week'**
+  String get oneWeek;
+
+  /// No description provided for @oneMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'1 Month'**
+  String get oneMonth;
+
+  /// No description provided for @threeMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'3 Months'**
+  String get threeMonths;
+
+  /// No description provided for @sixMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'6 Months'**
+  String get sixMonths;
+
+  /// No description provided for @twelveMonths.
+  ///
+  /// In en, this message translates to:
+  /// **'12 Months'**
+  String get twelveMonths;
+
+  /// No description provided for @percentageUnit.
+  ///
+  /// In en, this message translates to:
+  /// **' %'**
+  String get percentageUnit;
+
+  /// No description provided for @rateUnit.
+  ///
+  /// In en, this message translates to:
+  /// **' rate'**
+  String get rateUnit;
+
+  /// No description provided for @mlUnit.
+  ///
+  /// In en, this message translates to:
+  /// **' ml'**
+  String get mlUnit;
+
+  /// No description provided for @kcalUnit.
+  ///
+  /// In en, this message translates to:
+  /// **' kcal'**
+  String get kcalUnit;
+
+  /// No description provided for @kmUnit.
+  ///
+  /// In en, this message translates to:
+  /// **' km'**
+  String get kmUnit;
+
+  /// No description provided for @recentWorkouts.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Workouts'**
+  String get recentWorkouts;
+
+  /// No description provided for @workoutPlans.
+  ///
+  /// In en, this message translates to:
+  /// **'Workout Plans'**
+  String get workoutPlans;
+
+  /// No description provided for @viewAll.
+  ///
+  /// In en, this message translates to:
+  /// **'View All'**
+  String get viewAll;
+
+  /// No description provided for @workoutsWithCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Workouts ({count})'**
+  String workoutsWithCount(int count);
+
+  /// No description provided for @durationMinutes.
+  ///
+  /// In en, this message translates to:
+  /// **'Duration: {minutes} minutes'**
+  String durationMinutes(int minutes);
+
+  /// No description provided for @follow.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow'**
+  String get follow;
+
+  /// No description provided for @followers.
+  ///
+  /// In en, this message translates to:
+  /// **'Followers'**
+  String get followers;
+
+  /// No description provided for @following.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get following;
+
+  /// No description provided for @signOutFailedWithError.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out failed: {error}'**
+  String signOutFailedWithError(String error);
 }
 
 class _AppLocalizationsDelegate

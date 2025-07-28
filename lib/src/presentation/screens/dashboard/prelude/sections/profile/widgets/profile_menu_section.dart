@@ -1,3 +1,4 @@
+import 'package:fittrack_pro/src/core/constants/ui/colors_constants.dart';
 import 'package:fittrack_pro/src/presentation/screens/auth/sign_in_screen.dart';
 import 'package:fittrack_pro/src/presentation/screens/settings/locale_settings_screen.dart';
 import 'package:fittrack_pro/src/presentation/screens/settings/theme_settings_bottom_sheet.dart';
@@ -79,7 +80,7 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
         ),
         _MenuTile(
           icon: KIcons.slideHorizontal,
-          title: 'Onboarding Slides',
+          title: context.l10n?.onboardingSlides ?? 'Onboarding Slides',
           subtitle: '',
           hasNotification: false,
           onTap: () {
@@ -269,6 +270,7 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
+            style: TextButton.styleFrom(foregroundColor: KColors.gray80),
             child: Text(context.l10n?.profileCancel ?? 'Cancel'),
           ),
           TextButton(
@@ -286,13 +288,27 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
       });
 
       try {
-        final authCubit = locator<AuthCubit>();
-        await authCubit.signOut();
+        final authCubit = context.read<AuthCubit>();
+        print(
+          'PROFILE: About to call signOut, cubit isClosed: ${authCubit.isClosed}',
+        );
 
+        await authCubit.signOut();
+        print('PROFILE: signOut completed');
+
+        // Navigate immediately after sign out completes
+        // Don't wait for state changes as the cubit may be disposed during navigation
         if (mounted) {
+          print(
+            'PROFILE: Navigating to sign in screen after successful sign out',
+          );
           navigator(SignInScreen.name);
+        } else {
+          print('PROFILE: Widget unmounted, skipping navigation');
         }
+        // Remove the unconditional navigation call that was causing the issue
       } catch (e) {
+        print('PROFILE: Sign out error: $e');
         if (mounted) {
           setState(() {
             _isSigningOut = false;
@@ -300,7 +316,11 @@ class _ProfileMenuSectionState extends State<ProfileMenuSection> {
 
           messenger.showSnackBar(
             SnackBar(
-              content: Text('Sign out failed: ${e.toString()}'),
+              content: Text(
+                // ignore: use_build_context_synchronously
+                context.l10n?.signOutFailedWithError(e.toString()) ??
+                    'Sign out failed: ${e.toString()}',
+              ),
               backgroundColor: Colors.red,
             ),
           );

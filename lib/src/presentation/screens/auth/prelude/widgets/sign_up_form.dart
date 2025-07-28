@@ -1,8 +1,9 @@
+import 'package:fittrack_pro/src/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../../core/constants/ui/assets_constants.dart';
-import '../../../../../core/di/di.dart';
 import '../../../../../core/locale/generated/app_localizations.dart';
 import '../../../../controllers/auth/auth_cubit.dart';
 import '../../../../controllers/base/cubit_state.dart';
@@ -109,7 +110,7 @@ class _SignUpFormState extends State<SignUpForm> with TickerProviderStateMixin {
 
   void _signUp() {
     if (_formKey.currentState?.validate() ?? false) {
-      locator<AuthCubit>().signUpWithEmailPassword(
+      context.read<AuthCubit>().signUpWithEmailPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
@@ -117,7 +118,7 @@ class _SignUpFormState extends State<SignUpForm> with TickerProviderStateMixin {
   }
 
   void _signUpWithGoogle() {
-    locator<AuthCubit>().signInWithGoogle();
+    context.read<AuthCubit>().signInWithGoogle();
   }
 
   @override
@@ -126,7 +127,7 @@ class _SignUpFormState extends State<SignUpForm> with TickerProviderStateMixin {
     final l10n = AppLocalizations.of(context);
 
     return BlocListener<AuthCubit, AuthState>(
-      bloc: locator<AuthCubit>(),
+      bloc: context.read<AuthCubit>(),
       listener: (context, state) {
         if (state.signUpStatus.isError) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -147,7 +148,7 @@ class _SignUpFormState extends State<SignUpForm> with TickerProviderStateMixin {
               backgroundColor: theme.colorScheme.primary,
             ),
           );
-          Navigator.pushReplacementNamed(context, '/sign-in');
+          context.goNamed(DashboardScreen.name);
         }
       },
       child: FadeTransition(
@@ -219,13 +220,16 @@ class _SignUpFormState extends State<SignUpForm> with TickerProviderStateMixin {
 
                   // Sign up button
                   BlocBuilder<AuthCubit, AuthState>(
-                    bloc: locator<AuthCubit>(),
+                    bloc: context.read<AuthCubit>(),
                     builder: (context, state) {
-                      final isLoading = state.signUpStatus.isSubmitting;
                       return PrimaryButton(
                         text: l10n?.createAccountButton ?? 'Create Account',
-                        onPressed: isLoading ? null : _signUp,
-                        isLoading: isLoading,
+                        onPressed:
+                            (state.signUpStatus == CubitState.submitting())
+                            ? null
+                            : _signUp,
+                        isLoading:
+                            (state.signUpStatus == CubitState.submitting()),
                       );
                     },
                   ),
