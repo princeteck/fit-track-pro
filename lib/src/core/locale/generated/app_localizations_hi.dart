@@ -346,4 +346,43 @@ class AppLocalizationsHi extends AppLocalizations {
   String profileLoading(Object loadingIndication) {
     return 'लोड हो रहा है$loadingIndication';
   }
+
+  @override
+  String get fitnessMetricsTitle => 'फिटनेस मेट्रिक्स';
+
+  @override
+  String get viewAllText => 'सभी देखें';
+
+  @override
+  String get stepsLabel => 'कदम';
+
+  @override
+  String get hydrationLabel => 'जलयोजन';
+
+  @override
+  String get caloriesLabel => 'कैलोरी';
+
+  @override
+  String get distanceLabel => 'दूरी';
+
+  @override
+  String get scoreLabel => 'स्कोर';
+
+  @override
+  String get sleepLabel => 'नींद';
+
+  @override
+  String get bmiLabel => 'बीएमआई';
+
+  @override
+  String get bpmLabel => 'बीपीएम';
+
+  @override
+  String get calorieLabel => 'कैलोरी';
+
+  @override
+  String get stats => 'आँकड़े';
+
+  @override
+  String get heartRateLabel => 'दिल की धड़कन';
 }

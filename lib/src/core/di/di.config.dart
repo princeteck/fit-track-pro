@@ -17,6 +17,7 @@ import '../../data/datasources/auth_local_data_source_impl.dart' as _i515;
 import '../../data/datasources/auth_remote_data_source.dart' as _i716;
 import '../../data/datasources/auth_remote_data_source_impl.dart' as _i209;
 import '../../data/datasources/database_helper.dart' as _i778;
+import '../../data/datasources/heart_rate_local_data_source.dart' as _i578;
 import '../../data/repositories/auth_repository_impl.dart' as _i895;
 import '../../data/repositories/locale_repository_impl.dart' as _i579;
 import '../../data/repositories/theme_repository_impl.dart' as _i858;
@@ -36,6 +37,10 @@ import '../../domain/usecase/verify_two_factor_code_usecase.dart' as _i549;
 import '../../presentation/controllers/auth/auth_cubit.dart' as _i879;
 import '../../presentation/controllers/bottom_navbar/bottom_navbar_cubit.dart'
     as _i338;
+import '../../presentation/controllers/heart_rate_monitor/heart_rate_monitor_cubit.dart'
+    as _i199;
+import '../../presentation/controllers/heart_rate_stats/heart_rate_stats_cubit.dart'
+    as _i447;
 import '../../presentation/controllers/locale/locale_cubit.dart' as _i716;
 import '../../presentation/controllers/splash/splash_cubit.dart' as _i820;
 import '../../presentation/controllers/system/system_cubit.dart' as _i885;
@@ -44,6 +49,7 @@ import '../../presentation/controllers/walkthrough/walkthrough_cubit.dart'
 import '../services/app_startup_service.dart' as _i25;
 import '../services/isolate_service.dart' as _i548;
 import '../services/memory_manager_service.dart' as _i1014;
+import '../services/native_sensor_service.dart' as _i180;
 import '../services/prelude/prelude.dart' as _i913;
 import '../services/services.dart' as _i264;
 import '../storage/local_storage.dart' as _i329;
@@ -61,6 +67,7 @@ _i174.GetIt init(
   gh.singleton<_i1014.MemoryManagerService>(
     () => _i1014.MemoryManagerService(),
   );
+  gh.singleton<_i180.NativeSensorService>(() => _i180.NativeSensorService());
   gh.singleton<_i548.IsolateService>(() => _i548.IsolateService());
   gh.singleton<_i913.NavigationService>(() => services.navigationService);
   gh.singleton<_i778.DatabaseHelper>(() => _i778.DatabaseHelper());
@@ -71,12 +78,22 @@ _i174.GetIt init(
     () => _i209.AuthRemoteDataSourceImpl(),
   );
   gh.factory<_i369.LocaleRepository>(() => _i579.LocaleRepositoryImpl());
+  gh.singleton<_i578.HeartRateLocalDataSource>(
+    () => _i578.HeartRateLocalDataSource(gh<_i778.DatabaseHelper>()),
+  );
   gh.factory<_i964.ThemeRepository>(() => _i858.ThemeRepositoryImpl());
   gh.factory<_i565.AuthLocalDataSource>(
     () => _i515.AuthLocalDataSourceImpl(
       gh<_i778.DatabaseHelper>(),
       gh<_i548.IsolateService>(),
       gh<_i1014.MemoryManagerService>(),
+    ),
+  );
+  gh.factory<_i199.HeartRateMonitorCubit>(
+    () => _i199.HeartRateMonitorCubit(
+      gh<_i578.HeartRateLocalDataSource>(),
+      gh<_i180.NativeSensorService>(),
+      gh<_i548.IsolateService>(),
     ),
   );
   gh.singleton<_i25.AppStartupService>(
@@ -89,6 +106,12 @@ _i174.GetIt init(
     () => _i820.SplashCubit(
       gh<_i25.AppStartupService>(),
       gh<_i1014.MemoryManagerService>(),
+    ),
+  );
+  gh.singleton<_i447.HeartRateStatsCubit>(
+    () => _i447.HeartRateStatsCubit(
+      gh<_i578.HeartRateLocalDataSource>(),
+      gh<_i180.NativeSensorService>(),
     ),
   );
   gh.singleton<_i219.WalkthroughCubit>(
@@ -109,6 +132,9 @@ _i174.GetIt init(
   gh.factory<_i33.SignUpWithEmailAndPasswordUseCase>(
     () => _i33.SignUpWithEmailAndPasswordUseCase(gh<_i1073.AuthRepository>()),
   );
+  gh.factory<_i873.SignInWithInstagramUseCase>(
+    () => _i873.SignInWithInstagramUseCase(gh<_i1073.AuthRepository>()),
+  );
   gh.factory<_i549.VerifyTwoFactorCodeUseCase>(
     () => _i549.VerifyTwoFactorCodeUseCase(gh<_i1073.AuthRepository>()),
   );
@@ -126,9 +152,6 @@ _i174.GetIt init(
   );
   gh.factory<_i720.SignOutUseCase>(
     () => _i720.SignOutUseCase(gh<_i1073.AuthRepository>()),
-  );
-  gh.factory<_i873.SignInWithInstagramUseCase>(
-    () => _i873.SignInWithInstagramUseCase(gh<_i1073.AuthRepository>()),
   );
   return getIt;
 }

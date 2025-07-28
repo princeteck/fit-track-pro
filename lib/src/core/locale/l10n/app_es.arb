@@ -107,5 +107,18 @@
   "profileBeta": "Beta",
   "profileWarning": "Advertencia",
   "profileRightsReserved": "© {year} Derechos Reservados",
-  "profileLoading": "Cargando{loadingIndication}"
+  "profileLoading": "Cargando{loadingIndication}",
+  "fitnessMetricsTitle": "Métricas de Fitness",
+  "viewAllText": "Ver Todo",
+  "stepsLabel": "Pasos",
+  "hydrationLabel": "Hidratación",
+  "caloriesLabel": "Calorías",
+  "distanceLabel": "Distancia",
+  "scoreLabel": "Puntuación",
+  "sleepLabel": "Sueño",
+  "bmiLabel": "IMC",
+  "bpmLabel": "FCM",
+  "calorieLabel": "Caloría",
+  "stats": "Estadísticas",
+  "heartRateLabel": "Frecuencia Cardíaca"
 }

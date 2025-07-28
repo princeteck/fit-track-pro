@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../../../../core/constants/ui/assets_constants.dart';
+import '../../../../../../../../core/constants/ui/assets_constants.dart';
 
 class GreetingHeader extends StatelessWidget {
   const GreetingHeader({super.key});

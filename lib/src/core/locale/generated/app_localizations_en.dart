@@ -345,4 +345,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String profileLoading(Object loadingIndication) {
     return 'Loading$loadingIndication';
   }
+
+  @override
+  String get fitnessMetricsTitle => 'Fitness Metrics';
+
+  @override
+  String get viewAllText => 'View All';
+
+  @override
+  String get stepsLabel => 'Steps';
+
+  @override
+  String get hydrationLabel => 'Hydration';
+
+  @override
+  String get caloriesLabel => 'Calories';
+
+  @override
+  String get distanceLabel => 'Distance';
+
+  @override
+  String get scoreLabel => 'Score';
+
+  @override
+  String get sleepLabel => 'Sleep';
+
+  @override
+  String get bmiLabel => 'bmi';
+
+  @override
+  String get bpmLabel => 'bpm';
+
+  @override
+  String get calorieLabel => 'Calorie';
+
+  @override
+  String get stats => 'Stats';
+
+  @override
+  String get heartRateLabel => 'Heart Rate';
 }

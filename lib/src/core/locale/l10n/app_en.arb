@@ -107,5 +107,18 @@
   "profileBeta": "Beta",
   "profileWarning": "Warning",
   "profileRightsReserved": "© {year} Rights Reserved",
-  "profileLoading": "Loading{loadingIndication}"
+  "profileLoading": "Loading{loadingIndication}",
+  "fitnessMetricsTitle": "Fitness Metrics",
+  "viewAllText": "View All",
+  "stepsLabel": "Steps",
+  "hydrationLabel": "Hydration",
+  "caloriesLabel": "Calories",
+  "distanceLabel": "Distance",
+  "scoreLabel": "Score",
+  "sleepLabel": "Sleep",
+  "bmiLabel": "bmi",
+  "bpmLabel": "bpm",
+  "calorieLabel": "Calorie",
+  "stats": "Stats",
+  "heartRateLabel": "Heart Rate"
 }

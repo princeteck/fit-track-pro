@@ -352,4 +352,43 @@ class AppLocalizationsEs extends AppLocalizations {
   String profileLoading(Object loadingIndication) {
     return 'Cargando$loadingIndication';
   }
+
+  @override
+  String get fitnessMetricsTitle => 'Métricas de Fitness';
+
+  @override
+  String get viewAllText => 'Ver Todo';
+
+  @override
+  String get stepsLabel => 'Pasos';
+
+  @override
+  String get hydrationLabel => 'Hidratación';
+
+  @override
+  String get caloriesLabel => 'Calorías';
+
+  @override
+  String get distanceLabel => 'Distancia';
+
+  @override
+  String get scoreLabel => 'Puntuación';
+
+  @override
+  String get sleepLabel => 'Sueño';
+
+  @override
+  String get bmiLabel => 'IMC';
+
+  @override
+  String get bpmLabel => 'FCM';
+
+  @override
+  String get calorieLabel => 'Caloría';
+
+  @override
+  String get stats => 'Estadísticas';
+
+  @override
+  String get heartRateLabel => 'Frecuencia Cardíaca';
 }

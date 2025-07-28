@@ -1,9 +1,6 @@
 export 'sections/dashboard_section_manager.dart';
 export 'sections/home/home_section.dart';
-export 'sections/home/widgets/daily_challenge_card.dart';
-export 'sections/home/widgets/greeting_header.dart';
-export 'sections/home/widgets/weekly_calendar.dart';
-export 'sections/home/widgets/workout_plan_section.dart';
+export 'sections/home/prelude/widgets/greeting_header.dart';
 export 'sections/profile/profile_section.dart';
 export 'sections/profile/widgets/profile_header.dart';
 export 'sections/profile/widgets/profile_menu_section.dart';

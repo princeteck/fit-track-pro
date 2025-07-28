@@ -1,9 +1,7 @@
+import 'package:fittrack_pro/src/presentation/screens/dashboard/prelude/sections/home/prelude/sections/fitness_metrics/fitness_metrics.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/daily_challenge_card.dart';
-import 'widgets/greeting_header.dart';
-import 'widgets/weekly_calendar.dart';
-import 'widgets/workout_plan_section.dart';
+import 'prelude/widgets/greeting_header.dart';
 
 class HomeSectionImpl extends StatefulWidget {
   const HomeSectionImpl({super.key});
@@ -77,103 +75,100 @@ class _HomeSectionImplState extends State<HomeSectionImpl>
         position: _slideAnimation,
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
 
-                // Greeting Header with staggered animation
-                FadeTransition(
-                  opacity: _fadeAnimation,
-                  child: const GreetingHeader(),
-                ),
+              // Greeting Header with staggered animation
+              FadeTransition(
+                opacity: _fadeAnimation,
+                child: const GreetingHeader(),
+              ),
 
-                const SizedBox(height: 24),
+              const SizedBox(height: 24),
 
-                // Daily Challenge Card with delayed animation
-                SlideTransition(
-                  position:
-                      Tween<Offset>(
-                        begin: const Offset(0, 0.5),
-                        end: Offset.zero,
-                      ).animate(
-                        CurvedAnimation(
-                          parent: _slideAnimationController,
-                          curve: const Interval(
-                            0.2,
-                            1.0,
-                            curve: Curves.easeOutCubic,
-                          ),
+              // Daily Challenge Card with delayed animation
+              SlideTransition(
+                position:
+                    Tween<Offset>(
+                      begin: const Offset(0, 0.5),
+                      end: Offset.zero,
+                    ).animate(
+                      CurvedAnimation(
+                        parent: _slideAnimationController,
+                        curve: const Interval(
+                          0.2,
+                          1.0,
+                          curve: Curves.easeOutCubic,
                         ),
                       ),
-                  child: FadeTransition(
-                    opacity: CurvedAnimation(
-                      parent: _fadeAnimationController,
-                      curve: const Interval(0.2, 1.0),
                     ),
-                    child: const DailyChallengeCard(),
+                child: FadeTransition(
+                  opacity: CurvedAnimation(
+                    parent: _fadeAnimationController,
+                    curve: const Interval(0.2, 1.0),
                   ),
+                  child: const FitnessMetrics(),
                 ),
+              ),
 
-                const SizedBox(height: 24),
+              // const SizedBox(height: 24),
 
-                // Weekly Calendar with delayed animation
-                SlideTransition(
-                  position:
-                      Tween<Offset>(
-                        begin: const Offset(0, 0.5),
-                        end: Offset.zero,
-                      ).animate(
-                        CurvedAnimation(
-                          parent: _slideAnimationController,
-                          curve: const Interval(
-                            0.4,
-                            1.0,
-                            curve: Curves.easeOutCubic,
-                          ),
-                        ),
-                      ),
-                  child: FadeTransition(
-                    opacity: CurvedAnimation(
-                      parent: _fadeAnimationController,
-                      curve: const Interval(0.4, 1.0),
-                    ),
-                    child: const WeeklyCalendar(),
-                  ),
-                ),
+              // // Weekly Calendar with delayed animation
+              // SlideTransition(
+              //   position:
+              //       Tween<Offset>(
+              //         begin: const Offset(0, 0.5),
+              //         end: Offset.zero,
+              //       ).animate(
+              //         CurvedAnimation(
+              //           parent: _slideAnimationController,
+              //           curve: const Interval(
+              //             0.4,
+              //             1.0,
+              //             curve: Curves.easeOutCubic,
+              //           ),
+              //         ),
+              //       ),
+              //   child: FadeTransition(
+              //     opacity: CurvedAnimation(
+              //       parent: _fadeAnimationController,
+              //       curve: const Interval(0.4, 1.0),
+              //     ),
+              //     child: const WeeklyCalendar(),
+              //   ),
+              // ),
 
-                const SizedBox(height: 32),
+              // const SizedBox(height: 32),
 
-                // Your Plan Section with delayed animation
-                SlideTransition(
-                  position:
-                      Tween<Offset>(
-                        begin: const Offset(0, 0.5),
-                        end: Offset.zero,
-                      ).animate(
-                        CurvedAnimation(
-                          parent: _slideAnimationController,
-                          curve: const Interval(
-                            0.6,
-                            1.0,
-                            curve: Curves.easeOutCubic,
-                          ),
-                        ),
-                      ),
-                  child: FadeTransition(
-                    opacity: CurvedAnimation(
-                      parent: _fadeAnimationController,
-                      curve: const Interval(0.6, 1.0),
-                    ),
-                    child: const WorkoutPlanSection(),
-                  ),
-                ),
+              // // Your Plan Section with delayed animation
+              // SlideTransition(
+              //   position:
+              //       Tween<Offset>(
+              //         begin: const Offset(0, 0.5),
+              //         end: Offset.zero,
+              //       ).animate(
+              //         CurvedAnimation(
+              //           parent: _slideAnimationController,
+              //           curve: const Interval(
+              //             0.6,
+              //             1.0,
+              //             curve: Curves.easeOutCubic,
+              //           ),
+              //         ),
+              //       ),
+              //   child: FadeTransition(
+              //     opacity: CurvedAnimation(
+              //       parent: _fadeAnimationController,
+              //       curve: const Interval(0.6, 1.0),
+              //     ),
+              //     child: const WorkoutPlanSection(),
+              //   ),
+              // ),
 
-                const SizedBox(height: 100), // Space for bottom navbar
-              ],
-            ),
+              // const SizedBox(height: 100), // Space for bottom navbar
+            ],
           ),
         ),
       ),

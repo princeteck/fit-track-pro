@@ -107,5 +107,18 @@
   "profileBeta": "تجريبي",
   "profileWarning": "تحذير",
   "profileRightsReserved": "© {year} جميع الحقوق محفوظة",
-  "profileLoading": "جاري التحميل{loadingIndication}"
+  "profileLoading": "جاري التحميل{loadingIndication}",
+  "fitnessMetricsTitle": "مقاييس اللياقة البدنية",
+  "viewAllText": "عرض الكل",
+  "stepsLabel": "خطوات",
+  "hydrationLabel": "ترطيب",
+  "caloriesLabel": "سعرات حرارية",
+  "distanceLabel": "مسافة",
+  "scoreLabel": "درجة",
+  "sleepLabel": "نوم",
+  "bmiLabel": "مؤشر كتلة الجسم",
+  "bpmLabel": "معدل ضربات القلب",
+  "calorieLabel": "سعر حراري",
+  "stats": "الإحصائيات",
+  "heartRateLabel": "معدل ضربات القلب"
 }
