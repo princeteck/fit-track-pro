@@ -18,9 +18,8 @@ class HeartRateTypeBottomSheet extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => HeartRateTypeBottomSheet(
-        onTypeSelected: onTypeSelected,
-      ),
+      builder: (context) =>
+          HeartRateTypeBottomSheet(onTypeSelected: onTypeSelected),
     );
   }
 
